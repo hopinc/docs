@@ -1,9 +1,15 @@
-import {ReactNode} from 'react';
+import {Children, ReactElement} from 'react';
 
 export interface Props {
-	children: ReactNode[];
+	children: ReactElement[];
 }
 
 export function Code(props: Props) {
-	return <div>{props.children.length}</div>;
+	const children = Children.map(props.children, child => {
+		const language = child.props.children.props.children.props['data-language'];
+
+		return <div>{language}</div>;
+	});
+
+	return <div>{children}</div>;
 }
