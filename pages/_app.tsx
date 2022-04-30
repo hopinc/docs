@@ -1,5 +1,7 @@
 import {AppProps} from 'next/app';
+
 import 'nextra-theme-docs/style.css';
+import 'tailwindcss/tailwind.css';
 
 type GetLayout = (page: JSX.Element) => JSX.Element;
 

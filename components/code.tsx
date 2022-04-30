@@ -6,7 +6,9 @@ export interface Props {
 
 export function Code(props: Props) {
 	const children = Children.map(props.children, child => {
-		const language = child.props.children.props.children.props['data-language'];
+		const language = child.props.children.props.children.props[
+			'data-language'
+		] as string;
 
 		return {
 			language,
@@ -19,20 +21,34 @@ export function Code(props: Props) {
 	);
 
 	return (
-		<div>
-			<div className="code-language-selector">
-				{children.map(child => (
-					<button
-						key={child.language}
-						className={activeLanguage === child.language ? 'active' : ''}
-						onClick={() => setActiveLanguage(child.language)}
-					>
-						{child.language}
-					</button>
-				))}
+		<div className="flex flex-col dark:bg-black rounded-lg p-2">
+			<div className="flex max-w-full overflow-x-auto space-x-2">
+				{children.map(child => {
+					const active = activeLanguage === child.language;
+
+					return (
+						<button
+							key={child.language}
+							className="px-2 inline-block"
+							onClick={() => setActiveLanguage(child.language)}
+						>
+							{child.language}
+						</button>
+					);
+				})}
 			</div>
 
-			{children.find(child => child.language === activeLanguage).Component}
+			<div>
+				{children.map(child => {
+					const active = activeLanguage === child.language;
+
+					return (
+						<div key={child.language} className={active ? 'block' : 'hidden'}>
+							{child.Component}
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

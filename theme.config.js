@@ -1,7 +1,6 @@
-export default {
+const config = {
 	projectLink: 'https://github.com/hopinc/hopinc',
-	docsRepositoryBase:
-		'https://github.com/hopinc/docs/tree/master/apps/docs/pages',
+	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
 	titleSuffix: ' — Hop API',
 	nextLinks: true,
 	prevLinks: true,
@@ -25,3 +24,5 @@ export default {
 		</>
 	),
 };
+
+export default config;
