@@ -35,9 +35,6 @@ module.exports = {
 			'5xl': '3rem',
 			'6xl': '4rem',
 		},
-		letterSpacing: {
-			tight: '-0.015em',
-		},
 		colors: {
 			transparent: 'transparent',
 			current: 'currentColor',

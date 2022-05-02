@@ -25,25 +25,33 @@ export function Code(props: Props) {
 	return (
 		<div
 			className={clsx(
-				'flex flex-col dark:bg-black rounded-lg space-y-2',
+				'flex flex-col my-5 dark:bg-black rounded-lg space-y-2 p-3 border border-neutral-100 dark:border-neutral-900',
 				styles.code__container,
 			)}
 		>
-			<div className="flex max-w-full overflow-x-auto space-x-2">
+			<div className="flex max-w-full overflow-x-auto divide-x divide-neutral-100 dark:divide-neutral-600">
 				{children.map(child => {
 					const active = activeLanguage === child.language;
 
 					return (
-						<button
+						<div
 							key={child.language}
-							className={clsx('px-6 py-1.5 inline-block rounded-md', {
-								'bg-neutral-200 dark:bg-neutral-800': active,
-								'hover:bg-neutral-100 dark:hover:bg-neutral-900': !active,
-							})}
-							onClick={() => setActiveLanguage(child.language)}
+							className="px-3 first-of-type:pl-0 last-of-type:pr-0"
 						>
-							{child.language}
-						</button>
+							<button
+								className={clsx(
+									'px-6 py-1 text-xs uppercase tracking-widest inline-block rounded-md',
+									{
+										'bg-primary-500 text-primary-50 dark:bg-neutral-800':
+											active,
+										'hover:bg-neutral-100 dark:hover:bg-neutral-900': !active,
+									},
+								)}
+								onClick={() => setActiveLanguage(child.language)}
+							>
+								{child.language}
+							</button>
+						</div>
 					);
 				})}
 			</div>
