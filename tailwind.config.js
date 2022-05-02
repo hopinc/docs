@@ -14,7 +14,7 @@ const makePrimaryColor =
 	};
 
 module.exports = {
-	content: ['./src/**/*.{js,css,ts.tsx}'],
+	content: ['./{pages,components}/**/*.{js,css,ts,tsx,mdx}'],
 	theme: {
 		screens: {
 			'sm': '640px',
@@ -42,7 +42,7 @@ module.exports = {
 			transparent: 'transparent',
 			current: 'currentColor',
 			black: '#000',
-			white: '#fff',
+			white: '#ffffff',
 			gray: colors.gray,
 			slate: colors.slate,
 			neutral: colors.neutral,

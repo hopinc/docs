@@ -1,0 +1,3 @@
+.code__container [data-rehype-pretty-code-fragment] > pre {
+	margin: 0;
+}

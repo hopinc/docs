@@ -1,4 +1,6 @@
 import {Children, ReactElement, useState} from 'react';
+import clsx from 'clsx';
+import styles from './code.module.css';
 
 export interface Props {
 	children: ReactElement[];
@@ -21,7 +23,12 @@ export function Code(props: Props) {
 	);
 
 	return (
-		<div className="flex flex-col dark:bg-black rounded-lg p-2">
+		<div
+			className={clsx(
+				'flex flex-col dark:bg-black rounded-lg space-y-2',
+				styles.code__container,
+			)}
+		>
 			<div className="flex max-w-full overflow-x-auto space-x-2">
 				{children.map(child => {
 					const active = activeLanguage === child.language;
@@ -29,7 +36,10 @@ export function Code(props: Props) {
 					return (
 						<button
 							key={child.language}
-							className="px-2 inline-block"
+							className={clsx('px-6 py-1.5 inline-block rounded-md', {
+								'bg-neutral-200 dark:bg-neutral-800': active,
+								'hover:bg-neutral-100 dark:hover:bg-neutral-900': !active,
+							})}
 							onClick={() => setActiveLanguage(child.language)}
 						>
 							{child.language}
