@@ -1,6 +1,7 @@
 import {Children, ReactElement, useState} from 'react';
 import clsx from 'clsx';
 import styles from './code.module.css';
+import {useCurrentLanguage} from '../context/code';
 
 export interface Props {
 	children: ReactElement[];
@@ -18,9 +19,8 @@ export function Code(props: Props) {
 		};
 	});
 
-	const [activeLanguage, setActiveLanguage] = useState<string>(
-		children[0].language,
-	);
+	const {value: activeLanguage, setValue: setActiveLanguage} =
+		useCurrentLanguage(children.map(child => child.language));
 
 	return (
 		<div
