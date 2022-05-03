@@ -29,7 +29,7 @@ export function Code(props: Props) {
 				styles.code__container,
 			)}
 		>
-			<div className="flex max-w-full overflow-x-auto divide-x divide-neutral-100 dark:divide-neutral-600">
+			<div className="flex max-w-full overflow-x-auto divide-x divide-neutral-100 dark:divide-neutral-800">
 				{children.map(child => {
 					const active = activeLanguage === child.language;
 
@@ -40,7 +40,7 @@ export function Code(props: Props) {
 						>
 							<button
 								className={clsx(
-									'px-6 py-1 text-xs uppercase tracking-widest inline-block rounded-md',
+									'transition-colors px-6 py-1 text-xs uppercase tracking-widest inline-block rounded-md',
 									{
 										'bg-primary-500 text-primary-50 dark:bg-neutral-800':
 											active,

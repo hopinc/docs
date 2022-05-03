@@ -1,8 +1,10 @@
 import {
 	createContext,
 	Dispatch,
+	ReactNode,
 	SetStateAction,
 	useContext,
+	useEffect,
 	useMemo,
 	useState,
 } from 'react';
@@ -35,8 +37,18 @@ export function useCurrentLanguage(languages: string[]) {
 	};
 }
 
-export function CodeProvider({children}) {
-	const [value, setValue] = useState('');
+export function CodeProvider({children}: {children: ReactNode}) {
+	const [value, setValue] = useState(
+		typeof window === 'undefined'
+			? ''
+			: window.localStorage.getItem('language') ?? '',
+	);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			window.localStorage.setItem('language', value);
+		}
+	}, [value]);
 
 	return (
 		<code.Provider value={useMemo(() => ({value, setValue}), [value])}>
