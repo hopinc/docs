@@ -10,8 +10,8 @@ import {
 } from 'react';
 
 export const code = createContext<{
-	value: string;
-	setValue: Dispatch<SetStateAction<string>>;
+	value: string | null;
+	setValue: Dispatch<SetStateAction<string | null>>;
 } | null>(null);
 
 export function useContextLanguage() {
@@ -26,26 +26,41 @@ export function useContextLanguage() {
 
 export function useCurrentLanguage(languages: string[]) {
 	const {value, setValue} = useContextLanguage();
+	const [localState, setLocalState] = useState(value);
 
-	if (languages.includes(value)) {
-		return {value, setValue};
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+
+		setValue(window.localStorage.getItem('language'));
+	}, [setValue]);
+
+	if (value && languages.includes(value)) {
+		return [value, setValue] as const;
 	}
 
-	return {
-		value: languages[0],
-		setValue: (language: string) => setValue(language),
-	};
+	return [
+		localState,
+		(language: string) => {
+			if (languages.includes(language)) {
+				setValue(language);
+			}
+
+			setLocalState(language);
+		},
+	] as const;
 }
 
 export function CodeProvider({children}: {children: ReactNode}) {
-	const [value, setValue] = useState(
+	const [value, setValue] = useState<string | null>(
 		typeof window === 'undefined'
-			? ''
-			: window.localStorage.getItem('language') ?? '',
+			? null
+			: window.localStorage.getItem('language') ?? null,
 	);
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
+		if (typeof window !== 'undefined' && value) {
 			window.localStorage.setItem('language', value);
 		}
 	}, [value]);
