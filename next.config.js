@@ -5,4 +5,12 @@ const withNextra = require('nextra')({
 	unstable_staticImage: true,
 });
 
-module.exports = withNextra({});
+module.exports = withNextra({
+	redirects: async () => [
+		{
+			source: '/docs',
+			destination: '/docs/getting-started',
+			statusCode: 301,
+		},
+	],
+});
