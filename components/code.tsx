@@ -1,4 +1,4 @@
-import {Children, ReactElement, useEffect, useState} from 'react';
+import {Children, ReactElement} from 'react';
 import clsx from 'clsx';
 import styles from './code.module.css';
 import {useCurrentLanguage} from '../context/code';
@@ -8,7 +8,7 @@ export interface Props {
 	children: ReactElement[];
 }
 
-function Code(props: Props) {
+export function Code(props: Props) {
 	const children = Children.map(props.children, child => {
 		const language = child.props.children.props.children.props[
 			'data-language'
@@ -72,13 +72,3 @@ function Code(props: Props) {
 		</div>
 	);
 }
-
-const Wrapper = (props: Props) => {
-	return (
-		<NoSSR>
-			<Code {...props} />
-		</NoSSR>
-	);
-};
-
-export {Wrapper as Code};

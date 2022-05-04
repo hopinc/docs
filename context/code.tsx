@@ -5,6 +5,7 @@ import {
 	SetStateAction,
 	useContext,
 	useEffect,
+	useLayoutEffect,
 	useMemo,
 	useState,
 } from 'react';
@@ -28,13 +29,15 @@ export function useCurrentLanguage(languages: string[]) {
 	const {value, setValue} = useContextLanguage();
 	const [localState, setLocalState] = useState(value);
 
-	useEffect(() => {
+	const first = languages[0];
+
+	useLayoutEffect(() => {
 		if (typeof window === 'undefined') {
 			return;
 		}
 
-		setValue(window.localStorage.getItem('language'));
-	}, [setValue]);
+		setValue(window.localStorage.getItem('language') ?? first);
+	}, [setValue, first]);
 
 	if (value && languages.includes(value)) {
 		return [value, setValue] as const;
@@ -56,8 +59,20 @@ export function CodeProvider({children}: {children: ReactNode}) {
 	const [value, setValue] = useState<string | null>(
 		typeof window === 'undefined'
 			? null
-			: window.localStorage.getItem('language') ?? null,
+			: window.localStorage.getItem('language'),
 	);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+
+		const stored = window.localStorage.getItem('language');
+
+		if (stored) {
+			setValue(stored);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (typeof window !== 'undefined' && value) {
