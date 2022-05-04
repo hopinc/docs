@@ -1,18 +1,36 @@
 import urlcat from 'urlcat';
 
 const config = {
-	projectLink: 'https://github.com/hopinc/hopinc',
+	github: 'https://github.com/hopinc/hopinc',
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
 	titleSuffix: ' — Hop API',
-	floatTOC: true,
 	search: true,
+	floatTOC: true,
 	footer: true,
 	unstable_flexsearch: true,
+	unstable_staticImage: true,
 	feedbackLink: () => 'Feedback',
 	feedbackLabels: 'feedback',
 	footerText: () => `${new Date().getFullYear()} © Hop, Inc.`,
 	footerEditLink: () => 'Edit this page on GitHub',
-	logo: <span>Hop</span>,
+	logo: () => {
+		return <span>Hop</span>;
+	},
+	font: false,
+	projectChatLink: 'https://hop.io/discord',
+	banner: function Banner() {
+		return (
+			<a
+				href="https://hop.io/beta"
+				target="_blank"
+				rel="noopener noreferrer"
+				className="font-medium text-current no-underline"
+				title="Go to the Hop beta announcement"
+			>
+				Hop.io is now in public beta
+			</a>
+		);
+	},
 	head: function Head({title, meta}) {
 		const ogImage =
 			meta.image ||
