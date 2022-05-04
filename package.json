@@ -14,11 +14,12 @@
 	},
 	"dependencies": {
 		"clsx": "^1.1.1",
-		"next": "^12.1.6",
+		"next": "^12.1.5",
 		"nextra": "alpha",
 		"nextra-theme-docs": "alpha",
 		"react": "^18.1.0",
-		"react-dom": "^18.1.0"
+		"react-dom": "^18.1.0",
+		"urlcat": "^2.0.4"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.31",

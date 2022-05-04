@@ -5,7 +5,6 @@ import {
 	SetStateAction,
 	useContext,
 	useEffect,
-	useLayoutEffect,
 	useMemo,
 	useState,
 } from 'react';
@@ -31,7 +30,7 @@ export function useCurrentLanguage(languages: string[]) {
 
 	const first = languages[0];
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (typeof window === 'undefined') {
 			return;
 		}
