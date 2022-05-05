@@ -1,29 +1,29 @@
 import urlcat from 'urlcat';
 
 const config = {
-	github: 'https://github.com/hopinc/docs',
 	projectLink: 'https://github.com/hopinc/docs',
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
-	titleSuffix: ' — Hop API',
 	projectChatLink: 'https://hop.io/discord',
+	titleSuffix: ' — Hop API',
 	search: true,
 	floatTOC: true,
 	footer: true,
 	unstable_flexsearch: true,
-	unstable_staticImage: true,
 	feedbackLabels: 'feedback',
+	nextThemes: {
+		defaultTheme: 'dark',
+	},
 	feedbackLink: function FeedbackLink() {
 		return 'Feedback';
 	},
 	footerText: function FooterText() {
 		return <>{new Date().getFullYear()} © Hop, Inc.</>;
 	},
-	footerEditLink: () => 'Edit this page on GitHub',
-	logo: () => {
-		return <span>Hop</span>;
+	footerEditLink: function FooterEditLink() {
+		return 'Edit this page';
 	},
-	nextThemes: {
-		defaultTheme: 'dark',
+	logo: function Logo() {
+		return <span>Hop</span>;
 	},
 	banner: function Banner() {
 		return (
@@ -44,6 +44,7 @@ const config = {
 			urlcat('https://ogmeta.vercel.app/', {
 				title,
 				subtitle: meta.description ?? undefined,
+				dark: 'true',
 			});
 
 		return (

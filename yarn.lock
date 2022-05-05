@@ -1386,7 +1386,6 @@ __metadata:
     eslint: 8.14.0
     eslint-config-next: 12.1.6
     focus-visible: ^5.1.0
-    intersection-observer: ^0.10.0
     markdown-to-jsx: ^6.11.4
     next: ^12.1.0
     nextra: 2.0.0-alpha.49
@@ -1395,7 +1394,6 @@ __metadata:
     prettier: ^2.6.2
     react: ^17.0.2
     react-dom: ^17.0.2
-    react-intersection-observer: ^8.26.2
     tailwindcss: ^3.0.24
     typescript: ^4.6.4
     urlcat: ^2.0.4
@@ -2410,13 +2408,6 @@ __metadata:
     has: ^1.0.3
     side-channel: ^1.0.4
   checksum: 1944f92e981e47aebc98a88ff0db579fd90543d937806104d0b96557b10c1f170c51fb777b97740a8b6ddeec585fca8c39ae99fd08a8e058dfc8ab70937238bf
-  languageName: node
-  linkType: hard
-
-"intersection-observer@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "intersection-observer@npm:0.10.0"
-  checksum: 70c07db838153a29107c480e3e757c4b9c1103837b76e273616528c3f7db1e7d9c585725b3aa838f6af73ed06ef6a2a9e4892ba9dc9a8a14542fa5138b0c5c05
   languageName: node
   linkType: hard
 
@@ -4343,15 +4334,6 @@ __metadata:
   peerDependencies:
     react: 17.0.2
   checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
-  languageName: node
-  linkType: hard
-
-"react-intersection-observer@npm:^8.26.2":
-  version: 8.34.0
-  resolution: "react-intersection-observer@npm:8.34.0"
-  peerDependencies:
-    react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
-  checksum: 7713fecfd1512c7f5a60f9f0bf15403b8f8bbd4110bcafaeaea6de36a0e0eb60368c3638f99e9c97b75ad8fc787ea48c241dcb5c694f821d7f2976f709082cc5
   languageName: node
   linkType: hard
 
