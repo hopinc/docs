@@ -7,12 +7,5 @@
 	"docs": {
 		"title": "Docs",
 		"type": "page"
-	},
-	"blog": {
-		"title": "Blog",
-		"type": "page",
-		"theme": {
-			"sidebar": false
-		}
 	}
 }
