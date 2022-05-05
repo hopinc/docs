@@ -1,8 +1,18 @@
 {
 	"index": {
 		"title": "Introduction",
-		"type": "page",
-		"hidden": true
+		"hidden": true,
+		"type": "page"
 	},
-	"docs": "Docs"
+	"docs": {
+		"title": "Docs",
+		"type": "page"
+	},
+	"blog": {
+		"title": "Blog",
+		"type": "page",
+		"theme": {
+			"sidebar": false
+		}
+	}
 }

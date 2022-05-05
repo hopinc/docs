@@ -1,7 +1,8 @@
 import urlcat from 'urlcat';
 
 const config = {
-	github: 'https://github.com/hopinc/hopinc',
+	github: 'https://github.com/hopinc/docs',
+	projectLink: 'https://github.com/hopinc/docs',
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
 	titleSuffix: ' — Hop API',
 	projectChatLink: 'https://hop.io/discord',
