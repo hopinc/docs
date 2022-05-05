@@ -14,7 +14,10 @@ const makePrimaryColor =
 	};
 
 module.exports = {
-	content: ['./{pages,components}/**/*.{js,css,ts,tsx,mdx}'],
+	content: [
+		'./{pages,components,context,styles}/**/*.{js,css,ts,tsx,mdx}',
+		'./theme.config.js',
+	],
 	theme: {
 		screens: {
 			'sm': '640px',
@@ -38,7 +41,7 @@ module.exports = {
 		colors: {
 			transparent: 'transparent',
 			current: 'currentColor',
-			black: '#000',
+			black: '#000000',
 			white: '#ffffff',
 			gray: colors.gray,
 			slate: colors.slate,
@@ -63,7 +66,7 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				dark: '#111',
+				dark: '#111111',
 			},
 		},
 	},

@@ -9,10 +9,8 @@ const config = {
 	floatTOC: true,
 	footer: true,
 	unstable_flexsearch: true,
+	unstable_staticImage: true,
 	feedbackLabels: 'feedback',
-	nextThemes: {
-		defaultTheme: 'dark',
-	},
 	feedbackLink: function FeedbackLink() {
 		return 'Feedback';
 	},
