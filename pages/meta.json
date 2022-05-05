@@ -1,7 +1,4 @@
 {
-	"*": {
-		"type": "page"
-	},
 	"index": {
 		"title": "Introduction",
 		"type": "page",

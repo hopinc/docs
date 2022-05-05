@@ -1389,8 +1389,8 @@ __metadata:
     intersection-observer: ^0.10.0
     markdown-to-jsx: ^6.11.4
     next: ^12.1.0
-    nextra: alpha
-    nextra-theme-docs: alpha
+    nextra: 2.0.0-alpha.49
+    nextra-theme-docs: 2.0.0-alpha.50
     postcss: ^8.4.13
     prettier: ^2.6.2
     react: ^17.0.2
@@ -3796,7 +3796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nextra-theme-docs@npm:alpha":
+"nextra-theme-docs@npm:2.0.0-alpha.50":
   version: 2.0.0-alpha.50
   resolution: "nextra-theme-docs@npm:2.0.0-alpha.50"
   dependencies:
@@ -3821,7 +3821,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nextra@npm:alpha":
+"nextra@npm:2.0.0-alpha.49":
   version: 2.0.0-alpha.49
   resolution: "nextra@npm:2.0.0-alpha.49"
   dependencies:

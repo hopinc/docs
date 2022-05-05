@@ -1,7 +1,6 @@
 {
 	"name": "docs",
 	"version": "1.0.0",
-	"main": "index.js",
 	"repository": "https://github.com/hopinc/docs",
 	"author": "Alistair Smith <hi@alistair.sh>",
 	"license": "MIT",
@@ -19,8 +18,8 @@
 		"intersection-observer": "^0.10.0",
 		"markdown-to-jsx": "^6.11.4",
 		"next": "^12.1.0",
-		"nextra": "alpha",
-		"nextra-theme-docs": "alpha",
+		"nextra": "2.0.0-alpha.49",
+		"nextra-theme-docs": "2.0.0-alpha.50",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-intersection-observer": "^8.26.2",

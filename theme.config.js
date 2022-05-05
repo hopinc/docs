@@ -4,20 +4,26 @@ const config = {
 	github: 'https://github.com/hopinc/hopinc',
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
 	titleSuffix: ' — Hop API',
+	projectChatLink: 'https://hop.io/discord',
 	search: true,
 	floatTOC: true,
 	footer: true,
 	unstable_flexsearch: true,
 	unstable_staticImage: true,
-	feedbackLink: () => 'Feedback',
 	feedbackLabels: 'feedback',
-	footerText: () => `${new Date().getFullYear()} © Hop, Inc.`,
+	feedbackLink: function FeedbackLink() {
+		return 'Feedback';
+	},
+	footerText: function FooterText() {
+		return <>{new Date().getFullYear()} © Hop, Inc.</>;
+	},
 	footerEditLink: () => 'Edit this page on GitHub',
 	logo: () => {
 		return <span>Hop</span>;
 	},
-	font: false,
-	projectChatLink: 'https://hop.io/discord',
+	nextThemes: {
+		defaultTheme: 'dark',
+	},
 	banner: function Banner() {
 		return (
 			<a

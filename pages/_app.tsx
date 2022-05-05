@@ -12,5 +12,9 @@ export default function Nextra({Component, pageProps}: AppProps) {
 
 	return getLayout(<Component {...pageProps} />);
 
-	// return <CodeProvider>{}</CodeProvider>;
+	// return getLayout(
+	// 	<CodeProvider>
+	// 		<Component {...pageProps} />
+	// 	</CodeProvider>,
+	// );
 }
