@@ -1,5 +1,10 @@
+// @ts-check
+
 import urlcat from 'urlcat';
 
+/**
+ * @type {import("./theme").DocsThemeConfig}
+ */
 const config = {
 	projectLink: 'https://github.com/hopinc/docs',
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
@@ -9,16 +14,13 @@ const config = {
 	floatTOC: true,
 	footer: true,
 	unstable_flexsearch: true,
-	unstable_staticImage: true,
 	feedbackLabels: 'feedback',
-	feedbackLink: function FeedbackLink() {
-		return 'Feedback';
-	},
+	feedbackLink: 'Feedback',
 	footerText: function FooterText() {
 		return <>{new Date().getFullYear()} © Hop, Inc.</>;
 	},
 	footerEditLink: function FooterEditLink() {
-		return 'Edit this page';
+		return <>Edit this page</>;
 	},
 	logo: function Logo() {
 		return <span>Hop</span>;

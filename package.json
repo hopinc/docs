@@ -1,5 +1,5 @@
 {
-	"name": "docs",
+	"name": "@hopinc/docs",
 	"version": "1.0.0",
 	"repository": "https://github.com/hopinc/docs",
 	"author": "Alistair Smith <hi@alistair.sh>",
@@ -14,20 +14,18 @@
 	"dependencies": {
 		"@reach/skip-nav": "^0.17.0",
 		"clsx": "^1.1.1",
-		"focus-visible": "^5.2.0",
-		"markdown-to-jsx": "^7.1.7",
 		"next": "^12.1.6",
-		"nextra": "alpha",
-		"nextra-theme-docs": "alpha",
+		"nextra": "2.0.0-alpha.49",
+		"nextra-theme-docs": "2.0.0-alpha.50",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"urlcat": "^2.0.4"
 	},
 	"devDependencies": {
-		"@types/node": "^17.0.31",
-		"@types/react": "^18.0.8",
+		"@types/node": "^17.0.33",
+		"@types/react": "^18.0.9",
 		"autoprefixer": "^10.4.7",
-		"eslint": "8.14.0",
+		"eslint": "8.15.0",
 		"eslint-config-next": "12.1.6",
 		"postcss": "^8.4.13",
 		"prettier": "^2.6.2",
