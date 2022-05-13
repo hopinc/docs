@@ -1,4 +1,7 @@
 {
+	"*": {
+		"type": "page"
+	},
 	"index": {
 		"title": "Introduction",
 		"hidden": true,
