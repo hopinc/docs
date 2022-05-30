@@ -26,4 +26,12 @@ module.exports = withNextra({
 			statusCode: 301,
 		},
 	],
+	webpack(config) {
+		config.module.rules.push({
+			test: /\.svg$/,
+			use: ['@svgr/webpack'],
+		});
+
+		return config;
+	},
 });
