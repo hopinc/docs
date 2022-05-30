@@ -1,0 +1,23 @@
+---
+title: Leap
+description: Overview of the Leap Edge socket for Plug
+---
+
+# Leap & Leap Edge
+
+**Note**: The SDKs handle connections to Leap for you. This documentation is written for transparency & developers wanting to create their own SDKs for Hop.
+
+Leap, internally, is the service that we've created to facilitate our global realtime network. Leap Edge is a service that runs on all our edge PoPs that exposes a client-facing socket service used for connecting client applications to Hop services, such as Pipe or Plug.
+
+## Leap Edge Socket
+
+The LE (**L**eap **E**dge) socket allows clients & SDKs to connect to the following Hop realtime services:
+
+- Pipe
+- Plug
+
+### Protocol
+
+LE 1.0 currently only supports connections via WebSocket, which is accessible globally via `wss://leap.hop.io/1.0/ws`. The IP address behind the hostname is announced by the Hop anycast network, so you should be connected to the closest PoP.
+
+Messages with LE are exchanged through a series of opcodes, documented below.
