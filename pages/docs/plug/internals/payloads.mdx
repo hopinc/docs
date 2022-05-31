@@ -9,10 +9,10 @@ We split payloads up into 2 categories: **Control** and **Service**. All payload
 
 ### Encapsulating Payload Type
 
-| field | type   | description  |
-| ----- | ------ | ------------ |
-| op    | number | opcode       |
-| d     | object | message data |
+| field | type    | description  |
+| ----- | ------- | ------------ |
+| op    | integer | opcode       |
+| d     | object  | message data |
 
 **The payloads documented below are defining what goes inside the `d` (data) field.**
 
@@ -27,9 +27,9 @@ direction: `rx`
 
 Payload received from Leap Egde when connecting. This payload contains information needed for the client to set up and maintain a connection to Leap Edge.
 
-| field              | type   | description                                                                    |
-| ------------------ | ------ | ------------------------------------------------------------------------------ |
-| heartbeat_interval | number | the interval in milliseconds which the client should send heartbeat packets at |
+| field              | type    | description                                                                    |
+| ------------------ | ------- | ------------------------------------------------------------------------------ |
+| heartbeat_interval | integer | the interval in milliseconds which the client should send heartbeat packets at |
 
 ## Service
 
