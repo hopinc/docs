@@ -31,6 +31,17 @@ Payload received from Leap Egde when connecting. This payload contains informati
 | ------------------ | ------- | ------------------------------------------------------------------------------ |
 | heartbeat_interval | integer | the interval in milliseconds which the client should send heartbeat packets at |
 
+### Opcode 2: Identify
+
+opcode: `2`  
+direction: `tx`
+
+Client should send this after receiving Opcode 1: Hello. This should contain identifying information about the client, including the LE token.
+
+| field | type   | description                |
+| ----- | ------ | -------------------------- |
+| token | string | the `leap_token_xxx` token |
+
 ## Service
 
 Payloads for interacting with Hop realtime services through Leap Edge.

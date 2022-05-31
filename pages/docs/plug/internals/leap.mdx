@@ -60,7 +60,7 @@ Whe connecting to the websocket, LE supports 2 query parameters: `encoding` and 
 
 We recommend you explicitly pass in an encoding type with the LE socket URL, e.g. `wss://leap.hop.io/1.0/ws?encoding=json`.
 
-Once connected, you should receive an (Op 1: Hello)[ht] payload, which contains setup information about the LE session for the client to use, which includes the heartbeat interval:
+Once connected, you should receive an [Op 1: Hello](./payloads#opcode-1-hello) payload, which contains setup information about the LE session for the client to use, which includes the heartbeat interval:
 
 ###### Example Op 1: Hello
 
@@ -73,6 +73,22 @@ Once connected, you should receive an (Op 1: Hello)[ht] payload, which contains 
 }
 ```
 
+After receiving this, the client has 10 seconds to send an [Op 2: Identify](./payloads#opcode-2-identify). If this is not sent, LE will disconnect the socket with a `4002: Identify timeout` [error](#errors).
+
 #### Heartbeating
 
 Once receiving Op: 1 Hello, the LE client or SDK should start a repeating interval which sends
+
+## Errors
+
+Clients can be disconnected from Leap for a variety of reasons. Disconnections will be sent with an error code and descriptive reason. These are not sent as normal WebSocket messages; refer to your socket library for information on how to handle these events. In JS, these events are represented as [CloseEvent](https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent/code)s.
+
+Below, you can find a map of our custom error codes and what they mean.
+
+| code | description       | explaination                                                   |
+| ---- | ----------------- | -------------------------------------------------------------- |
+| 4000 | unknown           | Unknown error. Try reconnecting                                |
+| 4001 | Invalid auth      | You sent an invalid auth token in Op 2: Identify               |
+| 4002 | Identify timeout  | Client did not send Op 2: Identify within the 10 second window |
+| 4003 | Not authenticated | You sent a service payload prior to Op 2: Identify             |
+| 4004 | Unknown opcode    | You sent an invalid or undefined opcode                        |
