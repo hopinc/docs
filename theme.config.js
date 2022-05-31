@@ -25,7 +25,7 @@ const config = {
 		return <>Edit this page</>;
 	},
 	logo: function Logo() {
-		return <HopLogo width={80} height={30} />;
+		return <HopLogo width={50} />;
 		// return <Image width={100} height={50} alt="Hop Logo" src="/hop.svg" />;
 	},
 	banner: function Banner() {

@@ -1,0 +1,36 @@
+---
+title: Leap Payloads
+description: Payloads sent to & from Leap Edge
+---
+
+# Payloads
+
+We split payloads up into 2 categories: **Control** and **Service**. All payloads (from and to Leap Edge) must follow the Leap Edge encapsulating payload type:
+
+### Encapsulating Payload Type
+
+| field | type   | description  |
+| ----- | ------ | ------------ |
+| op    | number | opcode       |
+| d     | object | message data |
+
+**The payloads documented below are defining what goes inside the `d` (data) field.**
+
+## Control
+
+Payloads related to setting up & maintaining a connection with Leap Edge.
+
+### Opcode 1: Hello
+
+opcode: `1`  
+direction: `rx`
+
+Payload received from Leap Egde when connecting. This payload contains information needed for the client to set up and maintain a connection to Leap Edge.
+
+| field              | type   | description                                                                    |
+| ------------------ | ------ | ------------------------------------------------------------------------------ |
+| heartbeat_interval | number | the interval in milliseconds which the client should send heartbeat packets at |
+
+## Service
+
+Payloads for interacting with Hop realtime services through Leap Edge.

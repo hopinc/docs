@@ -5,7 +5,7 @@ description: Overview of the Leap Edge socket for Plug
 
 # Leap & Leap Edge
 
-**Note**: The SDKs handle connections to Leap for you. This documentation is written for transparency & developers wanting to create their own SDKs for Hop.
+**Note**: The SDKs handle connections to Leap for you. This documentation is written for transparency & for developers wanting to create their own SDKs for Hop.
 
 Leap, internally, is the service that we've created to facilitate our global realtime network. Leap Edge is a service that runs on all our edge PoPs that exposes a client-facing socket service used for connecting client applications to Hop services, such as Pipe or Plug.
 
@@ -20,4 +20,59 @@ The LE (**L**eap **E**dge) socket allows clients & SDKs to connect to the follow
 
 LE 1.0 currently only supports connections via WebSocket, which is accessible globally via `wss://leap.hop.io/1.0/ws`. The IP address behind the hostname is announced by the Hop anycast network, so you should be connected to the closest PoP.
 
-Messages with LE are exchanged through a series of opcodes, documented below.
+Messages with LE are exchanged through a series of opcodes, documented below. All messages sent from LE are formatted with the following payload type:
+
+```ts
+type SocketMessage {
+	op: number; // opcode
+	d: unknown; // message data; usually an object
+}
+```
+
+Clients are also expected to _send_ messages to LE in the same format.
+
+#### Encoding & Compression
+
+Whe connecting to the websocket, LE supports 2 query parameters: `encoding` and `compression`. Refer to the below table for possible values.
+
+| Parameter   | Possible Values | Default |
+| ----------- | --------------- | ------- |
+| encoding    | `etf`, `json`   | `json`  |
+| compression | `zlib`, `none`  | `none`  |
+
+**Note:** The `json` encoding type will just send plaintext minified JSON objects.
+
+#### Opcode Map
+
+> rx = receive (from LE, to client)  
+> tx = transmit (from client, to LE)
+
+| Opcode | Title     | Direction | Description                                                                                                  |
+| ------ | --------- | --------- | ------------------------------------------------------------------------------------------------------------ |
+| 0      | Dispatch  | rx        | Used to dispatch events to clients                                                                           |
+| 1      | Hello     | rx        | Sent by Leap Edge when connecting with setup info                                                            |
+| 2      | Identify  | tx        | Sent by clients after Op 1: Hello with identifying data (e.g. token)                                         |
+| 3      | Heartbeat | both      | Sent on the heartbeat interval by the client; also sometimes sent by LE for requesting HB packet from client |
+
+### Connection flow
+
+#### Connecting
+
+We recommend you explicitly pass in an encoding type with the LE socket URL, e.g. `wss://leap.hop.io/1.0/ws?encoding=json`.
+
+Once connected, you should receive an (Op 1: Hello)[ht] payload, which contains setup information about the LE session for the client to use, which includes the heartbeat interval:
+
+###### Example Op 1: Hello
+
+```json
+{
+	"op": 1,
+	"d": {
+		"heartbeat_interval": 30000
+	}
+}
+```
+
+#### Heartbeating
+
+Once receiving Op: 1 Hello, the LE client or SDK should start a repeating interval which sends
