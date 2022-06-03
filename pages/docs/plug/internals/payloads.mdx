@@ -42,6 +42,29 @@ Client should send this after receiving Opcode 1: Hello. This should contain ide
 | ----- | ------ | -------------------------- |
 | token | string | the `leap_token_xxx` token |
 
+### Opcode 3: Heartbeat
+
+opcode: `3`  
+direction: `both`
+
+Client should send this every x milliseconds, a repeating interval defined in Opcode 1: Hello (heartbeat_interval). The repeating payload does not need a data field, however, the socket may send this opcode with a `tag` field to the client - if this is received, the client needs to immediately send this opcode back with the `tag` field in the data object.
+
+| field | type    | description       |
+| ----- | ------- | ----------------- |
+| tag   | ?string | the heartbeat tag |
+
+### Opcode 4: Heartbeat Ack
+
+opcode: `4`  
+direction: `rx`
+
+Client will receive this opcode when any heartbeat is sent. If client was responding to a tagged heartbeat, then the `tag` field and an extra `latency` field will be included in the heartbeat acknowledgement.
+
+| field   | type     | description           |
+| ------- | -------- | --------------------- |
+| tag     | ?string  | the heartbeat tag     |
+| latency | ?integer | total round trip time |
+
 ## Service
 
 Payloads for interacting with Hop realtime services through Leap Edge.

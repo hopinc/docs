@@ -25,7 +25,7 @@ Messages with LE are exchanged through a series of opcodes, documented below. Al
 ```ts
 type SocketMessage {
 	op: number; // opcode
-	d: unknown; // message data; usually an object
+	d?: unknown; // message data; usually an object; does not exist on regular heartbeats
 }
 ```
 
@@ -77,7 +77,9 @@ After receiving this, the client has 10 seconds to send an [Op 2: Identify](./pa
 
 #### Heartbeating
 
-Once receiving Op: 1 Hello, the LE client or SDK should start a repeating interval which sends
+Once receiving Op: 1 Hello, the LE client or SDK should immediately start a repeating interval which sends [Op 3: Heartbeat](./payloads#opcode-3-heartbeat) on the interval. Please note that Leap Edge calculates the time drift over time,so if you drift too far out of the expected heartbeat interval then you may be disconnected from the socket with error `4007: Out of sync`.
+
+Leap Edge may also send Op 3 down to the client with a `tag` in the data field. If the client receives this, it needs to immediately respond with Op 3: Heartbeat with the same `tag` in the data field.
 
 ## Errors
 
@@ -85,10 +87,13 @@ Clients can be disconnected from Leap for a variety of reasons. Disconnections w
 
 Below, you can find a map of our custom error codes and what they mean.
 
-| code | description       | explaination                                                   |
-| ---- | ----------------- | -------------------------------------------------------------- |
-| 4000 | unknown           | Unknown error. Try reconnecting                                |
-| 4001 | Invalid auth      | You sent an invalid auth token in Op 2: Identify               |
-| 4002 | Identify timeout  | Client did not send Op 2: Identify within the 10 second window |
-| 4003 | Not authenticated | You sent a service payload prior to Op 2: Identify             |
-| 4004 | Unknown opcode    | You sent an invalid or undefined opcode                        |
+| code | description       | explaination                                                                                                                                                                                                                                           |
+| ---- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 4000 | unknown           | Unknown error. Try reconnecting                                                                                                                                                                                                                        |
+| 4001 | Invalid auth      | You sent an invalid auth token in Op 2: Identify                                                                                                                                                                                                       |
+| 4002 | Identify timeout  | Client did not send Op 2: Identify within the 10 second window                                                                                                                                                                                         |
+| 4003 | Not authenticated | You sent a service payload prior to Op 2: Identify                                                                                                                                                                                                     |
+| 4004 | Unknown opcode    | You sent an invalid or undefined opcode                                                                                                                                                                                                                |
+| 4005 | Invalid payload   | You sent a badly formatted payload                                                                                                                                                                                                                     |
+| 4006 | Bad route         | The server has determined that you have a bad network route to Leap Edge. The error reason will be a new socket endpoint. which you should use to reconnect with, instead of using the default endpoint. Not all implementations need to abide by this |
+| 4007 | Out of sync       | You have drifted too far outside of the heartbeat interval, or failed to respond to a heartbeat request in time. Reconnect.                                                                                                                            |
