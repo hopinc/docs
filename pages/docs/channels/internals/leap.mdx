@@ -7,14 +7,14 @@ description: Overview of the Leap Edge socket for Plug
 
 **Note**: The SDKs handle connections to Leap for you. This documentation is written for transparency & for developers wanting to create their own SDKs for Hop.
 
-Leap, internally, is the service that we've created to facilitate our global realtime network. Leap Edge is a service that runs on all our edge PoPs that exposes a client-facing socket service used for connecting client applications to Hop services, such as Pipe or Plug.
+Leap, internally, is the service that we've created to facilitate our global realtime network. Leap Edge is a service that runs on all our edge PoPs that exposes a client-facing socket service used for connecting client applications to Hop services through Channels.
 
 ## Leap Edge Socket
 
 The LE (**L**eap **E**dge) socket allows clients & SDKs to connect to the following Hop realtime services:
 
 - Pipe
-- Plug
+- Channels
 
 ### Protocol
 
@@ -47,12 +47,13 @@ Whe connecting to the websocket, LE supports 2 query parameters: `encoding` and 
 > rx = receive (from LE, to client)  
 > tx = transmit (from client, to LE)
 
-| Opcode | Title     | Direction | Description                                                                                                  |
-| ------ | --------- | --------- | ------------------------------------------------------------------------------------------------------------ |
-| 0      | Dispatch  | rx        | Used to dispatch events to clients                                                                           |
-| 1      | Hello     | rx        | Sent by Leap Edge when connecting with setup info                                                            |
-| 2      | Identify  | tx        | Sent by clients after Op 1: Hello with identifying data (e.g. token)                                         |
-| 3      | Heartbeat | both      | Sent on the heartbeat interval by the client; also sometimes sent by LE for requesting HB packet from client |
+| Opcode | Title         | Direction | Description                                                                                                  |
+| ------ | ------------- | --------- | ------------------------------------------------------------------------------------------------------------ |
+| 0      | Dispatch      | rx        | Used to dispatch events to clients                                                                           |
+| 1      | Hello         | rx        | Sent by Leap Edge when connecting with setup info                                                            |
+| 2      | Identify      | tx        | Sent by clients after Op 1: Hello with identifying data (e.g. token)                                         |
+| 3      | Heartbeat     | both      | Sent on the heartbeat interval by the client; also sometimes sent by LE for requesting HB packet from client |
+| 4      | Heartbeat Ack | rx        | Heartbeat acknowledgement                                                                                    |
 
 ### Connection flow
 

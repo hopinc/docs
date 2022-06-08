@@ -1,0 +1,47 @@
+---
+title: Overview
+description: Channels overview & concepts
+---
+
+# Overview
+
+Channels allows you to easily create direct or grouped realtime message channels between users, server-side applications, IoT devices and more.
+
+Channels are feature-rich and can be of multiple different Channel types, Visibility types and have multiple Capabilities enabled, allowing you to create anything from a realtime stock ticker to a fully feature-rich group messaging app.
+
+To use channels, you need a protected server-side application (e.g. an API) which can use the Hop SDK to create [Tokens](#tokens) and Channels.
+
+## Concepts
+
+### Clients
+
+The client (or "user") is the entity that subscribes to Channels, using either the Hop SDK or via a custom [Leap](internals/leap) implementation. The client can be anything: a React app, a server-side application or an IoT device, for example.
+
+### Tokens
+
+For a client application to authenticate with Channels, they will need to use a token (`leap_token_xxx`) generated using the Hop API from your backend. You can use the Hop SDK to generate a token with metadata. You are expected to securely hand this token to a client application, which they can then use to authenticate with Channels through the Hop SDK.
+
+### Channels
+
+By default, channels are direct, private, server->client realtime messaging rooms, however, channels are feature-rich and be of multiple different types, visibility types, and have multiple different Capabilities assigned to them.
+
+Channels are a "cheap" resource to create, meaning you can and should create as many as you need to fulfill the needs of your application or feature.
+
+#### Types
+
+#####
+
+#### Visibility Types
+
+Channels can have one of 2 visibility types:
+
+- Private
+- Public
+
+**Private** channels allow you to limit access to that channel, either by granting tokens permission or by telling Hop to call an API route you give to us.
+
+**Public** channels allow anyone to join them, given they're authenticated under your project and know the channel ID.
+
+### Messages
+
+You can use the Hop API or SDK to easily send messages of any size to channels.

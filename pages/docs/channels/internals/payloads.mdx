@@ -67,7 +67,7 @@ Client will receive this opcode when any heartbeat is sent. If client was respon
 
 ## Service
 
-Payloads for interacting with Hop realtime services through Leap Edge. All service payloads are sent and received over Opcode 0: Dispatch. Other than Op 0, the events documented in this section are describing the contents of the Dispatch message.
+Payloads for interacting with Hop realtime services through Leap Edge, through channels. All channel payloads are sent and received over Opcode 0: Dispatch. Other than Op 0, the events documented in this section are describing the contents of the Dispatch message.
 
 **Important:** All Hop services expose a default set of interface events which relate to the subscription and control of the service. The service will also implement its own events to transmit actual service data, and these events do not conflict with the default interface events documented below. You will need to check the documentation of the service for a full list of events dispatched from that specific service.
 
@@ -80,7 +80,7 @@ direction: `both`
 
 | field | type   | description         |
 | ----- | ------ | ------------------- |
-| s     | string | service identifier  |
+| c     | string | channel id          |
 | e     | string | dispatch event code |
 | d     | object | event data          |
 
@@ -88,7 +88,7 @@ direction: `both`
 
 All payloads documented below specify the contents of Opcode 0: Dispatch. For outgoing messages, this documentation assumes you have already populated the `s` (service identifier) field with the relevant service ID.
 
-### `SUBSCRIBE`: Create Service subscription
+### `SUBSCRIBE`: Create Channel subscription
 
 e: `SUBSCRIBE`  
 direction: `send`
@@ -97,14 +97,14 @@ Subscribe to the specified Hop service. If you do not have permission to subscri
 
 > `d` (event data) can be null
 
-### `INIT`: Service Initialization
+### `INIT`: Channel Became Available
 
 e: `INIT`  
 direction: `receive`
 
 The service has become available to this Leap session.
 
-### `UNAVAILABLE`: Service Became Unavailable
+### `UNAVAILABLE`: Channel Became Unavailable
 
 You have been unsubscribed from the service, potentially with an error attached.
 
