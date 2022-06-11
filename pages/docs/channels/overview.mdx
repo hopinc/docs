@@ -7,9 +7,9 @@ description: Channels overview & concepts
 
 Channels allows you to easily create direct or grouped realtime message channels between users, server-side applications, IoT devices and more.
 
-Channels are feature-rich and can be of multiple different Channel types, Visibility types and have multiple Capabilities enabled, allowing you to create anything from a realtime stock ticker to a fully feature-rich group messaging app.
+Channels are feature-rich and can be of multiple different visibility types and have multiple Capabilities enabled, allowing you to create anything from a realtime stock ticker to a fully feature-rich group messaging app.
 
-Channels can be given the `no_auth` capability, which means that you don't need to worry about handing out tokens to users on your frontend. This is useful if you want to display realtime data on a frontend application that doesn't require user sign-in, for example.
+Channels can be of the `unprotected` type, which means that you don't need to worry about handing out tokens to users on your frontend. This is useful if you want to display realtime data on a frontend application that doesn't require user sign-in, for example.
 
 For most use cases, you'll need a protected server-side application (e.g. an API) which can use the Hop SDK to create [Tokens](#tokens) and Channels. You can then use the client-side SDKs like hop-js to subscribe to channels.
 
@@ -63,20 +63,19 @@ By default, channels are direct, private, server->client realtime messaging room
 
 Channels are a "cheap" resource to create, meaning you can and should create as many as you need to fulfill the needs of your application or feature.
 
-#### Base Types
-
-#####
-
 #### Visibility Types
 
-Channels can have one of 2 visibility types:
+Channels can have one of 3 visibility types:
 
 - Private
 - Public
+- Unprotected
 
-**Private** channels allow you to limit access to that channel, either by granting tokens permission or by telling Hop to call an API route you give to us.
+**Private** channels allow you to individually grant tokens access to channels, either by calling a method from the server-side SDK or by responding to a webhook call when tokens try to subscribe, which you can set up on the Channels console page
 
 **Public** channels allow anyone to join them, given they're authenticated under your project and know the channel ID.
+
+**Unprotected** channels allow anyone to join them, even if they're not authenticated with a token, given they know the channel ID
 
 ### Messages
 
