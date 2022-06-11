@@ -9,7 +9,9 @@ Channels allows you to easily create direct or grouped realtime message channels
 
 Channels are feature-rich and can be of multiple different Channel types, Visibility types and have multiple Capabilities enabled, allowing you to create anything from a realtime stock ticker to a fully feature-rich group messaging app.
 
-To use channels, you need a protected server-side application (e.g. an API) which can use the Hop SDK to create [Tokens](#tokens) and Channels. You can then use the client-side SDKs like hop-js to subscribe to channels.
+Channels can be given the `no_auth` capability, which means that you don't need to worry about handing out tokens to users on your frontend. This is useful if you want to display realtime data on a frontend application that doesn't require user sign-in, for example.
+
+For most use cases, you'll need a protected server-side application (e.g. an API) which can use the Hop SDK to create [Tokens](#tokens) and Channels. You can then use the client-side SDKs like hop-js to subscribe to channels.
 
 ## Concepts
 
@@ -19,7 +21,7 @@ The client (or "user") is the entity that subscribes to Channels, using either t
 
 ### Tokens
 
-For a client application to authenticate with Channels, they will need to use a token (`leap_token_xxx`) generated using the Hop API from your backend. You can use the Hop SDK to generate a token with metadata. You are expected to securely hand this token to a client application, which they can then use to authenticate with Channels through the Hop SDK.
+For a client application to authenticate with protected Channels, they will need to use a token (`leap_token_xxx`) generated using the Hop API from your backend. You can use the Hop SDK to generate a token with metadata. You are expected to securely hand this token to a client application, which they can then use to authenticate with Channels through the Hop SDK.
 
 If you have a database of users, then you should create a token for each individual user that needs to connect to Channels and store it in relation to their user, then re-use that same token when they need to connect again in the future.
 
