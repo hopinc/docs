@@ -27,13 +27,17 @@ If you have a database of users, then you should create a token for each individ
 
 You can connect and authenticate with Channels multiple times under the same token.
 
+Tokens are permenant until they are deleted.
+
 ### Sessions
 
 When a client SDK connects to the Channels socket, they are given a session. Then, if a user connects multiple times under one token, they are connected to the same session. As a developer, you shouldn't need to worry about this resource - just know that it's used to keep a consistent and uninterrupted socket connection during unstable network conditions. You can read more about it in the [Leap](./leap) documentation.
 
 ### Channel Subscriptions
 
-A channel subscription refers to a client token being subscribed to a channel.
+A channel subscription refers to a client tokens being subscribed to a channel.
+
+**Important:** If you are just subscribing to unprotected (`no_auth`) channels on your frontend, then all channel subscriptions are ephemeral and last the duration of the socket connection.
 
 When tokens are created, they can be given access to a list of "default channels" which they will automatically get subscribed to when authenticating with the Channels socket. Tokens can also create channel subscriptions while being connected, through the SDK. It's up to you to decide if a token should be granted access to that channel.
 
