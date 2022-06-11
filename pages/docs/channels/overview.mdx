@@ -31,19 +31,23 @@ Tokens are permenant until they are deleted.
 
 ### Sessions
 
-When a client SDK connects to the Channels socket, they are given a session. Then, if a user connects multiple times under one token, they are connected to the same session. As a developer, you shouldn't need to worry about this resource - just know that it's used to keep a consistent and uninterrupted socket connection during unstable network conditions. You can read more about it in the [Leap](./leap) documentation.
+When a client SDK connects to the Channels socket, they are given a session. Then, if a user connects multiple times under one token, they are connected to the same session. As a developer, you shouldn't need to worry about this resource - just know that it's used to keep a consistent and uninterrupted socket connection during unstable network conditions. Sessions automatically die once there have been no connected clients for a 30 second period. You can read more about them in the [Leap](./leap) documentation.
 
 ### Channel Subscriptions
 
-A channel subscription refers to a client tokens being subscribed to a channel.
+A channel subscription refers to a client token being subscribed to a channel.
 
-**Important:** If you are just subscribing to unprotected (`no_auth`) channels on your frontend, then all channel subscriptions are ephemeral and last the duration of the socket connection.
+**Important:** If you are just subscribing to unprotected channels on your frontend, then all channel subscriptions are ephemeral and only last the duration of the session / socket connection.
 
-When tokens are created, they can be given access to a list of "default channels" which they will automatically get subscribed to when authenticating with the Channels socket. Tokens can also create channel subscriptions while being connected, through the SDK. It's up to you to decide if a token should be granted access to that channel.
+There are 3 ways a token can be subscribed to a channel:
 
-You can also force create a channel subscription through the Hop server-side SDK. When created, this will take effect in realtime.
+- When creating the token, you can specify a list of "default channels" the token should be subcribed to
+- Through the local client SDKs, the client can call the `subscribe` method with a channel ID. If the channel is private, then a webhook call will be required to succeed before the client is subscribed.
+- Through the server-side SDKs, you can call a method to subscribe multiple tokens to a channel
 
-All channel subscriptions are permanent across all sessions, and will last until a token is unsubscribed from a channel through the server-side API or local SDK.
+When client subscriptions are created, the realtime clients will instantly start receiving events from these channels.
+
+All channel subscriptions are permanent across all sessions, and will last until a token is unsubscribed from a channel through the server-side API or local SDK. However, you can mark a subscription as `ephemeral`, which will delete the subscription when the session dies.
 
 ```
                                   ┌──────► channel_0
@@ -59,7 +63,7 @@ User (Leap Token) ◄───► Session ◄─┼──────► channel
 
 ### Channels
 
-By default, channels are direct, private, server->client realtime messaging rooms, however, channels are feature-rich and be of multiple different types, visibility types, and have multiple different Capabilities assigned to them. By default, channels are permanent until you delete them, however for some use cases, it might make more sense to give them the `ephemeral` capability, which makes them automatically delete once all subscribers have disconnected.
+By default, channels are direct, private, server->client realtime messaging rooms, however, channels are feature-rich and have be of multiple visibility types, and have multiple different Capabilities assigned to them. By default, channels are permanent until you delete them, however for some use cases, it might make more sense to give them the `ephemeral` capability, which makes them automatically delete once all subscribers have disconnected.
 
 Channels are a "cheap" resource to create, meaning you can and should create as many as you need to fulfill the needs of your application or feature.
 
