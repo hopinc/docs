@@ -21,17 +21,21 @@ The client (or "user") is the entity that subscribes to Channels, using either t
 
 ### Tokens
 
-For a client application to authenticate with protected Channels, they will need to use a token (`leap_token_xxx`) generated using the Hop API from your backend. You can use the Hop SDK to generate a token with metadata. You are expected to securely hand this token to a client application, which they can then use to authenticate with Channels through the Hop SDK.
+For a client application to authenticate with protected (public & private) Channels, they will need to use token authentication. Tokens (`leap_token_xxx`) can be generated using the Hop API or SDK from your backend. Tokens can contain metadata - for example, you could include the user ID this token is generated for in. You are expected to securely hand this token to a client application, which they can then use to authenticate with Channels through the Hop client SDK.
+
+Tokens can subscribe to many channels at once. They are permenant until deleted.
 
 If you have a database of users, then you should create a token for each individual user that needs to connect to Channels and store it in relation to their user, then re-use that same token when they need to connect again in the future.
 
 You can connect and authenticate with Channels multiple times under the same token.
 
-Tokens are permenant until they are deleted.
-
 ### Sessions
 
-When a client SDK connects to the Channels socket, they are given a session. Then, if a user connects multiple times under one token, they are connected to the same session. As a developer, you shouldn't need to worry about this resource - just know that it's used to keep a consistent and uninterrupted socket connection during unstable network conditions. Sessions automatically die once there have been no connected clients for a 30 second period. You can read more about them in the [Leap](./leap) documentation.
+When a client SDK connects to the Channels socket, they are attached to a session individual to that token. Then, if a user connects multiple times under one token, they are connected to the same session. As a developer, you shouldn't need to worry about this resource - just know that it's used to keep a consistent and uninterrupted socket connection during unstable network conditions. Sessions automatically die once there have been no connected clients for a 30 second period. You can read more about them in the [Leap](./leap) documentation.
+
+#### Connections
+
+Individual connections to the Channels socket are a separate resource, and while they're attached to sessions, they get their own identifier which you can use to send messages to a single connection or "device".
 
 ### Channel Subscriptions
 

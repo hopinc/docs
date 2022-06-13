@@ -38,9 +38,10 @@ direction: `tx`
 
 Client should send this after receiving Opcode 1: Hello. This should contain identifying information about the client, including the LE token.
 
-| field | type   | description                |
-| ----- | ------ | -------------------------- |
-| token | string | the `leap_token_xxx` token |
+| field      | type   | description                |
+| ---------- | ------ | -------------------------- |
+| project_id | string | the project id             |
+| token      | string | the `leap_token_xxx` token |
 
 ### Opcode 3: Heartbeat
 
@@ -73,33 +74,51 @@ Payloads for interacting with Hop realtime services through Leap Edge, through c
 
 ### Opcode 0: Dispatch
 
-All interaction, to and from Hop services are transmitted through this Opcode.
+All interaction, to and from Hop Channels are transmitted through this Opcode.
 
 opcode: `0`  
 direction: `both`
 
-| field | type   | description         |
-| ----- | ------ | ------------------- |
-| c     | string | channel id          |
-| e     | string | dispatch event code |
-| d     | object | event data          |
+| field | type      | description                                                                              |
+| ----- | --------- | ---------------------------------------------------------------------------------------- |
+| c     | ?string\* | channel id                                                                               |
+| u     | boolean   | whether this is a unicast message (only sent to this connection, not the entire session) |
+| e     | string    | dispatch event code                                                                      |
+| d     | object    | event data                                                                               |
+
+\* the `INIT` payload will contain a `null` channel ID
 
 ---
 
 All payloads documented below specify the contents of Opcode 0: Dispatch. For outgoing messages, this documentation assumes you have already populated the `s` (service identifier) field with the relevant service ID.
+
+### `INIT`: Initialization
+
+e: `INIT`  
+direction: `receive`
+
+When successfully authenticating with the socket, you will receive this payload which details your authorization scope, token metadata, as well as channels the token is already subcribed to.
+
+| field            | type      | description                                                         |
+| ---------------- | --------- | ------------------------------------------------------------------- |
+| cid              | string    | connection id                                                       |
+| connection_count | integer   | how many times this leap token is connected to the Channels service |
+| metadata         | ?object   | token metadata, if applicable                                       |
+| scope            | string    | one of `project` or `token`                                         |
+| channels         | channel[] | list of subscribed channels                                         |
 
 ### `SUBSCRIBE`: Create Channel subscription
 
 e: `SUBSCRIBE`  
 direction: `send`
 
-Subscribe to the specified Hop service. If you do not have permission to subscribe to the specified service, then you will receive an `RESPONSE` event.
+Subscribe to the specified channel. If you do not have permission to subscribe to the specified channel, then you will receive a `SUBSCRIPTION_REJECTION` event.
 
 > `d` (event data) can be null
 
-### `INIT`: Channel Became Available
+### `AVAILABLE`: Channel Became Available
 
-e: `INIT`  
+e: `AVAILABLE`  
 direction: `receive`
 
 The service has become available to this Leap session.
