@@ -9,7 +9,13 @@ Channels allows you to easily create direct or grouped realtime message channels
 
 Channels are feature-rich and can be of multiple different visibility types and have multiple Capabilities enabled, allowing you to create anything from a realtime stock ticker to a fully feature-rich group messaging app.
 
-Channels can be of the `unprotected` type, which means that you don't need to worry about handing out tokens to users on your frontend. This is useful if you want to display realtime data on a frontend application that doesn't require user sign-in, for example.
+Some nicities provided by Channels include:
+
+- Channels can be of the `unprotected` type, which means that you don't need to worry about handing out tokens to users on your frontend. This is useful if you want to display realtime data on a frontend application that doesn't require user sign-in, for example.
+
+- You can send events directly to [Tokens](#tokens), instead of sending them to channels.
+
+- You can give Channels the `stateful` capability, which allows you to keep state within a channel and automatically sync clients with that state when they connect.
 
 For most use cases, you'll need a protected server-side application (e.g. an API) which can use the Hop SDK to create [Tokens](#tokens) and Channels. You can then use the client-side SDKs like hop-js to subscribe to channels.
 
