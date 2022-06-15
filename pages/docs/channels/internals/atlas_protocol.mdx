@@ -45,7 +45,7 @@ which takes the format of:
 
 `rrp:<region>/<node>/<resource_type>/<resource_id>`
 
-#### Redis as a Process Registry
+#### Redis as a ~~Process~~ Node Registry
 
 By using Redis (or KeyDB in our case), we can rely on the extremely fast and safe lookups that it provides from every node in the network, globally. We can rely on it as an SSoT (single source of truth), even during network partitions, and also use it to resolve conflicts by running sanity checks against RRPs.
 
