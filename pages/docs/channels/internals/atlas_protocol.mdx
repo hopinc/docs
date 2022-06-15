@@ -27,7 +27,7 @@ One way to solve this would be to implement a cluster-wide lock or semaphore for
 
 ### CAP Theorem
 
-The CAP theorem states that in the event of a network partition, you can only favor either **availability** _or_ **consistency**, but not both. In our case, we need to favor availability for the ability to look up a resource and understand if the response is inconsistent or not.
+The CAP theorem states that in the event of a network partition, you can only favor either **availability** _or_ **consistency**, but not both. In our case, we need to favor availability for the ability to look up a resource and understand if the response is inconsistent or not, and consistency for knowing where a resource lives.
 
 ### The Solution
 
@@ -60,3 +60,7 @@ When a node looks up an RRP from Redis, it can easily perform a local lookup to 
 When nodes claim ownership of existing RRPs, it optimistcally assigns RRP values (before the resource is actually created) in attempt to prevent call race conditions. However, there is still an error margin within the latency of reading and updating an RRP value where two or more nodes may create the same resource at once.
 
 The round trip time to set an RRP is measured while an existing ownership re-claim is executed, and a timer is set internally to re-check the RRP after the RTT has passed. Because a resource claim SET operation should take half of the total RRT, we can safely assume that, if the value hasn't changed, then this node safely owns the resource.
+
+#### Hacking the CAP
+
+We're effectively partitioning the CAP theorem's guarantees and using the _availability_ we get from one service (Redis), and then pairing it with a service acting as a _consistent_ layer (individual Elixir nodes) by optimistcally taking ownership of resources if a partition is observed.
