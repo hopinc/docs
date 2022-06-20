@@ -132,17 +132,26 @@ direction: `receive`
 
 | field      | type    | description                                       |
 | ---------- | ------- | ------------------------------------------------- |
-| graceful   | boolean | if the service was expected to become unavailable |
+| graceful   | boolean | if the channel was expected to become unavailable |
 | error_code | ?string | the error identifier                              |
 
-## Service Errors
+### `STATE_UPDATE`: Channel State was Updated
+
+e: `STATE_UPDATE`  
+direction: `receive`
+
+| field | type   | description          |
+| ----- | ------ | -------------------- |
+| state | object | the new state object |
+
+## Channel Availability Errors
 
 You can be disconnected from services for a variety of reasons. When you get disconnected, an `UNAVAILABLE` event will be sent down. If the service became unavailable errenously, an `error_code` string will be part of the event data. This section documents what those error codes mean.
 
 ### `NOT_GRANTED`
 
-The Leap Token used to authenticate the socket connection does not have the service grant required to authenticate with the service attempted.
+The Leap Token used to authenticate the socket connection does not have the permission grant required to authenticate with the attempted channel.
 
 ### `UNKNOWN`
 
-The service you attempted to message does not exist.
+The channel you attempted to message does not exist or you are not subscribed

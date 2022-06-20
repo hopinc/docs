@@ -1,0 +1,10 @@
+---
+title: Channel State
+description: About Hop channel state
+---
+
+# Channel State
+
+As well as transient messages, channels can be used as a store for realtime, stateful and persisted state. You can think of it like a realtime database attached to every channel.
+
+Channel state is stored under `state` in the Channel object. State is a key/value map, which you can provide when creating a Channel, and then update later on. All subscribers are able to access Channel state. When state is updated, all subscribers will be synced with the latest state object. You can also listen to the individual state update events with the client SDK.
