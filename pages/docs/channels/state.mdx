@@ -46,3 +46,35 @@ const channel = await hop.channels.get('channel_0');
 // Clear the state. This will set the state to an empty object ({})
 channel.clearState();
 ```
+
+
+## Reacting to State Changes on the Client
+
+You can use our client-side SDKs, like Hop.js to listen to and react to channel state changes. Clients will automatically receive state updates to all channels they subscribe to.
+
+To listen to individual state updates, you can listen to `stateUpdate`:
+```ts
+hop.channels.on('stateUpdate', (channelId: string, state: unknown) => {
+	// do something
+});
+```
+
+To get the initial state of all channels when clients connect, you need to listen for the `init` event.
+
+```ts
+hop.channels.on('init', (d: ChannelInitialization) => {
+	// all channel objects are stored under d.channels
+});
+```
+
+If using React, you can use the `useChannelState` hook:
+
+```tsx
+const Price = () => {
+	// `state` will be null until the client is connected
+	const state = useChannelState("usd_prices");
+
+	if(!state) return <h1>Loading</h1>;
+	return <h1>BTC Price: {state.btc}</h1>;
+}
+```
