@@ -3,8 +3,46 @@ title: Channel State
 description: About Hop channel state
 ---
 
+import {Code} from '../../../components/code';
+
 # Channel State
 
 As well as transient messages, channels can be used as a store for realtime, stateful and persisted state. You can think of it like a realtime database attached to every channel.
 
 Channel state is stored under `state` in the Channel object. State is a key/value map, which you can provide when creating a Channel, and then update later on. All subscribers are able to access Channel state. When state is updated, all subscribers will be synced with the latest state object. You can also listen to the individual state update events with the client SDK.
+
+## Updating State
+
+You can update channel state from the server side SDK libraries or the API:
+
+```ts
+// Get a channel by its ID
+const channel = await hop.channels.get('channel_0');
+
+/**
+ * Option 1: Rewrite the state.
+ * The existing state is passed as the first arument to Channel#setState
+ */
+
+channel.setState(s => { ...s, name: "My Channel" })
+
+/**
+ * Option 2: Update or add variables
+ * This operation will only effect the variables you specify.
+ * The rest of the state will remain unchanged
+ */
+
+channel.patchState({ name: "My Channel" })
+```
+
+Either of these operations will update the connected clients in realtime.
+
+## Clearing State
+
+```ts
+// Get a channel by its ID
+const channel = await hop.channels.get('channel_0');
+
+// Clear the state. This will set the state to an empty object ({})
+channel.clearState();
+```
