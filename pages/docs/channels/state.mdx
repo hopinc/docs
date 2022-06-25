@@ -67,14 +67,21 @@ hop.channels.on('init', (d: ChannelInitialization) => {
 });
 ```
 
+### Usage with React
 If using React, you can use the `useChannelState` hook:
 
 ```tsx
 const Price = () => {
-	// `state` will be null until the client is connected
+	/**
+	 * `state` will be null until the client is connected
+	 * this will attempt to subscribe the client to the specified channel
+	 * if they are not already subscribed (you can disable this)
+	 */
 	const state = useChannelState("usd_prices");
 
 	if(!state) return <h1>Loading</h1>;
 	return <h1>BTC Price: {state.btc}</h1>;
 }
 ```
+
+Read more on (TODO: Insert link to client docs)

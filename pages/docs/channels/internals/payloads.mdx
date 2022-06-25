@@ -82,11 +82,12 @@ direction: `both`
 | field | type      | description                                                                              |
 | ----- | --------- | ---------------------------------------------------------------------------------------- |
 | c     | ?string\* | channel id                                                                               |
-| u     | boolean   | whether this is a unicast message (only sent to this connection, not the entire session) |
+| u     | ?bool\**   | whether this is a unicast message (only sent to this connection, not the entire session) |
 | e     | string    | dispatch event code                                                                      |
 | d     | object    | event data                                                                               |
 
-\* the `INIT` payload will contain a `null` channel ID
+\* the `INIT` payload will contain a `null` channel ID  
+\** Exists on received payloads only (not required for tx)
 
 ---
 
