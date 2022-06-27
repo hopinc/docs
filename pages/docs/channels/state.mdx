@@ -15,6 +15,7 @@ Channel state is stored under `state` in the Channel object. State is a key/valu
 
 You can update channel state from the server side SDK libraries or the API:
 
+<Code>
 ```ts
 // Get a channel by its ID
 const channel = await hop.channels.get('channel_0');
@@ -24,7 +25,7 @@ const channel = await hop.channels.get('channel_0');
  * The existing state is passed as the first arument to Channel#setState
  */
 
-channel.setState(s => { ...s, name: "My Channel" })
+channel.setState(s => ({ ...s, name: "My Channel" }));
 
 /**
  * Option 2: Update or add variables
@@ -32,13 +33,15 @@ channel.setState(s => { ...s, name: "My Channel" })
  * The rest of the state will remain unchanged
  */
 
-channel.patchState({ name: "My Channel" })
+channel.patchState({ name: "My Channel" });
 ```
+</Code>
 
 Either of these operations will update the connected clients in realtime.
 
 ## Clearing State
 
+<Code>
 ```ts
 // Get a channel by its ID
 const channel = await hop.channels.get('channel_0');
@@ -46,6 +49,7 @@ const channel = await hop.channels.get('channel_0');
 // Clear the state. This will set the state to an empty object ({})
 channel.clearState();
 ```
+</Code>
 
 
 ## Reacting to State Changes on the Client
@@ -70,6 +74,7 @@ hop.channels.on('init', (d: ChannelInitialization) => {
 ### Usage with React
 If using React, you can use the `useChannelState` hook:
 
+<Code>
 ```tsx
 const Price = () => {
 	/**
@@ -79,9 +84,30 @@ const Price = () => {
 	 */
 	const state = useChannelState("usd_prices");
 
-	if(!state) return <h1>Loading</h1>;
+	if (!state) {
+		return <h1>Loading</h1>;
+	}
+
 	return <h1>BTC Price: {state.btc}</h1>;
 }
 ```
+
+```ts
+const Price = () => {
+	/**
+	 * `state` will be null until the client is connected
+	 * this will attempt to subscribe the client to the specified channel
+	 * if they are not already subscribed (you can disable this)
+	 */
+	const state = useChannelState("usd_prices");
+
+	if (!state) {
+		return <h1>Loading</h1>;
+	}
+
+	return <h1>BTC Price: {state.btc}</h1>;
+}
+```
+</Code>
 
 Read more on (TODO: Insert link to client docs)

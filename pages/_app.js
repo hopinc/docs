@@ -1,13 +1,14 @@
 import '../styles/globals.css';
 import 'nextra-theme-docs/style.css';
 
+import {CodeProvider} from '../context/code';
+
 export default function Nextra({Component, pageProps}) {
 	const getLayout = Component.getLayout || (page => page);
-	return getLayout(<Component {...pageProps} />);
 
-	// return getLayout(
-	// 	<CodeProvider>
-	// 		<Component {...pageProps} />
-	// 	</CodeProvider>,
-	// );
+	return getLayout(
+		<CodeProvider>
+			<Component {...pageProps} />
+		</CodeProvider>,
+	);
 }

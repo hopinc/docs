@@ -3,6 +3,7 @@ import {
 	Dispatch,
 	ReactNode,
 	SetStateAction,
+	useCallback,
 	useContext,
 	useEffect,
 	useMemo,
@@ -24,41 +25,23 @@ export function useContextLanguage() {
 	return data;
 }
 
-export function useCurrentLanguage(languages: string[]) {
-	const {value, setValue} = useContextLanguage();
-	const [localState, setLocalState] = useState(value);
+export function useCurrentLanguage(snippetSupportedLanguages: string[]) {
+	const context = useContextLanguage();
 
-	const first = languages[0];
+	console.log(context);
 
-	useEffect(() => {
-		if (typeof window === 'undefined') {
-			return;
-		}
+	const localLanguage = snippetSupportedLanguages.includes(context.value!)
+		? context.value
+		: snippetSupportedLanguages[0];
 
-		setValue(window.localStorage.getItem('language') ?? first);
-	}, [setValue, first]);
-
-	if (value && languages.includes(value)) {
-		return [value, setValue] as const;
-	}
-
-	return [
-		localState,
-		(language: string) => {
-			if (languages.includes(language)) {
-				setValue(language);
-			}
-
-			setLocalState(language);
-		},
-	] as const;
+	return [localLanguage, context.setValue] as const;
 }
 
 export function CodeProvider({children}: {children: ReactNode}) {
 	const [value, setValue] = useState<string | null>(
 		typeof window === 'undefined'
 			? null
-			: window.localStorage.getItem('language'),
+			: window.localStorage.getItem('preferred_language'),
 	);
 
 	useEffect(() => {
@@ -66,7 +49,7 @@ export function CodeProvider({children}: {children: ReactNode}) {
 			return;
 		}
 
-		const stored = window.localStorage.getItem('language');
+		const stored = window.localStorage.getItem('preferred_language');
 
 		if (stored) {
 			setValue(stored);
@@ -75,7 +58,7 @@ export function CodeProvider({children}: {children: ReactNode}) {
 
 	useEffect(() => {
 		if (typeof window !== 'undefined' && value) {
-			window.localStorage.setItem('language', value);
+			window.localStorage.setItem('preferred_language', value);
 		}
 	}, [value]);
 

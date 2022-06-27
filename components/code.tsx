@@ -2,7 +2,6 @@ import {Children, ReactElement} from 'react';
 import clsx from 'clsx';
 import styles from './code.module.css';
 import {useCurrentLanguage} from '../context/code';
-import {NoSSR} from './client';
 
 export interface Props {
 	children: ReactElement[];
