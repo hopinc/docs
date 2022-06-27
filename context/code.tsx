@@ -28,8 +28,6 @@ export function useContextLanguage() {
 export function useCurrentLanguage(snippetSupportedLanguages: string[]) {
 	const context = useContextLanguage();
 
-	console.log(context);
-
 	const localLanguage = snippetSupportedLanguages.includes(context.value!)
 		? context.value
 		: snippetSupportedLanguages[0];
