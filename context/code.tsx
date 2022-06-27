@@ -3,7 +3,6 @@ import {
 	Dispatch,
 	ReactNode,
 	SetStateAction,
-	useCallback,
 	useContext,
 	useEffect,
 	useMemo,
@@ -36,7 +35,7 @@ export function useCurrentLanguage(snippetSupportedLanguages: string[]) {
 }
 
 export function CodeProvider({children}: {children: ReactNode}) {
-	const [value, setValue] = useState<string | null>(
+	const [value, setValue] = useState<string | null>(() =>
 		typeof window === 'undefined'
 			? null
 			: window.localStorage.getItem('preferred_language'),
