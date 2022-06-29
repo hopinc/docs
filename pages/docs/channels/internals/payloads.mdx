@@ -113,7 +113,7 @@ When successfully authenticating with the socket, you will receive this payload 
 e: `SUBSCRIBE`  
 direction: `send`
 
-Subscribe to the specified channel. If you do not have permission to subscribe to the specified channel, then you will receive a `SUBSCRIPTION_REJECTION` event.
+Subscribe to the specified channel. If you do not have permission to subscribe to the specified channel, then you will receive an `UNAVAILABLE` event with a `NOT_GRANTED` error code.
 
 > `d` (event data) can be null
 
