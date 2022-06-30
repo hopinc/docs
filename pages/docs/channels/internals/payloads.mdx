@@ -145,6 +145,18 @@ direction: `receive`
 | ----- | ------ | -------------------- |
 | state | object | the new state object |
 
+### `MESSAGE`: Channel Message Receieved
+
+Developers can send transient messages to channels through the API or server-side SDKs.
+
+e: `MESSAGE`  
+direction: `receive`
+
+| field | type   | description          |
+| ----- | ------ | -------------------- |
+| e | string | user-provided event name |
+| d | object | user-provided event data |
+
 ## Channel Availability Errors
 
 You can be disconnected from services for a variety of reasons. When you get disconnected, an `UNAVAILABLE` event will be sent down. If the service became unavailable errenously, an `error_code` string will be part of the event data. This section documents what those error codes mean.
