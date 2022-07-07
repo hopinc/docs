@@ -14,7 +14,9 @@ import gwDemo5 from '../../../assets/images/hop-gw-demo-5.png';
 
 Gateways allow you to expose your Hop deployments to your project or the internet.
 
-There are 2 types of gateways: Internal or External. They work the same and support the same protocols, however internal gateways only get assigned an internal IP address and DNS name.
+There are 2 types of gateways: Internal or External. External gateways expose your deployment to the internet under a protocol of your choice, e.g. HTTP. Internal gateways expose your deployment to your project by giving you an IP address and customizable internal domain to use.
+
+Currently, both gateway types [round-robin](https://en.wikipedia.org/wiki/Round-robin_DNS) requests between containers. In the future, there will be more fine grained controls for load balancing requests.
 
 ## Creating a Gateway
 
@@ -28,7 +30,7 @@ Navigate to the Gateways tab in an Ignite deployment:
 
 Click on the "Create Gateway" button in the top right:
 
-<Image placeholder={"blur"} src={gwDemo2}/>
+<Image width={300} objectFit={"contain"}  placeholder={"blur"} src={gwDemo2}/>
 
 You will be presented with a modal:
 <Image width={500} height={500} objectFit={"contain"} placeholder={"blur"} src={gwDemo3}/>
@@ -41,7 +43,7 @@ Gateway type can be either:
 
 At the moment, external gateways only support HTTP(S), so there's no option to select the protocol yet.
 
-The target port should be the port your app listens on. The gateway will load balance requests between containers on the target port. HTTP gateways will automatically handle HTTP and HTTPS termination on the correct ports, so you don't need to configure them.
+The target port should be the port your app listens on. The gateway will load balance requests between containers on the target port. HTTP gateways will automatically handle external HTTP and HTTPS termination on the correct ports (80 & 443), so you don't need to run your application on these ports.
 
 Click **Create Gateway**.
 

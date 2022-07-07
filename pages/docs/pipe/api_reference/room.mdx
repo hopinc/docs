@@ -1,0 +1,60 @@
+---
+title: Creating a Pipe Room
+description: Creating a Pipe Room through the Hop API
+---
+
+import {Code} from '../../../../components/code';
+
+# Rooms
+
+Rooms are Pipe's abstraction of streams. You should create a new Room for each new live broadcast. Rooms will automatically delete after 10 minutes of no input stream. You can also delete them programatically through our API or SDK.
+
+## Room Object
+
+The full Room object returned by our API
+
+| field | type | description |
+| ----- | ---- | ----------- |
+| id | string | hop-generated room ID |
+| name | ?string | optional room name |
+| ingest_protocol | string | one of: rtp, rtmp, srtp |
+| delivery_protocols | string[] | an array of supported delivery protocols (llhls, webrtc)  |
+| join_token | string | room join token |
+| ingest_endpoint | string | room ingest endpoint (stream to this!) |
+| ingest_region | [region](/docs/reference/regions) (string) | the region where the primary ingest is hosted|
+
+## Creating a Room
+
+You can create a Pipe Room through our server-side [SDK](https://www.npmjs.com/package/@onehop/client) or our REST API.
+
+<Code>
+```ts
+const room = await hop.pipe.createRoom({
+	name: "My Stream", // optional room name
+	ingest_protocol: "rtp", // rtp, rtmp or srtp
+	delivery_protocols: ["llhls"], // llhls and webrtc are permitted,
+	/**
+	 * optionally specify ingest region
+	 * if not specified, closest region will be matched based on caller IP geolocation
+	 */ 
+	region: "us-east-1"
+})
+```
+</Code>
+
+
+## Deleting a Room
+
+Please note that this will cause the ingest server to terminate your connection. This will also trigger the "CLOSED_REMOTELY" connection state on the frontend clients.
+
+<Code>
+```ts
+// delete by ID
+const id = "pipe_room_xxx";
+const room = await hop.pipe.deleteRoom(id);
+
+// or, delete from room class
+const room = await hop.pipe.getRoom(id);
+void room.delete();
+```
+</Code>
