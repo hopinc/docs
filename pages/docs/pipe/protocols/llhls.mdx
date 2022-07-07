@@ -45,14 +45,20 @@ However, thanks to our (Leap)[/docs/channels/internals/leap] protocol, which is 
 
 ### Playback Sync
 
+> Please note that the following feature is experimental, and heavily subject to change
+
 While LLHLS is great, users on slow networks may receive older playlists due to network latency, and therefore be de-synced with other viewers. This isn't acceptable for certain applications, such as watch parties, which expect users to react to the same content.
 
 By default, Pipe will optimize your LLHLS stream for "low latency", and won't take sync into account. However, you can use the `llhls_config` object when creating a Room to fine-tune your playout options.
 
-To achieve better playout sync between users, you can use the `wcl_delay` parameter in your `llhls_config`. This will now optimize your stream for **sync** rather than **low-latency**, and while still miles better than legacy HLS, adds a base latency of 5 seconds to your delay from live. This latency can increase from 5 seconds to your "wcl_delay" parameter, regardless of your users' internet conditions.
+To achieve better playout sync between users, you can use the `wcl_delay` parameter in your `llhls_config`. This will now optimize your stream for **sync** rather than **low-latency**, and while still miles better than legacy HLS, adds a base latency of 5 seconds to your delay from live. This latency can increase from 5 seconds up to your "wcl_delay" parameter, regardless of your users' internet conditions. Users with network conditions unable to meet the "wcl_delay" parameter will be desynced from other users.
 
 The `wcl_delay` parameter is basically a way to tell Pipe how much you're willing to delay your live broadcast in favor of providing a more synced playback for users with bad network conditions. `wcl_delay` stands for "Worst Case Latency Delay".
 
+On frontend clients, Leap sends periodic telemetry data about the users' current playback environment, inclduing currently synced HLS playlist. If we detect that more than 5% of your room is behind the current playlist, we do 2 things:
+
+- Start sending older playlist data (adding latency up to the specified wcl_delay), and
+- Adjust the playback rate of other clients to eventually let them sync with the new active delay
 
 
 
@@ -61,3 +67,16 @@ The `wcl_delay` parameter is basically a way to tell Pipe how much you're willin
 | field | type | description |
 | ----- | ---- | ----------- |
 | wcl_delay | ?number | specify a "worst case" delay; this will optimize delivery for playout sync rather than latency; number must be between 5 and 20 seconds |
+| artificial_delay | ?number | artificially add latency from your live broadcast; this will take priority over wcl_delay, so only set one |
+| max_playout_bitrate_preset | ?string | limit your playout bitrate |
+
+### Playout Birate Presets (enum)
+
+| preset | video bitrate (kbps) | audio bitrate (kbps) | resolution |
+| ------ | ----- | ------ | ---- |
+| hls_400k | 275 | 128 | 280p |
+| hls_600k | 475 | 128 | 320p |
+| hls_1m | 850 | 128 | 480p |
+| hls_2m | 2700 | 192 | 720p |
+| hls_3m | 3800 | 192 | 1080p |
+| hls_4m | 5120 | 192 | 1440p |
