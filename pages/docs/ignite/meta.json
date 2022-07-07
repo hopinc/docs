@@ -1,6 +1,5 @@
 {
 	"overview": "Overview",
 	"gateways": "Gateways",
-	"project_secrets": "Project Secrets",
-	"project_tokens": "Project Tokens"
+	"project_secrets": "Project Secrets"
 }
