@@ -1,13 +1,18 @@
+---
+title: Low-latency HLS (LLHLS)
+description: Learn about Low-latency HLS and its benefits
+---
+
 # LLHLS
 
-LLHLS (Low-Latency HLS) allows you to deliver live, low-latency streams to global audiences over HTTP. Historically, HLS has favored stream reliability over latency, however back in 2019 during WWDC, Apple announced their own extension to the protocoL: LLHLS, which can bring stream latency down to 1-2 seconds.
+LLHLS (Low-Latency HLS) allows you to deliver live, low-latency streams to global audiences over HTTP. Historically, HLS has favored stream reliability over latency, however back in 2019 during WWDC, Apple announced their own extension to the protocol: LLHLS, which can bring stream latency down to 1-2 seconds.
 
 Jump to:
 [LLHLS Overview](#overview)
 
 ## Overview
 
-Regular HLS has an average global latency of 20-30 seconds, which is extremely poor by todays standards and definitely not realtime, which is what we strive to achieve in our entire product line.
+Regular HLS has an average global latency of 20-30 seconds, which is extremely poor by today's standards and definitely not realtime, which is what we strive to achieve in our entire product line.
 
 Low Latency HLS can bring this latency down to as low as 1-2 seconds. Apple achieved this by focussing on 4 major components:
 
@@ -15,7 +20,7 @@ Low Latency HLS can bring this latency down to as low as 1-2 seconds. Apple achi
 
 In the regular HLS protocol, encoded stream segments are meant to be about 6 seconds long before getting added to the HLS playlist. This already adds a *base* latency of 6 seconds - plus, clients could request the HLS playlist ~5.9 seconds after the previous segment publish (worst case), which would mean they would be delayed from the live broadcast by about **12 seconds**.
 
-LLHLS solves this by publishing small parts (~250ms each) of the main segment to the playlist before the main segment itsself is ready.
+LLHLS solves this by publishing small parts (~250ms each) of the main segment to the playlist before the main segment itself is ready.
 
 ### Optimizing Delivery
 
@@ -34,18 +39,18 @@ In LLHLS, when clients make a pre-empted playlist request, they also send a PUSH
 
 
 ### Delta Playlist Updates
-In regular HLS, playlists are always returned in full - it returns segments that the client is already be aware of. This makes sense for the client's *first* playlist request, but not for subsequent requests.
+In regular HLS, playlists are always returned in full - it returns segments that the client is already aware of. This makes sense for the client's *first* playlist request, but not for subsequent requests.
 
 In LLHLS, the full playlist is only returned for the client's *first* request. For subsequent requests, only the delta between the latest playlist and their previous request is sent back - this usually fits into a single packet (MTU) of data, which increases network forwarding efficiency.
 
 ## Hop's LLHLS Implementation
-There's no doubt that LLHLS is the gold-standard of today's livestreaming protocols; for Pipe, we implement the raw protocol and serve it across our edge network.
+There's no doubt that LLHLS is the gold standard of today's livestreaming protocols; for Pipe, we implement the raw protocol and serve it across our edge network.
 
-However, thanks to our (Leap)[/docs/channels/internals/leap] protocol, which is a WebSocket that all frontend SDKs use to signal with Pipe (and Channels!), we're able to gain greater insight across all realtime viewers from a latency and network environment standpoint. Leap keeps a running heartbeat with clients, which we use to calculate round-trip-time (RTT) between our edge and the client.
+However, thanks to our [Leap](/docs/channels/internals/leap) protocol, which is a WebSocket that all frontend SDKs use to signal with Pipe (and Channels!), we're able to gain greater insight across all realtime viewers from a latency and network environment standpoint. Leap keeps a running heartbeat with clients, which we use to calculate round-trip-time (RTT) between our edge and the client.
 
 ### Playback Sync
 
-> Please note that the following feature is experimental, and heavily subject to change
+> Please note that the following feature is experimental and heavily subject to change
 
 While LLHLS is great, users on slow networks may receive older playlists due to network latency, and therefore be de-synced with other viewers. This isn't acceptable for certain applications, such as watch parties, which expect users to react to the same content.
 
@@ -55,7 +60,7 @@ To achieve better playout sync between users, you can use the `wcl_delay` parame
 
 The `wcl_delay` parameter is basically a way to tell Pipe how much you're willing to delay your live broadcast in favor of providing a more synced playback for users with bad network conditions. `wcl_delay` stands for "Worst Case Latency Delay".
 
-On frontend clients, Leap sends periodic telemetry data about the users' current playback environment, inclduing currently synced HLS playlist. If we detect that more than 5% of your room is behind the current playlist, we do 2 things:
+On frontend clients, Leap sends periodic telemetry data about the users' current playback environment, including currently synced HLS playlist. If we detect that more than 5% of your room is behind the current playlist, we do 2 things:
 
 - Start sending older playlist data (adding latency up to the specified wcl_delay), and
 - Adjust the playback rate of other clients to eventually let them sync with the new active delay
