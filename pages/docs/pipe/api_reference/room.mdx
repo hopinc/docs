@@ -7,7 +7,7 @@ import {Code} from '../../../../components/code';
 
 # Rooms
 
-Rooms are Pipe's abstraction of streams. You should create a new Room for each new live broadcast. Rooms will automatically delete after 10 minutes of no input stream. You can also delete them programatically through our API or SDK.
+Rooms are Pipe's abstraction of streams. You should create a new Room for each new live broadcast. If marked with `ephemeral`, Rooms will automatically delete after 10 minutes of no input stream. You can also delete them programatically through our API or SDK.
 
 ## Room Object
 
@@ -17,9 +17,11 @@ The full Room object returned by our API
 | ----- | ---- | ----------- |
 | id | string | hop-generated room ID |
 | name | ?string | optional room name |
+| ephemeral | boolean | is this room temporary? |
 | ingest_protocol | string | one of: rtp, rtmp, srtp |
 | delivery_protocols | string[] | an array of supported delivery protocols (llhls, webrtc)  |
 | join_token | string | room join token |
+| state| string | "live" or "offline" |
 | ingest_endpoint | string | room ingest endpoint (stream to this!) |
 | ingest_region | [region](/docs/reference/regions) (string) | the region where the primary ingest is hosted|
 | llhls_config | ?[llhls_config](/docs/pipe/protocols/llhls#llhls-configuration-object) | custom LLHLS configuration options |
@@ -35,6 +37,7 @@ const room = await hop.pipe.createRoom({
 	name: "My Stream", // optional room name
 	ingest_protocol: "rtp", // rtp, rtmp or srtp
 	delivery_protocols: ["llhls"], // llhls and webrtc are permitted,
+	ephemeral: true, // set your rooms to ephemeral if they're single-use
 	/**
 	 * optionally specify ingest region
 	 * if not specified, closest region will be matched based on caller IP geolocation

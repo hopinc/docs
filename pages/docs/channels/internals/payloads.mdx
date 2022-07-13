@@ -122,18 +122,60 @@ Subscribe to the specified channel. If you do not have permission to subscribe t
 e: `AVAILABLE`  
 direction: `receive`
 
-The service has become available to this Leap session.
+A channel has become available to this Leap session.
 
-### `UNAVAILABLE`: Channel Became Unavailable
+| field      | type    | description                                       |
+| ---------- | ------- | ------------------------------------------------- |
+| channel   | channel | the channel object |
 
-You have been unsubscribed from the service, potentially with an error attached.
+### `PIPE_ROOM_AVAILABLE`: Pipe Room Became Available
+
+e: `PIPE_ROOM_AVAILABLE`  
+direction: `receive`
+
+A Pipe room has become available to this Leap session.
+
+| field      | type    | description                                       |
+| ---------- | ------- | ------------------------------------------------- |
+| pipe_room   | [pipe_room](/docs/pipe/api_reference/room) | the pipe room object, with sensitive fields stripped |
+| connection | ?ConnectionMap* | map connection objects, documented below |
+
+*connection will be `null` if stream is `offline` (pipe_room:state)
+
+
+#### parent connection map type
+```ts
+interface ConnectionMap {
+	["webrtc" | "llhls"]: Connection | null;
+}
+```
+
+#### individual connection objects
+```ts
+interface Connection {
+	edge_endpoint: string;
+	type: "webrtc" | "llhls"
+	serving_pop: string; // can safely be ignored in frontend implementations
+}
+```
+
+### `PIPE_ROOM_UPDATE`: Pipe Room Updated
+
+e: `PIPE_ROOM_UPDATE`  
+direction: `receive`
+
+A Pipe room has updated. The data field will contain the same data type as `PIPE_ROOM_AVAILABLE`
+
+### `UNAVAILABLE`: Service (Channel or Pipe Room) Became Unavailable
+
+You have been unsubscribed or were rejected from subscribing to a channel or pipe room, potentially with an error attached.
 
 e: `UNAVAILABLE`  
 direction: `receive`
 
 | field      | type    | description                                       |
 | ---------- | ------- | ------------------------------------------------- |
-| graceful   | boolean | if the channel was expected to become unavailable |
+| graceful   | boolean | if the service was expected to become unavailable |
 | error_code | ?string | the error identifier                              |
 
 ### `STATE_UPDATE`: Channel State was Updated
