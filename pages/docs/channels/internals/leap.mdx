@@ -18,7 +18,7 @@ The LE (**L**eap **E**dge) socket allows clients & SDKs to connect to the follow
 
 ### Protocol
 
-LE 1.0 currently only supports connections via WebSocket, which is accessible globally via `wss://leap.hop.io/1.0/ws`. The IP address behind the hostname is announced by the Hop anycast network, so you should be connected to the closest PoP.
+LE 1.0 currently only supports connections via WebSocket, which is accessible globally via `wss://leap.hop.io/ws`. The IP address behind the hostname is announced by the Hop anycast network, so you should be connected to the closest PoP.
 
 Messages with LE are exchanged through a series of opcodes, documented below. All messages sent from LE are formatted with the following payload type:
 
