@@ -199,6 +199,11 @@ direction: `receive`
 | e | string | user-provided event name |
 | d | object | user-provided event data |
 
+### `DIRECT_MESSAGE`: Direct Message Received
+
+Exactly the same as `MESSAGE`, however received when sending direct messages to tokens rather than channels.
+
+
 ## Channel Availability Errors
 
 You can be disconnected from services for a variety of reasons. When you get disconnected, an `UNAVAILABLE` event will be sent down. If the service became unavailable errenously, an `error_code` string will be part of the event data. This section documents what those error codes mean.
