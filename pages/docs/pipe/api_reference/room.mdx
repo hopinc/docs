@@ -33,16 +33,11 @@ You can create a Pipe Room through our server-side [SDK](https://www.npmjs.com/p
 
 <Code>
 ```ts
-const room = await hop.pipe.createRoom({
+const room = await hop.pipe.rooms.create({
 	name: "My Stream", // optional room name
-	ingest_protocol: "rtp", // rtp, rtmp or srtp
-	delivery_protocols: ["llhls"], // llhls and webrtc are permitted,
-	ephemeral: true, // set your rooms to ephemeral if they're single-use
-	/**
-	 * optionally specify ingest region
-	 * if not specified, closest region will be matched based on caller IP geolocation
-	 */ 
-	region: "us-east-1"
+	ingestProtocol: "rtmp", // rtmp or rtp
+	deliveryProtocols: ["llhls"], // llhls and webrtc are permitted,
+	ephemeral: true // set your rooms to ephemeral if they're single-use
 })
 ```
 </Code>
