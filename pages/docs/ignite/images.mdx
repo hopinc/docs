@@ -49,7 +49,7 @@ Password:
 Login Succeeded
 ```
 
-#### Build & Push the Image
+### Build & Push the Image
 
 When you build your Docker image, make sure you prefix the tag with `registry.hop.io/<PROJECT_NAMESPACE>`. For example, my project's namespace is `test`, so I'll run the following command to build my container:
 ```
@@ -64,7 +64,7 @@ Once the image is built, I'll push my image to the Hop Registry with the followi
 docker push registry.hop.io/test/my-cool-project
 ```
 
-#### View the Image
+### View the Image
 Once your image is pushed, you can view it on the [Images tab](https://console.hop.io/ignite/images) of Ignite:
 
 <Image src={hopImages1}/>
