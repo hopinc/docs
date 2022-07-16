@@ -74,6 +74,11 @@ const config = {
 				<meta name="description" content="Hop: the realtime engine" />
 				<meta name="og:title" content="Hop: the realtime engine" />{' '}
 				<meta name="og:image" content={ogImage} />
+				<style>
+					{`img[decoding] {
+						border-radius: 0.75rem;
+					}`}
+				</style>
 			</>
 		);
 	},
