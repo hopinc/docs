@@ -1,7 +1,7 @@
 {
 	"overview": "Overview",
 	"getting_started": "Getting Started",
-	"protocols": "Protocols",
 	"streaming_to_pipe": "Streaming to Pipe",
+	"protocols": "Protocols",
 	"api_reference": "API Reference"
 }
