@@ -15,6 +15,7 @@ const config = {
 	search: true,
 	floatTOC: true,
 	footer: true,
+	defaultMenuCollapsed: true,
 	unstable_flexsearch: true,
 	feedbackLabels: 'feedback',
 	feedbackLink: 'Feedback',
