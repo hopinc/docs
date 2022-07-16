@@ -10,7 +10,7 @@ import {HopLogo} from './assets/BrandVectors';
 const config = {
 	projectLink: 'https://github.com/hopinc/docs',
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
-	projectChatLink: 'https://hop.io/discord',
+	projectChatLink: 'https://discord.gg/hop',
 	titleSuffix: ' — Hop API',
 	search: true,
 	floatTOC: true,
@@ -32,13 +32,13 @@ const config = {
 	banner: function Banner() {
 		return (
 			<a
-				href="https://hop.io/beta"
+				href="https://hop.io"
 				target="_blank"
 				rel="noopener noreferrer"
 				className="font-medium text-current no-underline"
 				title="Go to the Hop beta announcement"
 			>
-				Hop.io is now in public beta
+				Hop is in private beta
 			</a>
 		);
 	},
