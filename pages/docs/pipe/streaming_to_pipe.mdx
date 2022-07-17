@@ -54,7 +54,7 @@ This will start streaming the X window to Pipe at it's local resolution.
 #### Streaming a Video file
 
 ```bash
-ffmpeg -re -stream_loop 111 -i <FILE_NAME> -b:a 96k -c:v libx264 -profile:v baseline -pix_fmt yuv420p -tune zerolatency -profile:v baseline -preset veryfast -acodec aac -b:a 192k -ar 44100 -pes_payload_size 0 -f flv <INGEST_ENDPOINT>
+ffmpeg -re -stream_loop -1 -i <FILE_NAME> -b:a 96k -c:v libx264 -profile:v baseline -pix_fmt yuv420p -tune zerolatency -profile:v baseline -preset veryfast -acodec aac -b:a 192k -ar 44100 -pes_payload_size 0 -f flv <INGEST_ENDPOINT>
 ```
 
 (where `<FILE_NAME>` is the file name and `<INGEST_ENDPOINT>` is the endpoint you received from the room creation request)
