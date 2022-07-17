@@ -43,7 +43,7 @@ The RTMP ingest endpoint can be split up into logical partitions:
 A common use case for Pipe is streaming an X window from an Ignite container. For this, we recommend the following FFmpeg command:
 <div style={{pre: {whiteSpace: "pre-wrap !important"}}}>
 ```bash
-ffmpeg -f avfoundation -i "1:" -b:a 96k -c:v libx264 -profile:v baseline -pix_fmt yuv420p -tune zerolatency -profile:v baseline -preset veryfast -acodec aac -b:a 192k -ar 44100 -pes_payload_size 0 -f flv <INGEST_ENDPOINT>
+ffmpeg -f x11grab -i :0.0 -b:a 96k -c:v libx264 -profile:v baseline -pix_fmt yuv420p -tune zerolatency -profile:v baseline -preset veryfast -acodec aac -b:a 192k -ar 44100 -pes_payload_size 0 -f flv <INGEST_ENDPOINT>
 ```
 </div>
 
