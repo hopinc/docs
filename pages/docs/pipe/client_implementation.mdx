@@ -69,7 +69,6 @@ const joinToken = "prjt_xxx"; // TODO: replace this with a real Pipe join token
 export function Livestream() {
 	const videoRef = useRef(null);
 
-	/
 	const room = usePipeRoom({
 		joinToken,
 		ref: videoRef
@@ -77,11 +76,11 @@ export function Livestream() {
 
 	return (
 		<>
-			<button disabled={!room.canPlay} onClick={}>
+			<button disabled={!room.canPlay} onClick={() => videoRef.current?.play()}>
 				play
 			</button>
 
-			<video ref={videoRef} onClick={() => videoRef.current?.play()} />
+			<video ref={videoRef} />
 		</>
 	)
 }

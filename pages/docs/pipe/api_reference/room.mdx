@@ -51,10 +51,6 @@ Please note that this will cause the ingest server to terminate your connection.
 ```ts
 // delete by ID
 const id = "pipe_room_xxx";
-const room = await hop.pipe.deleteRoom(id);
-
-// or, delete from room class
-const room = await hop.pipe.getRoom(id);
-void room.delete();
+const room = await hop.pipe.rooms.delete(id);
 ```
 </Code>
