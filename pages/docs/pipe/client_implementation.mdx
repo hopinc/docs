@@ -87,7 +87,7 @@ export function Livestream() {
 ```
 </Code>
 
-As you can see, Pipe allows you to provide your own video element - Pipe just controls the video source and live scrubbing. We will soon be adding an event emitter which will allow you to react to events such as the stream going offline.
+As you can see, Pipe allows you to provide your own video element - Pipe just hooks into it and controls the video source and live scrubbing. This gives you flexibility to use any player wrapper or implement the video element however you want.
 
 `usePipeRoom` returns the following object:
 
