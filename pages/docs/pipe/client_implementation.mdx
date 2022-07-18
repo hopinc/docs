@@ -1,0 +1,132 @@
+---
+title: Pipe Client Implementation
+description: Learn how to implement Pipe on your client application 
+---
+
+import {Code} from '../../../components/code';
+
+# Client Implementation
+
+You can use our client (frontend) SDKs to easily implement Pipe into your product.
+
+## Frontend Packages
+
+`@onehop/client`: The core library used by all other framework-specific packages. Can also be used independently.  
+`@onehop/react`: Our React-specific implementations for Pipe and Channels.
+
+## Integrating Pipe with a React App
+
+### Installing dependencies
+Start off by adding both of our frontend packages to your project
+<Code>
+```sh
+# Using npm
+npm i @onehop/client @onehop/react
+
+# Using yarn
+yarn add @onehop/client @onehop/react
+```
+</Code>
+
+### Initializing the Hop SDK
+
+Grab your **project ID** from the [Project Settings page](https://console.hop.io/project/settings).
+
+You should call the `init` function outside of a React component. For example, in your application's entrypoint file:
+
+<Code>
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { hop } from "@onehop/client";
+
+import App from "./App";
+
+hop.init({
+	projectId: "project_xxx" // TODO: replace with your project ID
+})
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+</Code>
+
+### Integrating Pipe with React Hooks
+
+The `@onehop/react` package exposes a collection of React hooks which allow you to easily implement product features into your app. We'll focus on `usePipeRoom` in this section.
+
+#### `usePipeRoom`
+
+`usePipeRoom` takes in an object as it's first and only argument, consisting of `joinToken` and `ref`, where `ref` is a [React reference](https://reactjs.org/docs/refs-and-the-dom.html) to a video element.
+
+Let's jump into an example bare-minimum component:
+<Code>
+```jsx
+import { useRef } from "react";
+import { usePipeRoom } from "@onehop/react/src/hooks/pipe";
+
+const joinToken = "prjt_xxx"; // TODO: replace this with a real Pipe join token
+
+export function Livestream() {
+	const videoRef = useRef(null);
+
+	/
+	const room = usePipeRoom({
+		joinToken,
+		ref: videoRef
+	});
+
+	return (
+		<>
+			<button disabled={!room.canPlay} onClick={}>
+				play
+			</button>
+
+			<video ref={videoRef} onClick={() => videoRef.current?.play()} />
+		</>
+	)
+}
+```
+</Code>
+
+As you can see, Pipe allows you to provide your own video element - Pipe just controls the video source and live scrubbing. We will soon be adding an event emitter which will allow you to react to events such as the stream going offline.
+
+`usePipeRoom` returns the following object:
+
+| field | type | description |
+| - | - | - |
+| live | boolean | whether the current room is live or offline |
+| canPlay | boolean | whether the room is able to play the stream |
+| susbcription | string | one of: available, unavailable, non_existent |
+
+## Integrating Pipe with Vanilla JS
+
+<Code>
+```tsx
+import {hop, pipe} from '@onehop/client';
+
+declare const node: HTMLVideoElement;
+
+const client = hop.init({
+    projectId: 'project_xxx',
+});
+
+const joinToken = 'join_token_xxx';
+
+client.subscribeToPipeRoom(joinToken);
+
+client.getRoomStateMap().addListener(map => {
+    const room = map.get(joinToken);
+
+    if (
+        !room ||
+        room.subscription !== 'available' ||
+        !room.connection.llhls?.edge_endpoint
+    ) {
+        console.log('Not ready:', {room});
+        return;
+    }
+
+    pipe.mount(node, room.connection.llhls.edge_endpoint);
+});
+```
+</Code>

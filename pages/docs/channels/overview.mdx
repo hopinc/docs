@@ -31,7 +31,7 @@ The client (or "user") is the entity that subscribes to Channels, using either t
 
 For a client application to authenticate with protected (public & private) Channels, they will need to use token authentication. Tokens (`leap_token_xxx`) can be generated using the Hop API or SDK from your backend. Tokens can contain metadata - for example, you could include the user ID this token is generated for in. You are expected to securely hand this token to a client application, which they can then use to authenticate with Channels through the Hop client SDK.
 
-Tokens can subscribe to many channels at once. They are permenant until deleted.
+Tokens can subscribe to many channels at once. They are permanent until deleted.
 
 If you have a database of users, then you should create a token for each individual user that needs to connect to Channels and store it in relation to their user, then re-use that same token when they need to connect again in the future.
 
@@ -55,7 +55,7 @@ There are 3 ways a token can be subscribed to a channel:
 
 - When creating the token, you can specify a list of "default channels" the token should be subcribed to
 - Through the local client SDKs, the client can call the `subscribe` method with a channel ID. If the channel is private, then a webhook call will be required to succeed before the client is subscribed.
-- Through the server-side SDKs, you can call a method to subscribe multiple tokens to a channel
+- Through the server-side SDKs, you can call a method to subscribe one or multiple tokens to a channel
 
 When client subscriptions are created, the realtime clients will instantly start receiving events from these channels.
 
