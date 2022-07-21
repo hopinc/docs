@@ -62,7 +62,7 @@ Let's jump into an example bare-minimum component:
 <Code>
 ```jsx
 import { useRef } from "react";
-import { usePipeRoom } from "@onehop/react/src/hooks/pipe";
+import { usePipeRoom } from "@onehop/react";
 
 const joinToken = "prjt_xxx"; // TODO: replace this with a real Pipe join token
 
@@ -101,7 +101,7 @@ As you can see, Pipe allows you to provide your own video element - Pipe just ho
 
 <Code>
 ```tsx
-import {hop, pipe} from '@onehop/client';
+import { hop, pipe } from '@onehop/client';
 
 declare const node: HTMLVideoElement;
 
@@ -121,7 +121,7 @@ client.getRoomStateMap().addListener(map => {
         room.subscription !== 'available' ||
         !room.connection.llhls?.edge_endpoint
     ) {
-        console.log('Not ready:', {room});
+        console.log('Not ready:', { room });
         return;
     }
 
