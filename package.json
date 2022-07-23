@@ -4,7 +4,7 @@
 	"repository": "https://github.com/hopinc/docs",
 	"author": "Hop <developers@hop.io>",
 	"license": "MIT",
-	"packageManager": "yarn@3.2.0",
+	"packageManager": "yarn@3.2.2",
 	"scripts": {
 		"dev": "next",
 		"build": "next build",
@@ -20,6 +20,7 @@
 		"nextra-theme-docs": "2.0.0-alpha.50",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"sharp": "^0.30.7",
 		"urlcat": "^2.0.4"
 	},
 	"devDependencies": {
