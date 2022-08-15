@@ -100,9 +100,11 @@ As you can see, Pipe allows you to provide your own video element - Pipe just ho
 ## Integrating Pipe with Vanilla JS
 
 <Code>
-```tsx
+```ts
 import { hop, pipe } from '@onehop/client';
 
+// TypeScript only — declaring that `node` is a variable
+// that exists, and is a DOM Video element
 declare const node: HTMLVideoElement;
 
 const client = hop.init({
