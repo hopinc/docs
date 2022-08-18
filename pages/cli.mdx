@@ -4,6 +4,8 @@ description: Use the Hop CLI to manage your Hop projects
 ---
 
 import Callout from 'nextra-theme-docs/callout'
+import Image from 'next/image';
+import cliSwitchProject from '../assets/images/cli-switch.png';
 
 # CLI
 
@@ -27,3 +29,25 @@ hop auth login
 <Callout>
 If you want to login to the Hop CLI in a headless environment (e.g. without a browser), then you can provide a [Project Token](/reference/project_tokens) or a PAT using the `--token` flag.
 </Callout>
+
+## Projects
+
+When first logging in, the CLI will execute commands against your default personal project.
+
+### Switching Projects
+
+You can switch projects using the following command:
+
+```sh
+hop projects switch
+```
+
+This will bring up an interface that allows you to use arrow keys to select a project:
+<br/>
+<Image src={cliSwitchProject}/>
+
+You can also use `hop projects switch <namespace>` to perform the switch directly.
+
+### Project override flag
+
+You can specify `--project` on any Hop CLI command to override the currently selected project for the current command.
