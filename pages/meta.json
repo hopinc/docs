@@ -1,5 +1,7 @@
 {
-	"index": {
-		"title": "Introduction"
-	}
+	"index": "Introduction",
+	"cli": "CLI",
+	"ignite": "Ignite",
+	"channels": "Channels",
+	"pipe": "Pipe"
 }

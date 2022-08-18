@@ -1,0 +1,29 @@
+---
+title: Hop CLI
+description: Use the Hop CLI to manage your Hop projects
+---
+
+import Callout from 'nextra-theme-docs/callout'
+
+# CLI
+
+The Hop CLI allows you to manage and control every aspect of your Hop projects. It acts as a command-line replacement for the Hop Console with some extra features to support Hop deployments.
+
+## Install
+
+### Shell Script (Unix-like, Linux, macOS)
+```bash
+curl -fsSL https://hop.io/install-cli | sh
+```
+
+## Login
+
+Once installed, you will be able to use the following command to authenticate the CLI with your Hop account. This will open a browser window to login.
+
+```sh
+hop auth login
+```
+
+<Callout>
+If you want to login to the Hop CLI in a headless environment (e.g. without a browser), then you can provide a [Project Token](/reference/project_tokens) or a PAT using the `--token` flag.
+</Callout>
