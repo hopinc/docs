@@ -48,7 +48,7 @@ In LLHLS, the full playlist is only returned for the client's *first* request. F
 ## Hop's LLHLS Implementation
 There's no doubt that LLHLS is the gold standard of today's livestreaming protocols; for Pipe, we implement the raw protocol and serve it across our edge network.
 
-However, thanks to our [Leap](/docs/channels/internals/leap) protocol, which is a WebSocket that all frontend SDKs use to signal with Pipe (and Channels!), we're able to gain greater insight across all realtime viewers from a latency and network environment standpoint. Leap keeps a running heartbeat with clients, which we use to calculate round-trip-time (RTT) between our edge and the client.
+However, thanks to our [Leap](/channels/internals/leap) protocol, which is a WebSocket that all frontend SDKs use to signal with Pipe (and Channels!), we're able to gain greater insight across all realtime viewers from a latency and network environment standpoint. Leap keeps a running heartbeat with clients, which we use to calculate round-trip-time (RTT) between our edge and the client.
 
 ### Playback Sync
 
