@@ -1,0 +1,51 @@
+---
+title: Deploying
+description: How to deploy apps and services to Hop Ignite
+---
+
+# Deploying to Hop
+
+Any application of any size, language or framework can be deployed to Hop. Deployments are Ignite's primary abstraction - containers run inside them. 
+
+However you create a new deployment on Hop, we'll internally create a "deployment config" which contains values such as the image, default resource allocations and environment variables for the deployment. When containers start, they read off of this deployment config. You can also provide custom **overrides** per container if needed, though this is rarely needed.
+
+## Deployment Methods
+
+There are various ways to create and deploy new versions to existing deployments.
+
+### Hop CLI
+
+The easiest way to deploy a project directory is to use the [Hop CLI](/cli). 
+
+#### Installation
+Follow the [install guide](/cli#install) to install the CLI on your machine.
+
+#### Deploying
+Once installed and logged into the CLI, you can navigate to your project directory in your terminal and use `hop deploy`.
+
+```sh
+hop deploy
+```
+
+If this is the first time deploying this project to Hop, the CLI will walk you through creating a new deployment before finally building and deploying your project. You can also [link existing deployments to directories](#linking-a-project-directory-to-an-existing-deployment).
+
+#### Pushing Updates
+
+If you need to deploy an update, just run `hop deploy` again and it'll take care of the rest, including smoothly rolling out new containers to guarantee uptime.
+
+#### Rolling Back
+
+If you accidentally pushed out a bad update, you can use the following command to roll back to the previous deployment.
+
+```sh
+hop oops
+```
+
+#### Linking a Project Directory to an Existing Deployment
+If you've already created a deployment on Hop and want to link a project directory to that deployment, you can use:
+
+```sh
+hop link [deployment_id]
+```
+
+If a deployment ID isn't specified, then you will be given a list of your deployments to select from.
