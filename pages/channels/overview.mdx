@@ -5,7 +5,7 @@ description: Channels overview & concepts
 
 # Overview
 
-Channels allows you to easily create direct or grouped realtime message channels between users, server-side applications, IoT devices and more.
+Channels allow you to easily create direct or grouped real-time message channels between users, server-side applications, IoT devices and more.
 
 Channels are feature-rich and can be of multiple different visibility types and have multiple Capabilities enabled, allowing you to create anything from a realtime stock ticker to a fully feature-rich group messaging app.
 
@@ -15,11 +15,11 @@ Some nicities provided by Channels include:
 
 - You can send events directly to [Tokens](#tokens), instead of sending them to channels
 
-- You can keep realtime, persisted "state" within a channel, which all clients are kept in sync with when connecting & when it's updated. [Read more ➜](state)
+- You can keep a real-time, persisted "state" within a channel, which all clients are kept in sync with when connecting & when it's updated. [Read more ➜](state)
 
 - All capabilities can be mixed and matched with each other, allowing you to reap powerful benefits from individual channels without having to create hacky workarounds
 
-For most use cases, you'll need a protected server-side application (e.g. an API) which can use the Hop SDK to create [Tokens](#tokens) and Channels. You can then use the client-side SDKs like hop-js to subscribe to channels.
+For most use cases, you'll need a protected server-side application (e.g. an API) that can use the Hop SDK to create [Tokens](#tokens) and Channels. You can then use the client-side SDKs like hop-js to subscribe to channels.
 
 ## Concepts
 
@@ -33,7 +33,7 @@ For a client application to authenticate with protected (public & private) Chann
 
 Tokens can subscribe to many channels at once. They are permanent until deleted.
 
-If you have a database of users, then you should create a token for each individual user that needs to connect to Channels and store it in relation to their user, then re-use that same token when they need to connect again in the future.
+If you have a database of users, then you should create a token for each user that needs to connect to Channels and store it in relation to their user, then re-use that same token when they need to connect again in the future.
 
 You can connect and authenticate with Channels multiple times under the same token.
 
@@ -49,17 +49,17 @@ Individual connections to the Channels socket are a separate resource, and while
 
 A channel subscription refers to a client token being subscribed to a channel.
 
-**Important:** If you are just subscribing to unprotected channels on your frontend, then all channel subscriptions are ephemeral and only last the duration of the session / socket connection.
+**Important:** If you are just subscribing to unprotected channels on your frontend, then all channel subscriptions are ephemeral and only last the duration of the session/socket connection.
 
 There are 3 ways a token can be subscribed to a channel:
 
-- When creating the token, you can specify a list of "default channels" the token should be subcribed to
+- When creating the token, you can specify a list of "default channels" the token should be subscribed to
 - Through the local client SDKs, the client can call the `subscribe` method with a channel ID. If the channel is private, then a webhook call will be required to succeed before the client is subscribed.
 - Through the server-side SDKs, you can call a method to subscribe one or multiple tokens to a channel
 
-When client subscriptions are created, the realtime clients will instantly start receiving events from these channels.
+When client subscriptions are created, the real-time clients will instantly start receiving events from these channels.
 
-All channel subscriptions are permanent across all sessions, and will last until a token is unsubscribed from a channel through the server-side API or local SDK. However, you can mark a subscription as `ephemeral`, which will delete the subscription when the session dies.
+All channel subscriptions are permanent across all sessions and will last until a token is unsubscribed from a channel through the server-side API or local SDK. However, you can mark a subscription as `ephemeral`, which will delete the subscription when the session dies.
 
 ```
                                   ┌──────► channel_0

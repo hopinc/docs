@@ -11,11 +11,11 @@ import Callout from 'nextra-theme-docs/callout'
 **Note**: The SDKs handle connections to Leap for you. This documentation is written for transparency & for developers wanting to create their own SDKs for Hop.
 </Callout>
 
-Leap, internally, is the service that we've created to facilitate our global realtime network. Leap Edge is a service that runs on all our edge PoPs that exposes a client-facing socket service used for connecting client applications to Hop services through Channels.
+Leap, internally, is the service that we've created to facilitate our global real-time network. Leap Edge is a service that runs on all our edge PoPs that exposes a client-facing socket service used for connecting client applications to Hop services through Channels.
 
 ## Leap Edge Socket
 
-The LE (**L**eap **E**dge) socket allows clients & SDKs to connect to the following Hop realtime services:
+The LE (**L**eap **E**dge) socket allows clients & SDKs to connect to the following Hop real-time services:
 
 - Pipe
 - Channels
@@ -37,7 +37,7 @@ Clients are also expected to _send_ messages to LE in the same format.
 
 #### Encoding & Compression
 
-When connecting to the websocket, LE supports 2 query parameters: `encoding` and `compression`. Refer to the below table for possible values.
+When connecting to the WebSocket, LE supports 2 query parameters: `encoding` and `compression`. Refer to the below table for possible values.
 
 | Parameter   | Possible Values | Default |
 | ----------- | --------------- | ------- |
@@ -82,13 +82,13 @@ After receiving this, the client has 10 seconds to send an [Op 2: Identify](./pa
 
 #### Heartbeating
 
-Once receiving Op: 1 Hello, the LE client or SDK should immediately start a repeating interval which sends [Op 3: Heartbeat](./payloads#opcode-3-heartbeat) on the interval. Please note that Leap Edge calculates the time drift over time,so if you drift too far out of the expected heartbeat interval then you may be disconnected from the socket with error `4007: Out of sync`.
+Once receiving Op: 1 Hello, the LE client or SDK should immediately start a repeating interval which sends [Op 3: Heartbeat](./payloads#opcode-3-heartbeat) on the interval. Please note that Leap Edge calculates the time drift over time, so if you drift too far out of the expected heartbeat interval then you may be disconnected from the socket with the error `4007: Out of sync`.
 
 Leap Edge may also send Op 3 down to the client with a `tag` in the data field. If the client receives this, it needs to immediately respond with Op 3: Heartbeat with the same `tag` in the data field.
 
 #### Connecting to Hop Services
 
-When generating the Leap Token (the authentication secret used when identifying with Leap Edge), Hop services are granted to the token using "service grants". This is usually done trivially through the SDK. Service grants specify what services a Leap Token can _access_, however they're not automatically subscribed when the socket connects. To susbcribe to a service that the token has a grant for, send Op 5: Create Service Subcription.
+When generating the Leap Token (the authentication secret used when identifying with Leap Edge), Hop services are granted to the token using "service grants". This is usually done trivially through the SDK. Service grants specify what services a Leap Token can _access_, however, they're not automatically subscribed when the socket connects. To subscribe to a service that the token has a grant for, send Op 5: Create Service Subscription.
 
 ## Errors
 

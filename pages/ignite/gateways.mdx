@@ -16,11 +16,11 @@ Gateways allow you to expose your Hop deployments to your project or the interne
 
 There are 2 types of gateways: Internal or External. External gateways expose your deployment to the internet under a protocol of your choice, e.g. HTTP. Internal gateways expose your deployment to your project by giving you an IP address and customizable internal domain to use.
 
-Currently, both gateway types [round-robin](https://en.wikipedia.org/wiki/Load_balancing_(computing)#Round-robin_scheduling) requests between containers. In the future, there will be more fine grained controls for load balancing requests.
+Currently, both gateway types [round-robin](https://en.wikipedia.org/wiki/Load_balancing_(computing)#Round-robin_scheduling) request between containers. In the future, there will be more fine-grained controls for load balancing requests.
 
 ## Creating a Gateway
 
-It's easiest to create a gateway through our console, however keep in mind that all of Hop is built around a REST API, so you can automate this if you need to.
+It's easiest to create a gateway through our console, however, keep in mind that all of Hop is built around a REST API, so you can automate this if you need to.
 <br/>
 
 Navigate to the Gateways tab in an Ignite deployment:
@@ -48,7 +48,7 @@ The target port should be the port your app listens on. The gateway will load ba
 Click **Create Gateway**.
 
 ## Adding Custom Domains
-By default, every external gateway gets assigned it's own `.hop.sh` domain, generated using the deployment name. You have the choice to update this subdomain to something not taken already, or you can add your own custom domains.
+By default, every external gateway gets assigned its own `.hop.sh` domain, generated using the deployment name. You have the choice to update this subdomain to something not taken already, or you can add your own custom domains.
 
 Head over to the "Domains" page inside your gateway.
 

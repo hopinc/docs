@@ -11,11 +11,11 @@ description: The Hop Atlas protocol
 
 ## Outline
 
-Leap, specifically Leap Edge, is written in Elixir. Elixir, or more specifically, OTP, provides useful behaviors and functions for creating and managing an actor-based model across a cluster of nodes. Individual actors are called "processes" and each individual process can implement a behavior called `GenServer` to manage their own state.
+Leap, specifically Leap Edge, is written in Elixir. Elixir, or more specifically, OTP, provides useful behaviors and functions for creating and managing an actor-based model across a cluster of nodes. Individual actors are called "processes" and each individual process can implement a behavior called `GenServer` to manage its own state.
 
 Processes in Elixir are represented by their PID (process ID), denoted by 3 integers, which are transitive across Elixir nodes. As you can imagine, developers want to give their own internal names and IDs to processes so they can refer to them using existing internal terms gathered from external input like an API or database.
 
-There have been many different variations created by the Elixir & Erlang community to solve this issue, including some in the Erland OTP standard library, however they all have different drawbacks & tradeoffs. Without focussing on local process managers, which are trivial to implement, inter-node process management solutions include:
+There have been many different variations created by the Elixir & Erlang community to solve this issue, including some in the Erland OTP standard library, however, they all have different drawbacks & tradeoffs. Without focussing on local process managers, which are trivial to implement, inter-node process management solutions include:
 
 - [pg](https://www.erlang.org/doc/man/pg.html)
 - [horde](https://github.com/derekkraan/horde)
@@ -23,7 +23,7 @@ There have been many different variations created by the Elixir & Erlang communi
 
 All of these solutions embrace an _eventually consistent_ model, where certain nodes in the network may have a different view of where processes live. This model does not work for our use case. We need every node to be able to know where a resource lives, no matter what - if not, we could lose messages, or route them to the wrong session process.
 
-One way to solve this would be to implement a cluster-wide lock or semaphore for resource sync, however this would add latency and introduce a lot of un-necessary gossip between nodes. We need an **atomic, low-latency** process registry across all nodes.
+One way to solve this would be to implement a cluster-wide lock or semaphore for resource sync, however, this would add latency and introduce a lot of unnecessary gossip between nodes. We need an **atomic, low-latency** process registry across all nodes.
 
 ### CAP Theorem
 
@@ -57,10 +57,10 @@ When a node looks up an RRP from Redis, it can easily perform a local lookup to 
 
 #### Race Condition Resolution
 
-When nodes claim ownership of existing RRPs, it optimistcally assigns RRP values (before the resource is actually created) in attempt to prevent call race conditions. However, there is still an error margin within the latency of reading and updating an RRP value where two or more nodes may create the same resource at once.
+When nodes claim ownership of existing RRPs, it optimistically assigns RRP values (before the resource is actually created) in an attempt to prevent call race conditions. However, there is still an error margin within the latency of reading and updating an RRP value where two or more nodes may create the same resource at once.
 
 The round trip time to set an RRP is measured while an existing ownership re-claim is executed, and a timer is set internally to re-check the RRP after the RTT has passed. Because a resource claim SET operation should take half of the total RRT, we can safely assume that, if the value hasn't changed, then this node safely owns the resource.
 
 #### Hacking the CAP
 
-We're effectively partitioning the CAP theorem's guarantees and using the _availability_ we get from one service (Redis), and then pairing it with a service acting as a _consistent_ layer (individual Elixir nodes) by optimistcally taking ownership of resources if a partition is observed.
+We're effectively partitioning the CAP theorem's guarantees and using the _availability_ we get from one service (Redis), and then pairing it with a service acting as a _consistent_ layer (individual Elixir nodes) by optimistically taking ownership of resources if a partition is observed.
