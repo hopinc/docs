@@ -1,0 +1,75 @@
+---
+title: React SDK
+description: Guide to using Hop's React SDK
+---
+
+import {Code} from '../../../components/code';
+
+# React SDK
+
+The Hop React library allows you to easily integrate Hop products, such as Channels and Pipe, into your frontend.
+
+## Installation
+
+To use the React SDK, you have to install both our vanilla JS SDK & our React SDK into your application.
+
+Client JS SDK: `@onehop/client`  
+React SDK: `@onehop/react`
+
+### npm
+```bash
+npm i @onehop/client @onehop/react
+```
+
+### Yarn
+```bash
+yarn add @onehop/client @onehop/react
+```
+
+## Initializing the SDK
+
+To use the React SDK within your app, you first must call the `init` method from @onehop/client with your project ID. This should be done as early as possible in your application's lifecycle.
+
+Find your project ID on [this page](https://console.hop.io/project/settings).
+
+<Code>
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { hop } from "@onehop/client";
+import App from "./App";
+
+// hop.init should be called as early as possible in your application's lifecycle
+
+hop.init({
+	projectId: "project_xxx": // replace with your project ID
+})
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+</Code>
+
+### With Next.js
+
+If using Next.js, then you need to make sure that the client gets initialized on the **client-side**, not the server. To do this, we recommend initializing the Hop Client in a `useEffect` in your `_app` file, for example:
+
+<Code>
+```jsx
+import { useEffect } from "react";
+import { hop } from "@onehop/client";
+
+export default function MyApp({ Component, pageProps }) {
+	useEffect(() => {
+		if (typeof window === "undefined") {
+			return;
+		}
+
+		hop.init({
+			projectId: "project_xxx": // replace with your project ID
+		});
+	}, []);
+
+	return <Component {...pageProps} />;
+}
+```
+</Code>
