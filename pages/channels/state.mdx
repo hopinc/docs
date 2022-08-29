@@ -13,43 +13,9 @@ Channel state is stored under `state` in the Channel object. State is a key/valu
 
 ## Updating State
 
-You can update channel state from the server side SDK libraries or the API:
+You can update channel state from the server side SDK libraries or the API.
 
-<Code>
-```ts
-// Get a channel by its ID
-const channel = await hop.channels.get('channel_0');
-
-/**
- * Option 1: Rewrite the state.
- * The existing state is passed as the first arument to Channel#setState
- */
-
-channel.setState(s => ({ ...s, name: "My Channel" }));
-
-/**
- * Option 2: Update or add variables
- * This operation will only effect the variables you specify.
- * The rest of the state will remain unchanged
- */
-
-channel.patchState({ name: "My Channel" });
-```
-</Code>
-
-Either of these operations will update the connected clients in realtime.
-
-## Clearing State
-
-<Code>
-```ts
-// Get a channel by its ID
-const channel = await hop.channels.get('channel_0');
-
-// Clear the state. This will set the state to an empty object ({})
-channel.clearState();
-```
-</Code>
+- [Reference: Updating State](reference/updating_state)
 
 
 ## Reacting to State Changes on the Client
