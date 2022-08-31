@@ -4,11 +4,13 @@ description: How to update Hop Channel state
 ---
 
 import {Code} from '../../../components/code';
+import Callout from 'nextra-theme-docs/callout'
 
 # Updating Channel State
 
 [Channel State](/channels/state) acts as a realtime data store attached to every Channel. You can update this state on your backend and frontend clients can subscribe to Channel state objects in realtime.
 
+<Callout>This reference assumes you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
 
 ## Updating State
 
@@ -16,7 +18,8 @@ Channel state can be updated (manually) through the Hop Console or (programatica
 
 <Code>
 ```js
-import { hop } from "@onehop/js";
+// Import your Hop SDK instance
+import { hop } from ".";
 
 const channelId = "channel_xxx"; // the channel we want to update
 

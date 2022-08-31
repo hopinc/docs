@@ -7,10 +7,10 @@ const makePrimaryColor =
 	l =>
 	({opacityValue}) => {
 		if (opacityValue === undefined) {
-			return `hsl(var(--nextra-primary-hue) 100% ${l}%)`;
+			return `hsl(var(--hop-brand) 100% ${l}%)`;
 		}
 
-		return `hsl(var(--nextra-primary-hue) 100% ${l}% / ${opacityValue})`;
+		return `hsl(var(--hop-brand) 100% ${l}% / ${opacityValue})`;
 	};
 
 module.exports = {

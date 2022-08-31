@@ -10,13 +10,15 @@ import {Code} from '../../../components/code';
 
 You can create channels manually (through the Hop Console/CLI) or through our SDKs and API.
 
-<Callout>Channels cannot be created by frontend clients. You must use our server-side SDKs or API to create them.</Callout>
+<Callout>Channels cannot be created by frontend clients. You must use our server-side SDKs or API to create them. This reference assumes you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
+
 
 ## Creating a Channel
 
 <Code>
 ```js
-import { hop } from "@onehop/js";
+// Import your Hop SDK instance
+import { hop } from ".";
 
 // Create a channel with the ID "group_chat_1"
 const channel = await hop.channels.create(
@@ -31,7 +33,8 @@ const channel = await hop.channels.create(
 ### Creating a Channel with some Initial State
 <Code>
 ```js
-import { hop } from "@onehop/js";
+// Import your Hop SDK instance
+import { hop } from ".";
 
 // Create a channel with the ID "group_chat_2" and some initial state
 const channel = await hop.channels.create(

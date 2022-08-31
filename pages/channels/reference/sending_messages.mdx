@@ -4,6 +4,7 @@ description: How to send messages to Hop Channels
 ---
 
 import {Code} from '../../../components/code';
+import Callout from 'nextra-theme-docs/callout'
 
 # Sending Messages to Channels
 
@@ -20,11 +21,14 @@ The event name can be an arbritrary string of your choosing - for example, if we
 
 The data field can be any object. In the case of our group chat example, we might include the message content and author in the data object.
 
+<Callout>This reference assumes you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
+
 ## Publish a Message to a Channel
 
 <Code>
 ```js
-import { hop } from "@onehop/js";
+// Import your Hop SDK instance
+import { hop } from ".";
 
 const channelId = "channel_xxx"; // the channel we want to send a message to
 
