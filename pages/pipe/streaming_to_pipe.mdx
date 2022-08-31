@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import pipeConsole1 from '../../assets/images/pipe-console-live-1.png';
+import {Code} from '../../components/code';
 
 Pipe supports multiple ingest protocols for *sending* streams to Pipe: RTMP and RTP (MPEG-TS). You can set the ingest protocol to use when creating a Pipe room.
 
@@ -10,6 +11,7 @@ For stability, we recommend sticking with RTMP.
 ## RTMP
 When creating a Pipe room using the RTMP protocol, you'll get a response back from our API with something similar to the following:
 
+<Code>
 ```json
 {
   "id": "pipe_room_MzI1MjkzODg0MjgzNTM1NDg",
@@ -25,6 +27,7 @@ When creating a Pipe room using the RTMP protocol, you'll get a response back fr
   "state": "offline"
 }
 ```
+</Code>
 
 The `ingest_endpoint` is what we'll focus on here.
 

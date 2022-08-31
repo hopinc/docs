@@ -1,7 +1,7 @@
 // @ts-check
 
 import urlcat from 'urlcat';
-import Image from 'next/image';
+import React from 'react';
 import {HopLogo} from './assets/BrandVectors';
 
 /**
@@ -11,7 +11,7 @@ const config = {
 	projectLink: 'https://github.com/hopinc/docs',
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
 	projectChatLink: 'https://discord.gg/hop',
-	titleSuffix: ' — Hop API',
+	titleSuffix: ' — Hop Documentation',
 	search: true,
 	floatTOC: true,
 	footer: true,
@@ -77,7 +77,12 @@ const config = {
 				<style>
 					{`img[decoding] {
 						border-radius: 0.75rem;
-					}`}
+					}
+
+					/*:root {
+						--nextra-primary-hue: 258deg !important;
+					}*/
+					`}
 				</style>
 			</>
 		);
