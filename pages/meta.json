@@ -1,6 +1,7 @@
 {
 	"index": "Introduction",
 	"cli": "CLI",
+	"sdks": "SDKs",
 	"ignite": "Ignite",
 	"channels": "Channels",
 	"pipe": "Pipe"

@@ -1,0 +1,41 @@
+---
+title: Server-side JavaScript SDK
+description: Guide to using Hop's server-side JS SDK
+---
+
+import {Code} from '../../../components/code';
+
+# Server-side JS SDK
+The Hop server-side JS SDK allows you to interact with all Hop products on the server side.
+
+## Installing
+
+### npm
+```bash
+npm i @onehop/js
+```
+
+### yarn
+```
+yarn add @onehop/js
+```
+
+
+## Creating an SDK Instance
+
+To use the SDK, you must first create a [project token](/reference/project_tokens). You can also use a PAT (personal access token), however this is not recommended as it has access to all of your projects.
+
+<Code>
+```js
+import { Hop } from '@onehop/js';
+
+const myToken = 'ptk_xxx';
+const hop = new Hop(myToken);
+
+// Example: Creating a project secret
+hop.projects.secrets.create(
+	'RANDOM_NUMBER',
+	Math.floor(Math.random() * 100).toString(),
+);
+```
+</Code>
