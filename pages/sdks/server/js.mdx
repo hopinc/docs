@@ -30,7 +30,8 @@ To use the SDK, you must first create a [project token](/reference/project_token
 import { Hop } from '@onehop/js';
 
 const myToken = 'ptk_xxx';
-const hop = new Hop(myToken);
+// Export the Hop SDK instance so you can use it throughout your codebase
+export const hop = new Hop(myToken);
 
 // Example: Creating a project secret
 hop.projects.secrets.create(
