@@ -1,0 +1,36 @@
+---
+title: useReadChannelState
+description: How to subscribe to Channel State using the Hop React SDK
+---
+
+import {Code} from '../../../../components/code';
+
+# useReadChannelState
+
+You can use this hook to subscribe to Channel state in your React app.
+
+## Hook Return Value
+| field | type | description |
+| ----- | ---- | ----------- |
+| state | ?object | the channel state |
+| error | ?object | leap error (if failed to subscribe) |
+| subscription | enum | `non_existent`, `pending`, `unavailable`, or `available` |
+
+## Example
+<Code>
+```jsx
+import { useReadChannelState } from '@onehop/react';
+
+const channelId = 'weather';
+
+export default function MyComponent() {
+	const { state } = useReadChannelState(channelId);
+
+	// state is null until the client has connected to the channel
+	if (!state) return <p>Loading...</p>;
+	return (
+		<p>Temperature in London: {state.london?.temperature}</p>
+	)
+}
+```
+</Code>

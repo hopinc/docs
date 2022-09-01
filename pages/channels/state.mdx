@@ -38,7 +38,7 @@ hop.channels.on('init', (d: ChannelInitialization) => {
 ```
 
 ### Usage with React
-If using React, you can use the `useChannelState` hook:
+If using React, you can use the `useReadChannelState` hook:
 
 <Code>
 ```tsx
@@ -48,7 +48,7 @@ const Price = () => {
 	 * this will attempt to subscribe the client to the specified channel
 	 * if they are not already subscribed (you can disable this)
 	 */
-	const state = useChannelState("usd_prices");
+	const { state } = useReadChannelState("usd_prices");
 
 	if (!state) {
 		return <h1>Loading</h1>;
