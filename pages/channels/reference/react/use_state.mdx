@@ -4,10 +4,16 @@ description: How to subscribe to Channel State using the Hop React SDK
 ---
 
 import {Code} from '../../../../components/code';
+import Callout from 'nextra-theme-docs/callout'
 
 # useReadChannelState
 
+```ts
+useReadChannelState(channelId: string): ChannelStateData
+```
+
 You can use this hook to subscribe to Channel state in your React app.
+
 
 ## Hook Return Value
 | field | type | description |
@@ -17,6 +23,9 @@ You can use this hook to subscribe to Channel state in your React app.
 | subscription | enum | `non_existent`, `pending`, `unavailable`, or `available` |
 
 ## Example
+
+<Callout type="info">This example assumes you have already initialized the [Hop React SDK](/sdks/client/react).</Callout>
+
 <Code>
 ```jsx
 import { useReadChannelState } from '@onehop/react';
