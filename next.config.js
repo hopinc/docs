@@ -22,7 +22,7 @@ module.exports = withNextra({
 	redirects: async () => [
 		{
 			source: '/docs',
-			destination: '/overview',
+			destination: '/',
 			statusCode: 301,
 		},
 	],
