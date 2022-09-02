@@ -12,6 +12,7 @@ const config = {
 	project: {
 		link: 'https://github.com/hopinc/docs',
 	},
+
 	projectChat: {
 		link: 'https://discord.gg/hop',
 	},
@@ -19,6 +20,24 @@ const config = {
 	feedback: {
 		labels: 'feedback',
 		link: 'Feedback',
+	},
+
+	toc: {
+		float: true,
+		extraContent: function ExtraTOCContent() {
+			return (
+				<div>
+					<a
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 contrast-more:text-gray-800 contrast-more:dark:text-gray-50"
+						href="https://console.hop.io"
+					>
+						Console
+					</a>
+				</div>
+			);
+		},
 	},
 
 	editLink: {
@@ -31,7 +50,7 @@ const config = {
 		},
 	},
 
-	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
+	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master',
 	titleSuffix: ' — Hop Documentation',
 
 	logo: function Logo() {
