@@ -19,6 +19,7 @@ const config = {
 	unstable_flexsearch: true,
 	feedbackLabels: 'feedback',
 	feedbackLink: 'Feedback',
+
 	footerText: function FooterText() {
 		return <>{new Date().getFullYear()} © Hop, Inc.</>;
 	},
@@ -29,6 +30,9 @@ const config = {
 		return <HopLogo width={50} />;
 		// return <Image width={100} height={50} alt="Hop Logo" src="/hop.svg" />;
 	},
+
+	font: false,
+
 	banner: function Banner() {
 		return (
 			<a
@@ -79,9 +83,39 @@ const config = {
 						border-radius: 0.75rem;
 					}
 
-					/*:root {
+					html {
+						font-family: "GT Walsheim", san-serif !important;
+					}
+
+					code, kbd, pre, samp {
+						font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
+					}
+
+					:root {
 						--nextra-primary-hue: 258deg !important;
-					}*/
+					}
+
+					.dark {
+						--nextra-primary-hue: 204deg !important;
+					}
+
+					.dark li.active > a {
+						--tw-text-opacity: 1 !important;
+						--tw-bg-opacity: 0.2 !important;
+					}
+
+					.nextra-sidebar li a {
+						border-radius: 2em !important;
+						padding-left: 12px !important;
+					}
+
+					.nextra-sidebar li > a > span > svg {
+						border-radius: 100%;
+					}
+
+					.dark .nextra-body a {
+						--nextra-primary-hue: 204deg !important;
+					}
 					`}
 				</style>
 			</>
