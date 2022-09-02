@@ -3,6 +3,7 @@
 import urlcat from 'urlcat';
 import React from 'react';
 import {HopLogo} from './assets/BrandVectors';
+import {useConfig} from 'nextra-theme-docs';
 
 /**
  * @type {import("nextra-theme-docs").DocsThemeConfig}
@@ -56,8 +57,8 @@ const config = {
 		},
 	},
 
-	head: function Head(props) {
-		console.log(props);
+	head: function Head() {
+		const {title, ...meta} = useConfig().frontMatter;
 
 		const ogImage =
 			meta.image ||
