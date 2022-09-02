@@ -5,49 +5,60 @@ import React from 'react';
 import {HopLogo} from './assets/BrandVectors';
 
 /**
- * @type {import("./theme").DocsThemeConfig}
+ * @type {import("nextra-theme-docs").DocsThemeConfig}
  */
 const config = {
-	projectLink: 'https://github.com/hopinc/docs',
-	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
-	projectChatLink: 'https://discord.gg/hop',
-	titleSuffix: ' — Hop Documentation',
-	search: true,
-	floatTOC: true,
-	footer: true,
-	defaultMenuCollapsed: true,
-	unstable_flexsearch: true,
-	feedbackLabels: 'feedback',
-	feedbackLink: 'Feedback',
+	project: {
+		link: 'https://github.com/hopinc/docs',
+	},
+	projectChat: {
+		link: 'https://discord.gg/hop',
+	},
 
-	footerText: function FooterText() {
-		return <>{new Date().getFullYear()} © Hop, Inc.</>;
+	feedback: {
+		labels: 'feedback',
+		link: 'Feedback',
 	},
-	footerEditLink: function FooterEditLink() {
-		return <>Edit this page</>;
+
+	editLink: {
+		text: 'Edit this page',
 	},
+
+	footer: {
+		text: function FooterText() {
+			return <>{new Date().getFullYear()} © Hop, Inc.</>;
+		},
+	},
+
+	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master/pages',
+	titleSuffix: ' — Hop Documentation',
+
 	logo: function Logo() {
 		return <HopLogo width={50} />;
-		// return <Image width={100} height={50} alt="Hop Logo" src="/hop.svg" />;
 	},
 
 	font: false,
 
-	banner: function Banner() {
-		return (
-			<a
-				href="https://hop.io"
-				target="_blank"
-				rel="noopener noreferrer"
-				className="font-medium text-current no-underline"
-				title="Go to the Hop beta announcement"
-			>
-				Hop is in private beta
-			</a>
-		);
+	banner: {
+		key: 'beta',
+		text: function Banner() {
+			return (
+				<a
+					href="https://hop.io"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="font-medium text-current no-underline"
+					title="Go to the Hop beta announcement"
+				>
+					Hop is in private beta
+				</a>
+			);
+		},
 	},
-	nextThemes: {},
-	head: function Head({title, meta, ...props}) {
+
+	head: function Head(props) {
+		console.log(props);
+
 		const ogImage =
 			meta.image ||
 			urlcat('https://ogmeta.vercel.app/', {
