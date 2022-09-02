@@ -57,6 +57,10 @@ const config = {
 		},
 	},
 
+	sidebar: {
+		defaultMenuCollapsed: true,
+	},
+
 	head: function Head() {
 		const {title, ...meta} = useConfig().frontMatter;
 
