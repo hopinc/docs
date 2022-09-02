@@ -22,12 +22,6 @@ export default withNextra({
 			destination: '/',
 			statusCode: 301,
 		},
-
-		{
-			source: '/sdks',
-			destination: '/sdks/client/js',
-			statusCode: 301,
-		},
 	],
 	webpack(config) {
 		config.module.rules.push({
