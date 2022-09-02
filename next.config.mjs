@@ -11,6 +11,7 @@ const config = {
 	unstable_flexsearch: true,
 	unstable_staticImage: true,
 	unstable_readingTime: true,
+	unstable_defaultShowCopyCode: true,
 };
 
 const withNextra = nextra(config);

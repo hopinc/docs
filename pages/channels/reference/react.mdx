@@ -1,0 +1,83 @@
+---
+title: React Channels implementation
+description: How to subscribe to Channel messages and state using the Hop React SDK
+---
+
+import {Code} from '../../../components/code';
+import {Callout} from 'nextra-theme-docs'
+
+## useChannelMessage
+
+```ts
+useChannelMessage(channelId: string, eventName: string, listener: Function): void
+```
+
+You can use this hook to subscribe to Channel message events in your React app.
+
+### Example
+
+<Callout type="info">This example assumes you have already initialized the [Hop React SDK](/sdks/client/react).</Callout>
+
+<Code>
+```jsx
+import { useChannelMessage } from '@onehop/react';
+
+const channelId = 'group_chat';
+
+export default function MyComponent() {
+	const [chatMessages, setChatMessages] = useState([]);
+
+	// in this example, USER_MESSAGE is an event that you'd send to the channel from your backend
+	useChannelMessage(channelId, 'USER_MESSAGE', (message) {
+		// this will be called every time the USER_MESSAGE event is sent to this channel
+		setChatMessages(m => [...m, message]);
+	});
+
+	return (
+		<ul>
+			{messages.map(m => (
+				<li><b>{m.author}</b>: {m.content}</li>
+			))}
+		</ul>
+	)
+}
+```
+</Code>
+
+## useReadChannelState
+
+```ts
+useReadChannelState(channelId: string): ChannelStateData
+```
+
+You can use this hook to subscribe to Channel state in your React app.
+
+
+### Hook Return Value
+| field | type | description |
+| ----- | ---- | ----------- |
+| state | ?object | the channel state |
+| error | ?object | leap error (if failed to subscribe) |
+| subscription | enum | `non_existent`, `pending`, `unavailable`, or `available` |
+
+### Example
+
+<Callout type="info">This example assumes you have already initialized the [Hop React SDK](/sdks/client/react).</Callout>
+
+<Code>
+```jsx
+import { useReadChannelState } from '@onehop/react';
+
+const channelId = 'weather';
+
+export default function MyComponent() {
+	const { state } = useReadChannelState(channelId);
+
+	// state is null until the client has connected to the channel
+	if (!state) return <p>Loading...</p>;
+	return (
+		<p>Temperature in London: {state.london?.temperature}</p>
+	)
+}
+```
+</Code>
