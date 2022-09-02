@@ -146,7 +146,7 @@ const config = {
 						padding-left: 12px !important;
 					}
 
-					.nextra-sidebar li > a > span > svg {
+					.nextra-sidebar-list svg {
 						border-radius: 100%;
 					}
 
