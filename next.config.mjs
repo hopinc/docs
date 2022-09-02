@@ -7,8 +7,10 @@ import nextra from 'nextra';
  */
 const config = {
 	theme: 'nextra-theme-docs',
-	themeConfig: './theme.config.js',
-	unstable_flexsearch: true,
+	themeConfig: './theme.config.tsx',
+	unstable_flexsearch: {
+		codeblocks: true,
+	},
 	unstable_staticImage: true,
 	unstable_readingTime: true,
 	unstable_defaultShowCopyCode: true,
@@ -24,6 +26,7 @@ export default withNextra({
 			statusCode: 301,
 		},
 	],
+
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/,
@@ -31,5 +34,11 @@ export default withNextra({
 		});
 
 		return config;
+	},
+
+	reactStrictMode: true,
+
+	experimental: {
+		newNextLinkBehavior: true,
 	},
 });

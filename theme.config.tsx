@@ -3,12 +3,9 @@
 import urlcat from 'urlcat';
 import React from 'react';
 import {HopLogo} from './assets/BrandVectors';
-import {useConfig} from 'nextra-theme-docs';
+import {DocsThemeConfig, useConfig} from 'nextra-theme-docs';
 
-/**
- * @type {import("nextra-theme-docs").DocsThemeConfig}
- */
-const config = {
+const config: DocsThemeConfig = {
 	project: {
 		link: 'https://github.com/hopinc/docs',
 	},
@@ -24,6 +21,7 @@ const config = {
 
 	toc: {
 		float: true,
+
 		extraContent: function ExtraTOCContent() {
 			return (
 				<div>
@@ -78,6 +76,9 @@ const config = {
 
 	sidebar: {
 		defaultMenuCollapsed: true,
+		subtitle: ({title}) => (
+			<div className="flex items-center gap-2">{title}</div>
+		),
 	},
 
 	head: function Head() {

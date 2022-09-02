@@ -32,10 +32,6 @@ body {
 		fixed 10px 10px / 20px 20px radial-gradient(#313131 1px, transparent 0);
 }
 
-.nextra-sidebar ul li a {
-	font-size: 0.875rem !important;
-}
-
 @media (min-width: 769px) {
 	.nextra-sidebar-container {
 		width: 18rem !important;

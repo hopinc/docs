@@ -1,8 +1,20 @@
 {
 	"index": "Introduction",
+	"--- documentation": {
+		"title": "Documentation",
+		"type": "separator"
+	},
 	"cli": "CLI",
-	"sdks": "SDKs",
-	"ignite": "Ignite",
-	"channels": "Channels",
-	"pipe": "Pipe"
+	"sdks": {
+		"title": "SDKs"
+	},
+	"ignite": {
+		"title": "Ignite"
+	},
+	"channels": {
+		"title": "Channels"
+	},
+	"pipe": {
+		"title": "Pipe"
+	}
 }
