@@ -1,10 +1,6 @@
 // @ts-check
 
-/**
- * @type {import("nextra").withNextra}
- */
-// @ts-expect-error
-const nextra = require('nextra');
+import nextra from 'nextra';
 
 /**
  * @type {import("nextra").NextraConfig}
@@ -14,11 +10,12 @@ const config = {
 	themeConfig: './theme.config.js',
 	unstable_flexsearch: true,
 	unstable_staticImage: true,
+	unstable_readingTime: true,
 };
 
 const withNextra = nextra(config);
 
-module.exports = withNextra({
+export default withNextra({
 	redirects: async () => [
 		{
 			source: '/docs',
