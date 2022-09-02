@@ -28,7 +28,7 @@ export default function MyComponent() {
 	const [chatMessages, setChatMessages] = useState([]);
 
 	// in this example, USER_MESSAGE is an event that you'd send to the channel from your backend
-	useChannelMessage(channelId, 'USER_MESSAGE', (message) {
+	useChannelMessage(channelId, 'USER_MESSAGE', (message) => {
 		// this will be called every time the USER_MESSAGE event is sent to this channel
 		setChatMessages(m => [...m, message]);
 	});
