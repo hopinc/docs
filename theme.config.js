@@ -90,7 +90,7 @@ const config = {
 					}
 
 					code, kbd, pre, samp {
-						font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
+						font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
 					}
 
 					:root {
