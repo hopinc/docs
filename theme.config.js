@@ -46,7 +46,8 @@ const config = {
 			</a>
 		);
 	},
-	head: function Head({title, meta}) {
+	nextThemes: {},
+	head: function Head({title, meta, ...props}) {
 		const ogImage =
 			meta.image ||
 			urlcat('https://ogmeta.vercel.app/', {
@@ -78,8 +79,9 @@ const config = {
 				<meta name="description" content="Hop: the realtime engine" />
 				<meta name="og:title" content="Hop: the realtime engine" />{' '}
 				<meta name="og:image" content={ogImage} />
-				<style>
-					{`img[decoding] {
+				<style
+					dangerouslySetInnerHTML={{
+						__html: `img[decoding] {
 						border-radius: 0.75rem;
 					}
 
@@ -116,8 +118,9 @@ const config = {
 					.dark .nextra-body a {
 						--nextra-primary-hue: 204deg !important;
 					}
-					`}
-				</style>
+					`,
+					}}
+				/>
 			</>
 		);
 	},

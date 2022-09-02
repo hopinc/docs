@@ -32,12 +32,8 @@ body {
 		fixed 10px 10px / 20px 20px radial-gradient(#313131 1px, transparent 0);
 }
 
-:root {
-	--hop-brand: rgb(143, 100, 242);
-}
-
 .nextra-sidebar ul li a {
-	font-size: .875rem !important;
+	font-size: 0.875rem !important;
 }
 
 @media (min-width: 769px) {
