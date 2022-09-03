@@ -1,0 +1,56 @@
+---
+title: REST API
+description: About the Hop REST API
+---
+
+import {Callout} from 'nextra-theme-docs'
+
+# REST API
+
+<Callout>
+You usually don't need to use the REST API directly. We provide [SDKs](/sdks/overview) to use Hop with various languages and frameworks. The primary reason you'll need to use the REST API directly is if you're writing a Hop API wrapper in a language which we don't have SDK support for yet.
+</Callout>
+
+Every feature and action provided by Hop is implemented into our HTTP REST API. The Hop Console, Hop CLI and all server side SDKs use the Hop REST API in the background.
+
+#### API Base Hostname
+```
+https://api.hop.io/v1/
+```
+
+Currently, only version 1 (`v1`) of the API exists.
+
+#### List of Endpoints
+
+[View list of Hop API endpoints](https://api-staging.hop.io/docs/static/index.html#/)
+
+## Response Structure
+
+All responses from the API will be sent to you in JSON format.
+
+### Succesful Response
+```json
+{
+	success: true,
+	data: <response data object>
+}
+```
+
+### Error Response
+```json
+{
+	success: false,
+	error: {
+		code: <error code string>,
+		message: <error message>
+	}
+}
+```
+
+## Authentication
+For most use-cases, you will just need to use a [Project Token](./project_token) (they start with `ptk_`) to authenticate API routes. If you need access to user-scoped routes, then you can pass in a Personal Access Token generated from the Hop Console - they start with `pat_`.
+
+To provide authentication to the API, send a token under the `Authorization` HTTP header. For example:
+```
+Authorization: ptk_xxx
+```
