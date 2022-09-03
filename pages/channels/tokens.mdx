@@ -36,8 +36,8 @@ Here's an example of generating tokens using the server-side SDK:
 // Import your Hop SDK instance
 import { hop } from ".";
  
-const { token } = await hop.channels.tokens.create();
-// token = leap_token_xxx - you can now store and pass this token to clients
+const { id } = await hop.channels.tokens.create();
+// id = leap_token_xxx - you can now store and pass this token to clients
 ```
 </Code>
 
