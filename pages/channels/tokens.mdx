@@ -4,6 +4,7 @@ description: About Hop Channel tokens
 ---
 
 import {Code} from '../../components/code';
+import {Callout} from 'nextra-theme-docs'
 
 # Tokens
 
@@ -22,7 +23,11 @@ If you're providing data that you want everyone to be able to see (without signi
 
 A good use-case for Tokens would be if you're building something like a group messaging app, for example, and need to limit access to certain channels, such as private group chat channels, to specific users.
 
-## Generating Tokens
+## Server-side Examples 
+
+<Callout type="info">The examples below assume you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
+
+### Generating Tokens
 You can generate Tokens manually (using our Console) or via our SDKs & API.
 
 Here's an example of generating tokens using the server-side SDK:
@@ -36,7 +41,7 @@ const { token } = await hop.channels.tokens.create();
 ```
 </Code>
 
-## Subscribing Tokens to Channels
+### Subscribing Tokens to Channels
 When you subscribe a Token to a channel, it will be subscribed to that channel in realtime and it will be made available to any live connections using that Token.
 
 In this example, let's assume that we have a private channel with the ID `game`.
@@ -74,8 +79,9 @@ await hop.channels.publishDirectMessage(
 ```
 </Code>
 
+## Client-side Examples
 
-## Using Tokens with Client-side SDKs
+### Using Tokens with Client-side SDKs
 
 Implementing Tokens into your frontend app is super easy. Just pass it into `hop.init` in the `token` key. For example:
 
@@ -89,6 +95,5 @@ hop.init({
 	projectId: "project_xxx": // replace with your project ID,
 	token: "leap_token_xxx" // the Token to authenticate with
 })
- 
 ```
 </Code>

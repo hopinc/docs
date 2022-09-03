@@ -3,9 +3,9 @@ title: Overview
 description: Channels overview & concepts
 ---
 
-# Overview
+# Channels Overview
 
-Channels allows you to easily create direct or grouped realtime message channels between users, server-side applications, IoT devices and more.
+Channels allows you to easily create direct or grouped realtime message channels between users, server-side applications, IoT devices and more. You can use them to publish realtime events & even store realtime state objects which you can handle using our client-side SDKs.
 
 Channels are feature-rich and can be of multiple different visibility types and have multiple Capabilities enabled, allowing you to create anything from a realtime stock ticker to a fully feature-rich group messaging app.
 
@@ -13,13 +13,23 @@ Some nicities provided by Channels include:
 
 - Channels can be of the `unprotected` type, which means that you don't need to worry about handing out tokens to users on your frontend. This is useful if you want to display realtime data on a frontend application that doesn't require user sign-in, for example.
 
-- You can send events directly to [Tokens](#tokens), instead of sending them to channels
+- You can send events directly to [Tokens](./tokens), instead of sending them to channels
 
 - You can keep realtime, persisted "state" within a channel, which all clients are kept in sync with when connecting & when it's updated. [Read more ➜](state)
 
 - All capabilities can be mixed and matched with each other, allowing you to reap powerful benefits from individual channels without having to create hacky workarounds
 
-For most use cases, you'll need a protected server-side application (e.g. an API) which can use the Hop SDK to create [Tokens](#tokens) and Channels. You can then use the client-side SDKs like hop-js to subscribe to channels.
+For most use cases, you'll need a protected server-side application (e.g. an API) which can use the [Hop SDK](/sdks/server/js) to [generate Tokens](./tokens) and [create Channels](./reference/creating). You can then use the [client-side SDKs](/sdks/client/js) to subscribe to channels.
+
+## Jump To
+
+- [Learn about Channel State](./state)
+- [Learn about Channel Tokens (authenticate users to Channels)](./tokens)
+- [Using Channels with React](./reference/react)
+- [Creating Channels with the Hop SDK](./reference/creating)
+- [Updating Channel State using the Hop SDK](./reference/updating_state)
+- [Sending Messages to Channels using the Hop SDK](./reference/sending_messages)
+- [Hop SDKs](./sdks/overview)
 
 ## Concepts
 
@@ -98,3 +108,5 @@ State acts as a realtime data store attached to each channel. See [Channel State
 ### Messages
 
 You can use the Hop API or SDK to easily send messages of any size to channels, which can then be handled by channel subscribers.
+
+[How to send Messages to Channels](./reference/sending_messages)
