@@ -122,7 +122,7 @@ const config: DocsThemeConfig = {
 					}
 
 					html {
-						font-family: "GT Walsheim", san-serif !important;
+						font-family: "GT Walsheim",-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
 					}
 
 					code, kbd, pre, samp {
