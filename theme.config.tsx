@@ -19,6 +19,10 @@ const config: DocsThemeConfig = {
 		link: 'Feedback',
 	},
 
+	nextThemes: {
+		defaultTheme: 'dark',
+	},
+
 	toc: {
 		float: true,
 
