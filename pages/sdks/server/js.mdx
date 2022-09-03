@@ -35,7 +35,7 @@ const myToken = 'ptk_xxx';
 export const hop = new Hop(myToken);
 
 // Example: Creating a project secret
-hop.projects.secrets.create(
+await hop.projects.secrets.create(
 	'RANDOM_NUMBER',
 	Math.floor(Math.random() * 100).toString(),
 );
