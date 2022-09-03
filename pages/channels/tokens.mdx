@@ -79,6 +79,22 @@ await hop.channels.publishDirectMessage(
 ```
 </Code>
 
+## Determine if a Token is Online
+
+You can use the `isOnline` function to check if a Token is currently connected to Channels.
+
+<Code>
+```ts
+// Import your Hop SDK instance
+import { hop } from ".";
+ 
+const userToken = "leap_token_abc123";
+
+const isOnline = await hop.channels.tokens.isOnline(userToken);
+// isOnline: boolean
+```
+</Code>
+
 ## Client-side Examples
 
 ### Using Tokens with Client-side SDKs
