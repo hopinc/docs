@@ -33,7 +33,7 @@ import { hop } from ".";
 const channelId = "channel_xxx"; // the channel we want to send a message to
 
 
-hop.channels.publishMessage(
+await hop.channels.publishMessage(
 	channelId,
 	// event name of your choosing
 	"MESSAGE_CREATE",
