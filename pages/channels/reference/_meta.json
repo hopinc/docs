@@ -2,5 +2,6 @@
 	"react": "React",
 	"creating": "Creating Channels",
 	"updating_state": "Updating Channel State",
-	"sending_messages": "Sending Messages"
+	"sending_messages": "Sending Messages",
+	"sending_messages": "Channel Stats"
 }
