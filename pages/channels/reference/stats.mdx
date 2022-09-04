@@ -29,9 +29,9 @@ import { hop } from ".";
 
 const channelId = "channel_xxx"; // the channel we want to get statistics for
 
-await hop.channels.getStats(channelId);
+const stats = await hop.channels.getStats(channelId);
 /*
- *	{
+ *	stats = {
  *		"online_count": 0	
  *	}
  */
