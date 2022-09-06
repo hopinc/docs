@@ -32,7 +32,7 @@ You can generate Tokens manually (using our Console) or via our SDKs & API.
 
 Here's an example of generating tokens using the server-side SDK:
 <Code>
-```ts
+```js {4} title="create-token.js"
 // Import your Hop SDK instance
 import { hop } from ".";
  
@@ -47,7 +47,7 @@ When you subscribe a Token to a channel, it will be subscribed to that channel i
 In this example, let's assume that we have a private channel with the ID `game`.
 
 <Code>
-```ts
+```js {7} title="subscribe-token.js"
 // Import your Hop SDK instance
 import { hop } from ".";
  
@@ -61,7 +61,7 @@ await hop.channels.subscribeToken(channelId, userToken);
 ### Sending Messages Directly to Tokens
 
 <Code>
-```ts
+```js {7-14} title="send-message-to-token.js"
 // Import your Hop SDK instance
 import { hop } from ".";
  
@@ -84,7 +84,7 @@ await hop.channels.publishDirectMessage(
 You can use the `isOnline` function to check if a Token is currently connected to Channels.
 
 <Code>
-```ts
+```js {6} title="is-token-online.js"
 // Import your Hop SDK instance
 import { hop } from ".";
  
@@ -102,14 +102,17 @@ const isOnline = await hop.channels.tokens.isOnline(userToken);
 Implementing Tokens into your frontend app is super easy. Just pass it into `hop.init` in the `token` key. For example:
 
 <Code>
-```ts
+```js {5-8} title="index.js"
 import { hop } from "@onehop/client";
  
 // hop.init should be called as early as possible in your application's lifecycle
- 
-hop.init({
+// or, as soon as you have the leap token available
+const client = hop.init({
 	projectId: "project_xxx": // replace with your project ID,
 	token: "leap_token_xxx" // the Token to authenticate with
-})
+});
+
+// Optionally do something with the client
+client.on('STATE_UPDATE', console.log);
 ```
 </Code>

@@ -16,7 +16,7 @@ You can create channels manually (through the Hop Console/CLI) or through our SD
 ## Creating a Channel
 
 <Code>
-```js
+```js {5,8-13} title="create-channel.js"
 // Import your Hop SDK instance
 import { hop } from ".";
 
@@ -35,7 +35,7 @@ const channel = await hop.channels.create(
 
 ### Creating a Channel with some Initial State
 <Code>
-```js
+```js {5-16} title="create-channel-with-state.js"
 import { hop } from ".";
 import { ChannelType } from '@onehop/js';
 

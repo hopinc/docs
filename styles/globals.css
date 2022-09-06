@@ -37,3 +37,23 @@ body {
 		width: 18rem !important;
 	}
 }
+
+code {
+	counter-reset: line;
+}
+
+code > .line::before {
+	counter-increment: line;
+	content: counter(line);
+
+	display: inline-block;
+	width: 1rem;
+	margin-right: 1.5rem;
+	text-align: right;
+
+	@apply text-neutral-500 dark:text-gray-600;
+}
+
+div.block > pre {
+	@apply !my-0 !rounded-md;
+}

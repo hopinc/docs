@@ -1,4 +1,4 @@
-import {Children, ReactElement} from 'react';
+import {Children, ReactElement, useMemo} from 'react';
 import clsx from 'clsx';
 import styles from './code.module.css';
 import {useCurrentLanguage} from '../context/code';
@@ -8,20 +8,45 @@ export interface Props {
 }
 
 export function Code(props: Props) {
-	const children = Children.map(props.children, child => {
-		const language = child.props.children.props.children.props[
-			'data-language'
-		] as string;
+	const children = useMemo(() => {
+		return Children.map(props.children, child => {
+			if (Array.isArray(child.props.children)) {
+				if (child.props.children.length !== 2) {
+					throw new Error(
+						'Code component must have exactly two children, title and codeblock',
+					);
+				}
 
-		return {
-			language,
-			Component: child,
-		};
-	});
+				const title = child.props.children[0].props.children as string;
+
+				const language = child.props.children[1].props.children.props[
+					'data-language'
+				] as string;
+
+				return {
+					title,
+					language,
+					Component: child.props.children[1],
+				};
+			}
+
+			const language = child.props.children.props.children.props[
+				'data-language'
+			] as string;
+
+			return {
+				language,
+				Component: child,
+			};
+		});
+	}, [props.children]);
 
 	const [activeLanguage, setActiveLanguage] = useCurrentLanguage(
 		children.map(child => child.language),
 	);
+
+	const activeTitle =
+		children.find(child => child.language === activeLanguage)?.title ?? null;
 
 	return (
 		<div
@@ -30,7 +55,7 @@ export function Code(props: Props) {
 				styles.code__container,
 			)}
 		>
-			<div className="flex max-w-full overflow-x-auto divide-x divide-neutral-100 dark:divide-neutral-800">
+			<div className="flex max-w-full items-center space-x-2 overflow-x-auto justify-between">
 				{children.map(child => {
 					const active = activeLanguage === child.language;
 
@@ -55,6 +80,10 @@ export function Code(props: Props) {
 						</div>
 					);
 				})}
+
+				{activeTitle && (
+					<p className="text-neutral-500 dark:text-gray-400">{activeTitle}</p>
+				)}
 			</div>
 
 			<div>
