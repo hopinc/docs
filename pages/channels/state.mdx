@@ -17,31 +17,11 @@ You can update channel state from the server side SDK libraries or the API.
 
 - [Reference: Updating State](reference/updating_state)
 
-
-## Reacting to State Changes on the Client
-
-You can use our client-side SDKs, like Hop.js to listen to and react to channel state changes. Clients will automatically receive state updates to all channels they subscribe to.
-
-To listen to individual state updates, you can listen to `stateUpdate`:
-```ts
-hop.channels.on('stateUpdate', (channelId: string, state: unknown) => {
-	// do something
-});
-```
-
-To get the initial state of all channels when clients connect, you need to listen for the `init` event.
-
-```ts
-hop.channels.on('init', (d: ChannelInitialization) => {
-	// all channel objects are stored under d.channels
-});
-```
-
 ### Usage with React
 If using React, you can use the `useReadChannelState` hook:
 
 <Code>
-```tsx
+```jsx {7} title="Price.jsx"
 const Price = () => {
 	/**
 	 * `state` will be null until the client is connected

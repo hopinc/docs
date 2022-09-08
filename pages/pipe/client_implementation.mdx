@@ -3,7 +3,46 @@ title: Pipe Client Implementation
 description: Learn how to implement Pipe on your client application 
 ---
 
+import {getPackageDetails} from '../../utils/npm';
+
+export const getStaticProps = async () => {
+	const [client, react] = await Promise.all([
+		getPackageDetails('@onehop/client'),
+		getPackageDetails('@onehop/react'),
+	]);
+
+	return {
+		props: {
+			ssg: {
+				client: client['dist-tags'].latest,
+				react: client['dist-tags'].latest,
+			},
+		},
+
+		revalidate: 60,
+	};
+}
+
 import {Code} from '../../components/code';
+import {useSSG} from 'nextra/ssg';
+
+```sh
+# Using npm
+npm i @onehop/client @onehop/react
+
+# Using yarn
+yarn add @onehop/client @onehop/react
+```
+
+export const InstallationWithVersion = () => {
+	const ssg = useSSG();
+
+	return (
+		<Code>
+			<WhatHere?! />
+		</Code>
+	);
+};
 
 # Client Implementation
 
@@ -18,15 +57,8 @@ You can use our client (frontend) SDKs to easily implement Pipe into your produc
 
 ### Installing dependencies
 Start off by adding both of our frontend packages to your project
-<Code>
-```sh
-# Using npm
-npm i @onehop/client @onehop/react
 
-# Using yarn
-yarn add @onehop/client @onehop/react
-```
-</Code>
+<InstallationWithVersion />
 
 ### Initializing the Hop SDK
 

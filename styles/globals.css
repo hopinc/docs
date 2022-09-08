@@ -1,4 +1,6 @@
 @tailwind utilities;
+@tailwind components;
+@tailwind base;
 
 html {
 	font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1, 'ss06' 1 !important;
@@ -51,9 +53,15 @@ code > .line::before {
 	margin-right: 1.5rem;
 	text-align: right;
 
+	user-select: none;
+
 	@apply text-neutral-500 dark:text-gray-600;
 }
 
 div.block > pre {
 	@apply !my-0 !rounded-md;
+}
+
+iframe {
+	@apply rounded-xl overflow-hidden;
 }

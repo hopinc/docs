@@ -147,7 +147,7 @@ const config: DocsThemeConfig = {
 					}
 
 					.nextra-sidebar li a {
-						border-radius: 2em !important;
+						border-radius: 1.5em !important;
 						padding-left: 12px !important;
 					}
 
