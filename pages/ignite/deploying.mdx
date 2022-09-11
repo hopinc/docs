@@ -3,6 +3,10 @@ title: Deploying
 description: How to deploy apps and services to Hop Ignite
 ---
 
+import Image from 'next/image';
+import createDeployment from '../../assets/images/creating-deployment.gif';
+import authorizingGitHub from '../../assets/images/authorizing-github.gif';
+
 # Deploying to Hop
 
 Any application of any size, language or framework can be deployed to Hop. Deployments are Ignite's primary abstraction - containers run inside them. 
@@ -12,6 +16,33 @@ However you create a new deployment on Hop, we'll internally create a "deploymen
 ## Deployment Methods
 
 There are various ways to create and deploy new versions to existing deployments.
+
+### GitHub
+
+Deploying to Hop from GitHub allows you to easily connect a GitHub repository to Ignite and have your project be automatically deployed when you push to your main branch.
+
+To deploy from GitHub, we will use the [Hop Console](https://console.hop.io)
+
+#### Creating the Deployment
+Select "Create Deployment" under the **Ignite** page.
+<br/>
+<Image src={createDeployment}/>
+
+If you're not sure what container type to pick, we recommend using **Persistent**.
+
+#### Linking GitHub Account
+
+You will now be prompted to link your GitHub account to Hop. Once connected, you can give Hop permission to all or individual repositories on your account.
+<br/>
+<Image src={authorizingGitHub}/>
+
+Once permission is granted, you can select the repository to use and create the deployment. Once created, the first build for your application will start. You can view the build logs in realtime through the console - when it's built, it'll create a container to start serving your deployment.
+
+#### Pushing Updates to your Deployment
+To push an update to a GitHub deployment, simply `git push` to the main branch.
+
+ Hop will automatically detect this push and will begin building the new release. Once built, Hop will create a rollout: create containers for the new build and delete the old ones once the new ones are running.
+
 
 ### Hop CLI
 
