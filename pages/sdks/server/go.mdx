@@ -1,0 +1,49 @@
+---
+title: Server-side Go SDK
+description: Guide to using Hop's server-side Go SDK
+---
+
+import {Code} from '../../../components/code';
+
+# Server-side Go SDK
+The Hop server-side Go SDK allows you to interact with all Hop products on the server side. 
+
+## Usage
+
+Reference the Hop Go SDK in your imports:
+
+<Code>
+```go {3}
+import (
+	...
+	"github.com/hopinc/hop-go"
+	...
+)
+```
+</Code>
+
+Once you run any Go command, the Go toolchain will fetch and install the SDK automatically.
+
+## Creating an SDK Instance
+
+To use the SDK, you must first create a [project token](/reference/project_tokens). You can also use a PAT (personal access token), however this is not recommended as it has access to all of your projects.
+
+<Code>
+```go {11}
+import (
+	"context"
+	"fmt"
+
+	"github.com/hopinc/hop-go"
+)
+
+const HopToken = "ptk_xxx" 
+
+func main() {
+	c, _ := hop.NewClient(HopToken)
+
+	// Example: getting a channel by ID
+	ch, _ := c.Channels.Get(context.Background(), "test")
+}
+```
+</Code>
