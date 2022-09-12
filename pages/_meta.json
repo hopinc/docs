@@ -5,16 +5,9 @@
 		"type": "separator"
 	},
 	"cli": "CLI",
-	"sdks": {
-		"title": "SDKs"
-	},
-	"ignite": {
-		"title": "Ignite"
-	},
-	"channels": {
-		"title": "Channels"
-	},
-	"pipe": {
-		"title": "Pipe"
-	}
+	"sdks": "SDKs",
+	"ignite": "Ignite",
+	"channels": "Channels",
+	"pipe": "Pipe",
+	"reference": "Reference"
 }
