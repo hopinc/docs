@@ -10,13 +10,13 @@ const config: DocsThemeConfig = {
 		link: 'https://github.com/hopinc/docs',
 	},
 
-	projectChat: {
+	chat: {
 		link: 'https://discord.gg/hop',
 	},
 
 	feedback: {
 		labels: 'feedback',
-		link: 'Feedback',
+		content: 'Feedback',
 	},
 
 	nextThemes: {
@@ -59,8 +59,6 @@ const config: DocsThemeConfig = {
 		return <HopLogo width={50} />;
 	},
 
-	font: false,
-
 	banner: {
 		key: 'beta',
 		text: function Banner() {
@@ -80,9 +78,6 @@ const config: DocsThemeConfig = {
 
 	sidebar: {
 		defaultMenuCollapsed: true,
-		subtitle: ({title}) => (
-			<div className="flex items-center gap-2">{title}</div>
-		),
 	},
 
 	head: function Head() {
