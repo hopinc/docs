@@ -40,10 +40,42 @@ import (
 const HopToken = "ptk_xxx" 
 
 func main() {
-	c, _ := hop.NewClient(HopToken)
+	c, err := hop.NewClient(HopToken)
+	if err != nil {
+		// Handle your error here!
+		panic(err)
+	}
 
 	// Example: getting a channel by ID
-	ch, _ := c.Channels.Get(context.Background(), "test")
+	ch, err := c.Channels.Get(context.Background(), "test")
+	if err != nil {
+		// Handle your error here!
+		panic(err)
+	}
 }
 ```
 </Code>
+
+## Specifying the Project ID
+
+If you do not use a project token, you must also specify the project ID. You can do this in 1 of 2 ways:
+
+1. You can set this at a client level:
+	<Code>
+	```go {2}
+	...
+	c.AddClientOptions(hop.WithProjectID("project_id"))
+	...
+	```
+	</Code>
+
+2. You can set this at a request level:
+	<Code>
+	```go {2}
+	...
+	ch, err := c.Channels.Get(context.Background(), "test", hop.WithProjectID("project_id"))
+	...
+	```
+	</Code>
+
+hop-go will prefer options which are set at a functional level.
