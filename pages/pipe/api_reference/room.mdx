@@ -32,7 +32,7 @@ The full Room object returned by our API
 You can create a Pipe Room through our server-side [SDK](https://www.npmjs.com/package/@onehop/client) or our REST API.
 
 <Code>
-```ts
+```ts showLineNumbers
 const room = await hop.pipe.rooms.create({
 	name: "My Stream", // optional room name
 	ingestProtocol: "rtmp", // rtmp or rtp
@@ -48,7 +48,7 @@ const room = await hop.pipe.rooms.create({
 Please note that this will cause the ingest server to terminate your connection. This will also trigger the "CLOSED_REMOTELY" connection state on the frontend clients.
 
 <Code>
-```ts
+```ts showLineNumbers
 // delete by ID
 const id = "pipe_room_xxx";
 const room = await hop.pipe.rooms.delete(id);

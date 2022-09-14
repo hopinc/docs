@@ -34,7 +34,7 @@ Grab your **project ID** from the [Project Settings page](https://console.hop.io
 You should call the `init` function outside of a React component. For example, in your application's entrypoint file:
 
 <Code>
-```jsx
+```jsx showLineNumbers
 import React from "react";
 import ReactDOM from "react-dom";
 import { hop } from "@onehop/client";
@@ -59,7 +59,7 @@ The `@onehop/react` package exposes a collection of React hooks which allow you 
 
 Let's jump into an example bare-minimum component:
 <Code>
-```jsx
+```jsx showLineNumbers
 import { useRef } from "react";
 import { usePipeRoom } from "@onehop/react";
 
@@ -99,7 +99,7 @@ As you can see, Pipe allows you to provide your own video element - Pipe just ho
 ## Integrating Pipe with Vanilla JS
 
 <Code>
-```ts
+```ts showLineNumbers
 import { hop, pipe } from '@onehop/client';
 
 // TypeScript only — declaring that `node` is a variable

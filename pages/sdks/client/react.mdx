@@ -33,7 +33,7 @@ To use the React SDK within your app, you first must call the `init` method from
 Find your project ID on [this page](https://console.hop.io/project/settings).
 
 <Code>
-```jsx
+```jsx showLineNumbers
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { hop } from "@onehop/client";
@@ -53,7 +53,7 @@ createRoot(document.getElementById("root")).render(<App />);
 If using Next.js (or SSR in general), then you need to make sure that the client gets initialized on the **client-side**, not the server. To do this, we recommend initializing the Hop Client in a `useEffect` in your `_app` file, for example:
 
 <Code>
-```jsx
+```jsx showLineNumbers
 import { useEffect } from "react";
 import { hop } from "@onehop/client";
 

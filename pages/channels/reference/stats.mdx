@@ -15,15 +15,15 @@ We provide functionality to get statistics about certain channels, such as how m
 ## Get Stats
 
 The following function will return the following type:
-```js
-{
-	// how many clients are connected to this channel
-	online_count: <number>
+```ts
+type Stats = {
+	// How many clients are connected to this channel
+	online_count: number;
 }
 ```
 
 <Code>
-```js
+```js showLineNumbers
 // Import your Hop SDK instance
 import { hop } from ".";
 

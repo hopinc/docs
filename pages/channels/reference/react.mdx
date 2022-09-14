@@ -8,7 +8,7 @@ import {Callout} from 'nextra-theme-docs'
 
 ## useChannelMessage
 
-```ts
+```ts showLineNumbers
 useChannelMessage(channelId: string, eventName: string, listener: Function): void
 ```
 
@@ -19,7 +19,7 @@ You can use this hook to subscribe to Channel message events in your React app.
 <Callout type="info">This example assumes you have already initialized the [Hop React SDK](/sdks/client/react).</Callout>
 
 <Code>
-```jsx
+```jsx showLineNumbers
 import { useChannelMessage } from '@onehop/react';
 
 const channelId = 'group_chat';
@@ -46,7 +46,7 @@ export default function MyComponent() {
 
 ## useReadChannelState
 
-```ts
+```ts showLineNumbers
 useReadChannelState(channelId: string): ChannelStateData
 ```
 
@@ -65,7 +65,7 @@ You can use this hook to subscribe to Channel state in your React app.
 <Callout type="info">This example assumes you have already initialized the [Hop React SDK](/sdks/client/react).</Callout>
 
 <Code>
-```jsx
+```jsx showLineNumbers
 import { useReadChannelState } from '@onehop/react';
 
 const channelId = 'weather';

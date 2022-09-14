@@ -144,14 +144,14 @@ A Pipe room has become available to this Leap session.
 
 
 #### parent connection map type
-```ts
+```ts showLineNumbers
 interface ConnectionMap {
 	["webrtc" | "llhls"]: Connection | null;
 }
 ```
 
 #### individual connection objects
-```ts
+```ts showLineNumbers
 interface Connection {
 	edge_endpoint: string;
 	type: "webrtc" | "llhls"

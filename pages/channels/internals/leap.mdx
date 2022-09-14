@@ -26,7 +26,7 @@ LE 1.0 currently only supports connections via WebSocket, which is accessible gl
 
 Messages with LE are exchanged through a series of opcodes, documented below. All messages sent from LE are formatted with the following payload type:
 
-```ts
+```ts showLineNumbers
 type SocketMessage {
 	op: number; // opcode
 	d?: unknown; // message data; usually an object; does not exist on regular heartbeats
