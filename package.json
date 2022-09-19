@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"repository": "https://github.com/hopinc/docs",
 	"author": "Hop <developers@hop.io>",
-	"license": "MIT",
+	"license": "Apache-2.0",
 	"packageManager": "yarn@1.22.19",
 	"scripts": {
 		"dev": "next",
