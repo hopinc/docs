@@ -116,44 +116,45 @@ const config: DocsThemeConfig = {
 				<meta name="og:image" content={ogImage} />
 				<style
 					dangerouslySetInnerHTML={{
-						__html: `img[decoding] {
-						border-radius: 0.75rem;
-					}
+						__html: `
+							img[decoding] {
+								border-radius: 0.75rem;
+							}
 
-					html {
-						font-family: "GT Walsheim",-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
-					}
+							html {
+								font-family: "GT Walsheim",-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
+							}
 
-					code, kbd, pre, samp {
-						font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
-					}
+							code, kbd, pre, samp {
+								font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
+							}
 
-					:root {
-						--nextra-primary-hue: 258deg !important;
-					}
+							:root {
+								--nextra-primary-hue: 258deg !important;
+							}
 
-					.dark {
-						--nextra-primary-hue: 204deg !important;
-					}
+							.dark {
+								--nextra-primary-hue: 204deg !important;
+							}
 
-					.dark li.active > a {
-						--tw-text-opacity: 1 !important;
-						--tw-bg-opacity: 0.2 !important;
-					}
+							.dark li.active > a {
+								--tw-text-opacity: 1 !important;
+								--tw-bg-opacity: 0.2 !important;
+							}
 
-					.nextra-sidebar li a {
-						border-radius: 1.5em !important;
-						padding-left: 12px !important;
-					}
+							.nextra-sidebar-container li a {
+								border-radius: 1.5em !important;
+								padding-left: 12px !important;
+							}
 
-					.nextra-sidebar-list svg {
-						border-radius: 100%;
-					}
+							.nextra-sidebar-container li a svg {
+								border-radius: 100%;
+							}
 
-					.dark .nextra-body a {
-						--nextra-primary-hue: 204deg !important;
-					}
-					`,
+							.dark .nextra-body a {
+								--nextra-primary-hue: 204deg !important;
+							}
+						`,
 					}}
 				/>
 			</>
