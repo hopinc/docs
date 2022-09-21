@@ -13,6 +13,7 @@ const config = {
 	},
 	unstable_staticImage: true,
 	unstable_readingTime: true,
+	unstable_defaultShowCopyCode: true,
 };
 
 const withNextra = nextra(config);

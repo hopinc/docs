@@ -82,7 +82,9 @@ export function Code(props: Props) {
 				})}
 
 				{activeTitle && (
-					<p className="text-neutral-500 dark:text-gray-400">{activeTitle}</p>
+					<p className="text-neutral-500 dark:text-neutral-400">
+						{activeTitle}
+					</p>
 				)}
 			</div>
 

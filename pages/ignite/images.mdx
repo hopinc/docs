@@ -3,9 +3,10 @@ title: Images
 description: Guide to managing Docker images on Hop
 ---
 
-import Image from 'next/image';
+import Image from 'next/future/image';
 import hopPat2 from '../../assets/images/hop-pat-2.png';
 import hopImages1 from '../../assets/images/hop-images-1.png';
+import {Bleed} from '../../components/bleed';
 
 # Images
 
@@ -27,9 +28,11 @@ Click on the "Create Token" button in the top right, optionally give it a name s
 
 It'll be created and will be shown in the PAT list:
 
-<Image src={hopPat2}/>
+<Bleed>
+    <Image src={hopPat2}/>
+</Bleed>
 
-> You can use the <span><img style={{display: "inline", height: "1em", margin: "0px 3px"}} src="/icons/clipboard.png"/></span> button to copy the token to your clipboard
+> You can use the <span><img className="no-styles" style={{display: "inline", height: "1em", margin: "0px 3px"}} src="/icons/clipboard.png"/></span> button to copy the token to your clipboard
 
 #### Log into the Registry
 
@@ -67,6 +70,8 @@ docker push registry.hop.io/test/my-cool-project
 ### View the Image
 Once your image is pushed, you can view it on the [Images tab](https://console.hop.io/ignite/images) of Ignite:
 
-<Image src={hopImages1}/>
+<Bleed>
+    <Image src={hopImages1}/>
+</Bleed>
 
 That's it! Your image is now ready to use on Hop. You can use the 3 dots in the top right of the image card to create a deployment directly from the image.

@@ -32,7 +32,7 @@ const config: DocsThemeConfig = {
 					<a
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 contrast-more:text-gray-800 contrast-more:dark:text-gray-50"
+						className="text-xs font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 contrast-more:text-neutral-800 contrast-more:dark:text-neutral-50"
 						href="https://console.hop.io"
 					>
 						Console

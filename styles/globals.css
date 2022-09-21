@@ -55,7 +55,7 @@ code[data-line-numbers] > .line::before {
 
 	user-select: none;
 
-	@apply text-neutral-500 dark:text-gray-600;
+	@apply text-neutral-500 dark:text-neutral-600;
 }
 
 div.block > pre {
@@ -64,4 +64,8 @@ div.block > pre {
 
 iframe {
 	@apply rounded-xl overflow-hidden;
+}
+
+img:not(.no-styles) {
+	@apply border !border-neutral-700 my-4 shadow-lg shadow-black/20;
 }
