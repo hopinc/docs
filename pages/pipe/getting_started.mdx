@@ -8,6 +8,7 @@ import crModal from '../../assets/images/pipe-create-room-modal.png';
 import rcModal from '../../assets/images/pipe-room-created-modal.png';
 import obs1 from '../../assets/images/obs-stream-1.png';
 import obs2 from '../../assets/images/obs-stream-2.png';
+import {Bleed} from '../../components/bleed';
 
 # Getting Started
 
@@ -15,9 +16,6 @@ Pipe allows you to deliver real-time livestreams to users across the globe witho
 
 - [Easy mode (use Console UI & OBS)](#easy-mode)
 - [Advanced mode (use our SDK/API & ffmpeg)](#advanced-mode)
-
-
-
 
 ## Easy Mode
 
@@ -29,21 +27,29 @@ Head over to the [Rooms tab](https://console.hop.io/pipe/rooms) under the Pipe p
 
 Click "Create Room" in the top right. You'll be presented with a modal:
 
-<br/>
-<Image height={400} objectFit={'contain'} src={crModal}/>
+<br />
+
+<Bleed>
+<Image height={400} objectFit={'contain'} src={crModal} />
+</Bleed>
 
 For this example, stick to **RTMP** for the ingest protocol and **LLHLS** for delivery. You can optionally give the stream a name.
 
 Click **Create Room**.
 
+<Bleed>
 <Image height={400} objectFit={'contain'} src={rcModal}/>
+</Bleed>
 
 Use the <span><img style={{display: "inline", height: "1em", margin: "0px 3px"}} src="/icons/clipboard.png"/></span> button to copy the **Ingest Endpoint** to your clipboard.
 
 ### Streaming via OBS
 [OBS](https://obsproject.com/) allows you to quickly and easily set up a livestream from your machine. Once downloaded, head over to the "Stream" tab in the Settings page:
-<br/>
-<Image height={400} objectFit={'contain'} src={obs1}/>
+<br />
+
+<Bleed>
+<Image height={400} objectFit={'contain'} src={obs1} />
+</Bleed>
 
 For **Service**, Select **Custom**.
 
@@ -56,12 +62,14 @@ Copy the last segment (after the `/`) from the endpoint. This is technically wha
 
 Once done, your Stream config should look something like this:
 <br/>
-<Image objectFit={'contain'} src={obs2}/>
+
+<Bleed>
+<Image objectFit={'contain'} src={obs2} />
+</Bleed>
 
 Click **OK**.
 
 You can now hit the **Start Streaming** button. You're now streaming to Pipe!
-
 
 
 ## Advanced Mode

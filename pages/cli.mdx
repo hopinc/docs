@@ -6,6 +6,7 @@ description: Use the Hop CLI to manage your Hop projects
 import {Callout} from 'nextra-theme-docs'
 import Image from 'next/future/image';
 import cliSwitchProject from '../assets/images/cli-switch.png';
+import {Bleed} from '../components/bleed';
 
 # CLI
 
@@ -55,7 +56,7 @@ hop projects switch
 
 This will bring up an interface that allows you to use arrow keys to select a project:
 <br/>
-<Image src={cliSwitchProject}/>
+<Bleed><Image src={cliSwitchProject} /></Bleed>
 
 You can also use `hop projects switch <namespace>` to perform the switch directly.
 

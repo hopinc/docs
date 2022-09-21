@@ -9,6 +9,7 @@ import gwDemo2 from '../../assets/images/hop-gw-demo-2.png';
 import gwDemo3 from '../../assets/images/hop-gw-demo-3.png';
 import gwDemo4 from '../../assets/images/hop-gw-demo-4.png';
 import gwDemo5 from '../../assets/images/hop-gw-demo-5.png';
+import {Bleed} from '../../components/bleed';
 
 # Gateways
 
@@ -25,15 +26,21 @@ It's easiest to create a gateway through our console, however keep in mind that 
 
 Navigate to the Gateways tab in an Ignite deployment:
 
-<Image placeholder={"blur"} src={gwDemo1}/>
-
+<Bleed>
+<Image src={gwDemo1} />
+</Bleed>
 
 Click on the "Create Gateway" button in the top right:
 
-<Image width={300} objectFit={"contain"}  placeholder={"blur"} src={gwDemo2}/>
+<Bleed>
+<Image width={300} objectFit={"contain"} src={gwDemo2} />
+</Bleed>
 
 You will be presented with a modal:
-<Image width={500} height={500} objectFit={"contain"} placeholder={"blur"} src={gwDemo3}/>
+
+<Bleed>
+<Image width={500} height={500} objectFit={"contain"} src={gwDemo3} />
+</Bleed>
 
 Here, you can select the gateway type and target port.
 
@@ -52,13 +59,17 @@ By default, every external gateway gets assigned it's own `.hop.sh` domain, gene
 
 Head over to the "Domains" page inside your gateway.
 
-<Image width={500} height={500} objectFit={"contain"} placeholder={"blur"} src={gwDemo4}/>
+<Bleed>
+<Image width={500} height={500} objectFit={"contain"} placeholder={"blur"} src={gwDemo4} />
+</Bleed>
 
 Here, you can manage the `.hop.sh` domain as well as add your own custom ones. To add a custom domain, click on the **Attach Domain** button in the top right of the page.
 
 You will be presented with this modal, where you should enter your desired domain.
 
-<Image width={500} height={300} objectFit={"contain"} placeholder={"blur"} src={gwDemo5}/>
+<Bleed>
+<Image width={500} height={300} objectFit={"contain"} placeholder={"blur"} src={gwDemo5} />
+</Bleed>
 
 Click **Next**.
 
