@@ -3,6 +3,7 @@
 import Image from 'next/future/image';
 import pipeConsole1 from '../../assets/images/pipe-console-live-1.png';
 import {Code} from '../../components/code';
+import {Bleed} from '../../components/bleed';
 
 Pipe supports multiple ingest protocols for *sending* streams to Pipe: RTMP and RTP (MPEG-TS). You can set the ingest protocol to use when creating a Pipe room.
 
@@ -64,4 +65,7 @@ ffmpeg -re -stream_loop -1 -i <FILE_NAME> -b:a 96k -c:v libx264 -profile:v basel
 
 #### Verifying Stream Status
 You can verify that you're streaming from the Pipe page on the Hop Console:
-<Image src={pipeConsole1}/>
+
+<Bleed>
+  <Image src={pipeConsole1}/>
+</Bleed>
