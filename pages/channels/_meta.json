@@ -1,7 +1,7 @@
 {
-	"internals": "Internals",
 	"overview": "Overview",
 	"state": "Channel State",
 	"tokens": "Tokens",
-	"reference": "Reference"
+	"reference": "Reference",
+	"internals": "Internals"
 }
