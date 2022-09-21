@@ -14,8 +14,11 @@ The Hop server side Go SDK allows you to interact with all Hop products on the s
 Reference the Hop Go SDK in your imports:
 
 <Code>
-	```go {3}
-	import ( ... "github.com/hopinc/hop-go" ... ) ```
+```go {2}
+import (
+	"github.com/hopinc/hop-go"
+)
+```
 </Code>
 
 Once you run any Go command, the Go toolchain will fetch and install the SDK automatically.
@@ -31,17 +34,16 @@ import (
 	"fmt"
 
     "github.com/hopinc/hop-go"
-
 )
 
 const HopToken = "ptk_xxx"
 
 func main() {
-c, err := hop.NewClient(HopToken)
-if err != nil {
-// Handle your error here!
-panic(err)
-}
+	c, err := hop.NewClient(HopToken)
+	if err != nil {
+		// Handle your error here!
+		panic(err)
+	}
 
     // Example: getting a channel by ID
     ch, err := c.Channels.Get(context.Background(), "test")
@@ -49,10 +51,8 @@ panic(err)
     	// Handle your error here!
     	panic(err)
     }
-
 }
-
-````
+```
 </Code>
 
 ## Specifying the Project ID
@@ -61,21 +61,16 @@ If you do not use a project token, you must also specify the project ID. You can
 
 1. You can set this at a client level:
 	<Code>
-	```go {2}
-	...
+	```go
 	c.AddClientOptions(hop.WithProjectID("project_id"))
-	...
 	```
 	</Code>
 
 2. You can set this at a request level:
 	<Code>
-	```go {2}
-	...
+	```go
 	ch, err := c.Channels.Get(context.Background(), "test", hop.WithProjectID("project_id"))
-	...
 	```
 	</Code>
 
 hop-go will prefer options which are set at a functional level.
-````

@@ -27,20 +27,19 @@ type Stats = {
 ```
 
 <Code>
+
 ```js showLineNumbers
 // Import your Hop SDK instance
-import { hop } from ".";
+import {hop} from '.';
 
-const channelId = "channel_xxx"; // the channel we want to get statistics for
+const channelId = 'channel_xxx'; // the channel we want to get statistics for
 
 const stats = await hop.channels.getStats(channelId);
-/\*
-
-- stats = {
--     "online_count": 0
-- }
-  \*/
-
+/*
+ * - stats = {
+ * -     "online_count": 0
+ * - }
+ */
 ```
+
 </Code>
-```

@@ -33,19 +33,20 @@ import {Hop} from 'https://jspm.dev/@onehop/js@<version>';
 To use the SDK, you must first create a [project token](/reference/project_tokens). You can also use a PAT (personal access token), however this is not recommended as it has access to all of your projects.
 
 <Code>
+
 ```js showLineNumbers
 import { Hop } from '@onehop/js';
 
 const myToken = 'ptk_xxx';
+
 // Export the Hop SDK instance so you can use it throughout your codebase
 export const hop = new Hop(myToken);
 
 // Example: Creating a project secret
 await hop.projects.secrets.create(
-'RANDOM_NUMBER',
-Math.floor(Math.random() \* 100).toString(),
+    'RANDOM_NUMBER',
+    Math.floor(Math.random() \* 100).toString(),
 );
+```
 
-```
 </Code>
-```

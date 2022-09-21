@@ -22,38 +22,40 @@ You can use this hook to subscribe to Channel message events in your React app.
 </Callout>
 
 <Code>
+
 ```jsx showLineNumbers
-import { useChannelMessage } from '@onehop/react';
+import {useChannelMessage} from '@onehop/react';
 
 const channelId = 'group_chat';
 
 export default function MyComponent() {
 	const [chatMessages, setChatMessages] = useState([]);
 
-    // in this example, USER_MESSAGE is an event that you'd send to the channel from your backend
-    useChannelMessage(channelId, 'USER_MESSAGE', (message) => {
-    	// this will be called every time the USER_MESSAGE event is sent to this channel
-    	setChatMessages(m => [...m, message]);
-    });
+	// in this example, USER_MESSAGE is an event that you'd send to the channel from your backend
+	useChannelMessage(channelId, 'USER_MESSAGE', message => {
+		// this will be called every time the USER_MESSAGE event is sent to this channel
+		setChatMessages(m => [...m, message]);
+	});
 
-    return (
-    	<ul>
-    		{chatMessages.map(m => (
-    			<li><b>{m.author}</b>: {m.content}</li>
-    		))}
-    	</ul>
-    )
-
+	return (
+		<ul>
+			{chatMessages.map(m => (
+				<li>
+					<b>{m.author}</b>: {m.content}
+				</li>
+			))}
+		</ul>
+	);
 }
+```
 
-````
 </Code>
 
 ## useReadChannelState
 
 ```ts showLineNumbers
 useReadChannelState(channelId: string): ChannelStateData
-````
+```
 
 You can use this hook to subscribe to Channel state in your React app.
 
@@ -73,22 +75,22 @@ You can use this hook to subscribe to Channel state in your React app.
 </Callout>
 
 <Code>
+
 ```jsx showLineNumbers
-import { useReadChannelState } from '@onehop/react';
+import {useReadChannelState} from '@onehop/react';
 
 const channelId = 'weather';
 
 export default function MyComponent() {
-	const { state } = useReadChannelState(channelId);
+	const {state} = useReadChannelState(channelId);
 
-    // state is null until the client has connected to the channel
-    if (!state) return <p>Loading...</p>;
-    return (
-    	<p>Temperature in London: {state.london?.temperature}</p>
-    )
+	// state is null until the client has connected to the channel
+	if (!state) {
+		return <p>Loading...</p>;
+	}
 
+	return <p>Temperature in London: {state.london?.temperature}</p>;
 }
+```
 
-```
 </Code>
-```

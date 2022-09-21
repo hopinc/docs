@@ -3,5 +3,5 @@
 import {PropsWithChildren} from 'react';
 
 export function Bleed({children}: PropsWithChildren) {
-	return <div className="-mx-6">{children}</div>;
+	return <div className="-mx-6 flex justify-center">{children}</div>;
 }

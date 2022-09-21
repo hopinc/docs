@@ -19,44 +19,47 @@ You can create channels manually (through the Hop Console/CLI) or through our SD
 ## Creating a Channel
 
 <Code>
-```js {5,8-13} title="create-channel.js" showLineNumbers
+
+```js {5,8} title="create-channel.js" showLineNumbers
 // Import your Hop SDK instance
-import { hop } from ".";
+import {hop} from '.';
 
 // Import the ChannelType enum from Hop sdk
-import { ChannelType } from '@onehop/js';
+import {ChannelType} from '@onehop/js';
 
 // Create a channel with the ID "group_chat_1"
 const channel = await hop.channels.create(
-// Channel Type; either: "unprotected", "public", or "private"
-ChannelType.UNPROTECTED,
-// Channel ID; leave this field as null if you want an auto-generated ID
-"group_chat_1"
+	// Channel Type; either: "unprotected", "public", or "private"
+	ChannelType.UNPROTECTED,
+	// Channel ID; leave this field as null if you want an auto-generated ID
+	'group_chat_1',
 );
+```
 
-````
 </Code>
 
 ### Creating a Channel with some Initial State
+
 <Code>
-```js {5-16} title="create-channel-with-state.js" showLineNumbers
-import { hop } from ".";
-import { ChannelType } from '@onehop/js';
+
+```js {2,5} title="create-channel-with-state.js" showLineNumbers
+import {hop} from '.';
+import {ChannelType} from '@onehop/js';
 
 // Create a channel with the ID "group_chat_2" and some initial state
 const channel = await hop.channels.create(
 	ChannelType.UNPROTECTED,
-	"group_chat_2",
+	'group_chat_2',
 	// Creation Options
 	{
 		// Initial Channel state object
 		state: {
-			name: "Group Chat",
-			my_custom_value: 123
-		}
-	}
-)
-````
+			name: 'Group Chat',
+			my_custom_value: 123,
+		},
+	},
+);
+```
 
 </Code>
 
@@ -67,3 +70,7 @@ const channel = await hop.channels.create(
 **Public** channels allow any leap token to join them, given they're authenticated under your project and know the channel ID.
 
 **Unprotected** channels allow anyone to join them, even if they're not authenticated with a token, given they know the channel ID
+
+```
+
+```

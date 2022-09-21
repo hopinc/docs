@@ -29,23 +29,23 @@ The data field can be any object. In the case of our group chat example, we migh
 ## Publish a Message to a Channel
 
 <Code>
-```js {7-16} title="sending-messages.js" showLineNumbers
-// Import your Hop SDK instance
-import { hop } from ".";
 
-const channelId = "channel_xxx"; // the channel we want to send a message to
+```js {6} title="sending-messages.js" showLineNumbers
+// Import your Hop SDK instance
+import {hop} from '.';
+
+const channelId = 'channel_xxx'; // the channel we want to send a message to
 
 await hop.channels.publishMessage(
-channelId,
-// event name of your choosing
-"MESSAGE_CREATE",
-// event data, this can be any object you want it to be
-{
-content: "Hello Hop Channels!",
-author_name: "Vanilla"
-}
-)
+	channelId,
+	// event name of your choosing
+	'MESSAGE_CREATE',
+	// event data, this can be any object you want it to be
+	{
+		content: 'Hello Hop Channels!',
+		author_name: 'Vanilla',
+	},
+);
+```
 
-```
 </Code>
-```
