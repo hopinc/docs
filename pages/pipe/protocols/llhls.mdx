@@ -20,7 +20,7 @@ Low Latency HLS can bring this latency down to as low as 1-2 seconds. Apple achi
 
 ### Reducing Publishing Latency
 
-In the regular HLS protocol, encoded stream segments are meant to be about 6 seconds long before getting added to the HLS playlist. This already adds a *base* latency of 6 seconds - plus, clients could request the HLS playlist ~5.9 seconds after the previous segment publish (worst case), which would mean they would be delayed from the live broadcast by about **12 seconds**.
+In the regular HLS protocol, encoded stream segments are meant to be about 6 seconds long before getting added to the HLS playlist. This already adds a _base_ latency of 6 seconds - plus, clients could request the HLS playlist ~5.9 seconds after the previous segment publish (worst case), which would mean they would be delayed from the live broadcast by about **12 seconds**.
 
 LLHLS solves this by publishing small parts (~250ms each) of the main segment to the playlist before the main segment itself is ready.
 
@@ -31,21 +31,25 @@ HLS works through HTTP polling - clients send a HTTP request to fetch the HLS pl
 LLHLS allows clients to discover segments more quickly in 2 ways:
 
 #### Pre-empted Playlist Requests
-Clients can request playlists from the server *before* the actual segment is generated. The server will then hold on to the request and then, when the playlist updates, it responds back with the immediate latest segment. The client will now be aware of the latest segments in half the round-trip time.
+
+Clients can request playlists from the server _before_ the actual segment is generated. The server will then hold on to the request and then, when the playlist updates, it responds back with the immediate latest segment. The client will now be aware of the latest segments in half the round-trip time.
 
 #### Unique Playlist URLs
-To prevent CDNs from caching old playlist entities, LLHLS assigns *different* playlist URLs per update, which prevents CDNs from caching stale entities and allows for more efficient content delivery.
+
+To prevent CDNs from caching old playlist entities, LLHLS assigns _different_ playlist URLs per update, which prevents CDNs from caching stale entities and allows for more efficient content delivery.
 
 ### Eliminating Segment Round Trip
-In LLHLS, when clients make a pre-empted playlist request, they also send a PUSH tag - this tells the server to, when returning the HLS playlist, *push* the latest segment to the client at the same time, so the client doesn't have to make a second round-trip.
 
+In LLHLS, when clients make a pre-empted playlist request, they also send a PUSH tag - this tells the server to, when returning the HLS playlist, _push_ the latest segment to the client at the same time, so the client doesn't have to make a second round-trip.
 
 ### Delta Playlist Updates
-In regular HLS, playlists are always returned in full - it returns segments that the client is already aware of. This makes sense for the client's *first* playlist request, but not for subsequent requests.
 
-In LLHLS, the full playlist is only returned for the client's *first* request. For subsequent requests, only the delta between the latest playlist and their previous request is sent back - this usually fits into a single packet (MTU) of data, which increases network forwarding efficiency.
+In regular HLS, playlists are always returned in full - it returns segments that the client is already aware of. This makes sense for the client's _first_ playlist request, but not for subsequent requests.
+
+In LLHLS, the full playlist is only returned for the client's _first_ request. For subsequent requests, only the delta between the latest playlist and their previous request is sent back - this usually fits into a single packet (MTU) of data, which increases network forwarding efficiency.
 
 ## Hop's LLHLS Implementation
+
 There's no doubt that LLHLS is the gold standard of today's livestreaming protocols; for Pipe, we implement the raw protocol and serve it across our edge network.
 
 However, thanks to our [Leap](/channels/internals/leap) protocol, which is a WebSocket that all frontend SDKs use to signal with Pipe (and Channels!), we're able to gain greater insight across all realtime viewers from a latency and network environment standpoint. Leap keeps a running heartbeat with clients, which we use to calculate round-trip-time (RTT) between our edge and the client.
@@ -67,23 +71,21 @@ On frontend clients, Leap sends periodic telemetry data about the users' current
 - Start sending older playlist data (adding latency up to the specified wcl_delay), and
 - Adjust the playback rate of other clients to eventually let them sync with the new active delay
 
-
-
 ## LLHLS Configuration Object
 
-| field | type | description |
-| ----- | ---- | ----------- |
-| wcl_delay | ?number | specify a "worst case" delay; this will optimize delivery for playout sync rather than latency; number must be between 5 and 20 seconds |
-| artificial_delay | ?number | artificially add latency from your live broadcast; this will take priority over wcl_delay, so only set one |
-| max_playout_bitrate_preset | ?string | limit your playout bitrate |
+| field                      | type    | description                                                                                                                             |
+| -------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| wcl_delay                  | ?number | specify a "worst case" delay; this will optimize delivery for playout sync rather than latency; number must be between 5 and 20 seconds |
+| artificial_delay           | ?number | artificially add latency from your live broadcast; this will take priority over wcl_delay, so only set one                              |
+| max_playout_bitrate_preset | ?string | limit your playout bitrate                                                                                                              |
 
 ### Playout Birate Presets (enum)
 
-| preset | video bitrate (kbps) | audio bitrate (kbps) | resolution |
-| ------ | ----- | ------ | ---- |
-| hls_400k | 275 | 128 | 280p |
-| hls_600k | 475 | 128 | 320p |
-| hls_1m | 850 | 128 | 480p |
-| hls_2m | 2700 | 192 | 720p |
-| hls_3m | 3800 | 192 | 1080p |
-| hls_4m | 5120 | 192 | 1440p |
+| preset   | video bitrate (kbps) | audio bitrate (kbps) | resolution |
+| -------- | -------------------- | -------------------- | ---------- |
+| hls_400k | 275                  | 128                  | 280p       |
+| hls_600k | 475                  | 128                  | 320p       |
+| hls_1m   | 850                  | 128                  | 480p       |
+| hls_2m   | 2700                 | 192                  | 720p       |
+| hls_3m   | 3800                 | 192                  | 1080p      |
+| hls_4m   | 5120                 | 192                  | 1440p      |

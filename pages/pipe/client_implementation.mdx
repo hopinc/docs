@@ -1,6 +1,6 @@
 ---
 title: Pipe Client Implementation
-description: Learn how to implement Pipe on your client application 
+description: Learn how to implement Pipe on your client application
 ---
 
 import {Code} from '../../components/code';
@@ -17,6 +17,7 @@ You can use our client (frontend) SDKs to easily implement Pipe into your produc
 ## Integrating Pipe with a React App
 
 ### Installing dependencies
+
 Start off by adding both of our frontend packages to your project
 
 ```sh
@@ -39,14 +40,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { hop } from "@onehop/client";
 
-import App from "./App";
+import App from './App';
 
 hop.init({
-	projectId: "project_xxx" // TODO: replace with your project ID
+projectId: "project_xxx" // TODO: replace with your project ID
 })
 
 ReactDOM.render(<App />, document.getElementById("root"));
-```
+
+````
 </Code>
 
 ### Integrating Pipe with React Hooks
@@ -83,18 +85,19 @@ export function Livestream() {
 		</>
 	)
 }
-```
+````
+
 </Code>
 
 As you can see, Pipe allows you to provide your own video element - Pipe just hooks into it and controls the video source and live scrubbing. This gives you flexibility to use any player wrapper or implement the video element however you want.
 
 `usePipeRoom` returns the following object:
 
-| field | type | description |
-| - | - | - |
-| live | boolean | whether the current room is live or offline |
-| canPlay | boolean | whether the room is able to play the stream |
-| susbcription | string | one of: available, unavailable, non_existent |
+| field        | type    | description                                  |
+| ------------ | ------- | -------------------------------------------- |
+| live         | boolean | whether the current room is live or offline  |
+| canPlay      | boolean | whether the room is able to play the stream  |
+| susbcription | string  | one of: available, unavailable, non_existent |
 
 ## Integrating Pipe with Vanilla JS
 
@@ -107,7 +110,7 @@ import { hop, pipe } from '@onehop/client';
 declare const node: HTMLVideoElement;
 
 const client = hop.init({
-    projectId: 'project_xxx',
+projectId: 'project_xxx',
 });
 
 const joinToken = 'join_token_xxx';
@@ -115,7 +118,7 @@ const joinToken = 'join_token_xxx';
 client.subscribeToPipeRoom(joinToken);
 
 client.getRoomStateMap().addListener(map => {
-    const room = map.get(joinToken);
+const room = map.get(joinToken);
 
     if (
         !room ||
@@ -127,6 +130,9 @@ client.getRoomStateMap().addListener(map => {
     }
 
     pipe.mount(node, room.connection.llhls.edge_endpoint);
+
 });
+
 ```
 </Code>
+```

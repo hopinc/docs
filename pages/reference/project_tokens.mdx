@@ -14,7 +14,7 @@ import {Bleed} from '../../components/bleed';
 
 Project tokens allow you to create permission-based API keys to use with the Hop API or SDKs.
 
-**Jump to**:  
+**Jump to**:
 [Creating Project Tokens](#creating-project-tokens)  
 [Using Project Tokens](#using-project-tokens)
 
@@ -23,13 +23,13 @@ Project tokens allow you to create permission-based API keys to use with the Hop
 You can create project tokens through the Hop console. Navigate to "Project Settings" on the left Sidebar, then "Project Tokens".<br/><br/>
 
 <Bleed>
-    <Image src={ptkDemo1}/>
+	<Image src={ptkDemo1} />
 </Bleed>
 
 Next, click on "Create Project Token". You will be presented with a modal:
 
 <Bleed>
-    <Image width={500} height={400} objectFit={"contain"} src={ptkDemo2} />
+	<Image width={500} height={400} objectFit={'contain'} src={ptkDemo2} />
 </Bleed>
 
 You can grant permissions to the token so it can only access certain aspects of your project, for extra security.
@@ -37,7 +37,7 @@ You can grant permissions to the token so it can only access certain aspects of 
 Once you've selected the necessary permissions, click **Create Token**. It will appear in your list of project tokens.<br/><br/>
 
 <Bleed>
-    <Image src={ptkDemo3} />
+	<Image src={ptkDemo3} />
 </Bleed>
 
 You can now use the clipboard button to copy this token, and you're off to the races!
@@ -54,9 +54,11 @@ import { Hop } from '@onehop/js';
 
 const projectToken = "ptk_xxx";
 const hop = new Hop(projectToken);
+
 ```
 </Code>
 
 ### API
 
 When making requests to `https://api.hop.io`, specify the project token under a HTTP header named `authorization`. That's all!
+```

@@ -6,6 +6,7 @@ description: Guide to using Hop's server-side JS SDK
 import {Code} from '../../../components/code';
 
 # Server-side JS SDK
+
 The Hop server-side JS SDK allows you to interact with all Hop products on the server side. Currently, the SDK is compatible with [Bun](https://bun.sh), [Node.js](https://nodejs.org) and [Deno](https://deno.land).
 
 ## Installing
@@ -27,7 +28,6 @@ Or in Deno, we recommend serving from jspm.dev. This will ensure dependencies ar
 import {Hop} from 'https://jspm.dev/@onehop/js@<version>';
 ```
 
-
 ## Creating an SDK Instance
 
 To use the SDK, you must first create a [project token](/reference/project_tokens). You can also use a PAT (personal access token), however this is not recommended as it has access to all of your projects.
@@ -42,8 +42,10 @@ export const hop = new Hop(myToken);
 
 // Example: Creating a project secret
 await hop.projects.secrets.create(
-	'RANDOM_NUMBER',
-	Math.floor(Math.random() * 100).toString(),
+'RANDOM_NUMBER',
+Math.floor(Math.random() \* 100).toString(),
 );
+
 ```
 </Code>
+```

@@ -18,6 +18,7 @@ You can update channel state from the server side SDK libraries or the API.
 - [Reference: Updating State](reference/updating_state)
 
 ### Usage with React
+
 If using React, you can use the `useReadChannelState` hook:
 
 <Code>
@@ -30,13 +31,16 @@ const Price = () => {
 	 */
 	const { state } = useReadChannelState("usd_prices");
 
-	if (!state) {
-		return <h1>Loading</h1>;
-	}
+    if (!state) {
+    	return <h1>Loading</h1>;
+    }
 
-	return <h1>BTC Price: {state.btc}</h1>;
+    return <h1>BTC Price: {state.btc}</h1>;
+
 }
+
 ```
 </Code>
 
 Read more on (TODO: Insert link to client docs)
+```

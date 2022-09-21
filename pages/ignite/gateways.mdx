@@ -17,34 +17,36 @@ Gateways allow you to expose your Hop deployments to your project or the interne
 
 There are 2 types of gateways: Internal or External. External gateways expose your deployment to the internet under a protocol of your choice, e.g. HTTP. Internal gateways expose your deployment to your project by giving you an IP address and customizable internal domain to use.
 
-Currently, both gateway types [round-robin](https://en.wikipedia.org/wiki/Load_balancing_(computing)#Round-robin_scheduling) requests between containers. In the future, there will be more fine grained controls for load balancing requests.
+Currently, both gateway types [round-robin](<https://en.wikipedia.org/wiki/Load_balancing_(computing)#Round-robin_scheduling>) requests between containers. In the future, there will be more fine grained controls for load balancing requests.
 
 ## Creating a Gateway
 
 It's easiest to create a gateway through our console, however keep in mind that all of Hop is built around a REST API, so you can automate this if you need to.
-<br/>
+
+<br />
 
 Navigate to the Gateways tab in an Ignite deployment:
 
 <Bleed>
-<Image src={gwDemo1} />
+	<Image src={gwDemo1} />
 </Bleed>
 
 Click on the "Create Gateway" button in the top right:
 
 <Bleed>
-<Image width={300} objectFit={"contain"} src={gwDemo2} />
+	<Image width={300} objectFit={'contain'} src={gwDemo2} />
 </Bleed>
 
 You will be presented with a modal:
 
 <Bleed>
-<Image width={500} height={500} objectFit={"contain"} src={gwDemo3} />
+	<Image width={500} height={500} objectFit={'contain'} src={gwDemo3} />
 </Bleed>
 
 Here, you can select the gateway type and target port.
 
 Gateway type can be either:
+
 - External, or
 - Internal
 
@@ -55,12 +57,19 @@ The target port should be the port your app listens on. The gateway will load ba
 Click **Create Gateway**.
 
 ## Adding Custom Domains
+
 By default, every external gateway gets assigned it's own `.hop.sh` domain, generated using the deployment name. You have the choice to update this subdomain to something not taken already, or you can add your own custom domains.
 
 Head over to the "Domains" page inside your gateway.
 
 <Bleed>
-<Image width={500} height={500} objectFit={"contain"} placeholder={"blur"} src={gwDemo4} />
+	<Image
+		width={500}
+		height={500}
+		objectFit={'contain'}
+		placeholder={'blur'}
+		src={gwDemo4}
+	/>
 </Bleed>
 
 Here, you can manage the `.hop.sh` domain as well as add your own custom ones. To add a custom domain, click on the **Attach Domain** button in the top right of the page.
@@ -68,8 +77,13 @@ Here, you can manage the `.hop.sh` domain as well as add your own custom ones. T
 You will be presented with this modal, where you should enter your desired domain.
 
 <Bleed>
-<Image width={500} height={300} objectFit={"contain"} placeholder={"blur"} src={gwDemo5} />
+	<Image
+		width={500}
+		height={300}
+		objectFit={'contain'}
+		placeholder={'blur'}
+		src={gwDemo5}
+	/>
 </Bleed>
 
 Click **Next**.
-

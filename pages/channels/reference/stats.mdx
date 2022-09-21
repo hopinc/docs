@@ -4,22 +4,26 @@ description: How to get Channel Stats
 ---
 
 import {Code} from '../../../components/code';
-import {Callout} from 'nextra-theme-docs'
+import {Callout} from 'nextra-theme-docs';
 
 # Channel Stats
 
 We provide functionality to get statistics about certain channels, such as how many users are currently connected to them.
 
-<Callout type="info">This reference assumes you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
+<Callout type="info">
+	This reference assumes you have already set up the [Hop server-side
+	SDK](/sdks/server/js).
+</Callout>
 
 ## Get Stats
 
 The following function will return the following type:
+
 ```ts
 type Stats = {
 	// How many clients are connected to this channel
 	online_count: number;
-}
+};
 ```
 
 <Code>
@@ -30,10 +34,13 @@ import { hop } from ".";
 const channelId = "channel_xxx"; // the channel we want to get statistics for
 
 const stats = await hop.channels.getStats(channelId);
-/*
- *	stats = {
- *		"online_count": 0	
- *	}
- */
+/\*
+
+- stats = {
+-     "online_count": 0
+- }
+  \*/
+
 ```
 </Code>
+```

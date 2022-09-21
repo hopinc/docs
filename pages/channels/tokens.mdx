@@ -4,11 +4,12 @@ description: About Hop Channel tokens
 ---
 
 import {Code} from '../../components/code';
-import {Callout} from 'nextra-theme-docs'
+import {Callout} from 'nextra-theme-docs';
 
 # Tokens
 
 Tokens can be used to:
+
 - restrict access to private Channels
 - forcefully subscribe users to Channels
 - authenticate and identify users connected to Channels
@@ -17,31 +18,35 @@ Tokens can be used to:
 Tokens can be generated using our API, then you can pass them down to users so they can authenticate with Channels. A common implementation is to generate a Token per user on your backend, then store it with the user object in your database. You can then pass their token down to the user (via your API, for example) and it can be used with our [Client-side SDK](#using-tokens-with-client-side-sdks) to authenticate with Channels.
 
 ## Do I need to use Tokens?
+
 Tokens are **not necessary** in every application. Some applications may choose to use Tokens for logged in users only, or even not at all - it really depends on your use case.
 
 If you're providing data that you want everyone to be able to see (without signing into your app, for example) then it probably makes the most sense to use an `unprotected` channel, which can be subscribed to using our frontend SDKs without using Tokens.
 
 A good use-case for Tokens would be if you're building something like a group messaging app, for example, and need to limit access to certain channels, such as private group chat channels, to specific users.
 
-## Server-side Examples 
+## Server-side Examples
 
-<Callout type="info">The examples below assume you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
+<Callout type="info">
+	The examples below assume you have already set up the [Hop server-side
+	SDK](/sdks/server/js).
+</Callout>
 
 ### Generating Tokens
+
 You can generate Tokens manually (using our Console) or via our SDKs & API.
 
 Here's an example of generating tokens using the server-side SDK:
+
 <Code>
-```js {4} title="create-token.js" showLineNumbers
-// Import your Hop SDK instance
-import { hop } from ".";
- 
-const { id } = await hop.channels.tokens.create();
-// id = leap_token_xxx - you can now store and pass this token to clients
-```
+	```js {4} title="create-token.js" showLineNumbers // Import your Hop SDK
+	instance import {hop} from "."; const {id} = await
+	hop.channels.tokens.create(); // id = leap_token_xxx - you can now store and
+	pass this token to clients ```
 </Code>
 
 ### Subscribing Tokens to Channels
+
 When you subscribe a Token to a channel, it will be subscribed to that channel in realtime and it will be made available to any live connections using that Token.
 
 In this example, let's assume that we have a private channel with the ID `game`.
@@ -55,7 +60,8 @@ const channelId = "game";
 const userToken = "leap_token_abc123";
 
 await hop.channels.subscribeToken(channelId, userToken);
-```
+
+````
 </Code>
 
 ### Sending Messages Directly to Tokens
@@ -64,7 +70,7 @@ await hop.channels.subscribeToken(channelId, userToken);
 ```js {7-14} title="send-message-to-token.js" showLineNumbers
 // Import your Hop SDK instance
 import { hop } from ".";
- 
+
 const userToken = "leap_token_abc123";
 const eventName = "NOTIFICATION"; // this can be anything you want
 
@@ -76,7 +82,8 @@ await hop.channels.publishDirectMessage(
 		description: "Tap to view more."
 	}
 );
-```
+````
+
 </Code>
 
 ### Determine if a Token is Online
@@ -92,7 +99,8 @@ const userToken = "leap_token_abc123";
 
 const isOnline = await hop.channels.tokens.isOnline(userToken);
 // isOnline: boolean
-```
+
+````
 </Code>
 
 ## Client-side Examples
@@ -104,7 +112,7 @@ Implementing Tokens into your frontend app is super easy. Just pass it into `hop
 <Code>
 ```js {5-8} title="index.js" showLineNumbers
 import { hop } from "@onehop/client";
- 
+
 // hop.init should be called as early as possible in your application's lifecycle
 // or, as soon as you have the leap token available
 const client = hop.init({
@@ -114,5 +122,6 @@ const client = hop.init({
 
 // Optionally do something with the client
 client.on('STATE_UPDATE', console.log);
-```
+````
+
 </Code>

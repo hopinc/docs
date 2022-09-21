@@ -3,7 +3,7 @@ title: Hop CLI
 description: Use the Hop CLI to manage your Hop projects
 ---
 
-import {Callout} from 'nextra-theme-docs'
+import {Callout} from 'nextra-theme-docs';
 import Image from 'next/future/image';
 import cliSwitchProject from '../assets/images/cli-switch.png';
 import {Bleed} from '../components/bleed';
@@ -15,11 +15,13 @@ The Hop CLI allows you to manage and control every aspect of your Hop projects. 
 ## Install
 
 ### Shell Script (Linux, macOS and FreeBSD)
+
 ```bash
 curl -fsSL https://hop.io/install-cli | sh
 ```
 
 ### Arch Linux
+
 Use your favourite AUR helper to install the package:
 
 ```bash
@@ -28,6 +30,7 @@ $ yay -S hop-cli
 ```
 
 ### Windows
+
 Install with the [Hop Windows Installer 64bit](https://download.hop.sh/windows/x86_64) or the [Hop Windows Installer 32bit](https://download.hop.sh/windows/i686)
 
 ## Login
@@ -39,7 +42,9 @@ hop auth login
 ```
 
 <Callout>
-If you want to login to the Hop CLI in a headless environment (e.g. without a browser), then you can provide a [Project Token](/reference/project_tokens) or a PAT using the `--token` flag.
+	If you want to login to the Hop CLI in a headless environment (e.g. without a
+	browser), then you can provide a [Project Token](/reference/project_tokens) or
+	a PAT using the `--token` flag.
 </Callout>
 
 ## Projects
@@ -55,8 +60,11 @@ hop projects switch
 ```
 
 This will bring up an interface that allows you to use arrow keys to select a project:
-<br/>
-<Bleed><Image src={cliSwitchProject} /></Bleed>
+
+<br />
+<Bleed>
+	<Image src={cliSwitchProject} />
+</Bleed>
 
 You can also use `hop projects switch <namespace>` to perform the switch directly.
 

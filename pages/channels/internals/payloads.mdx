@@ -82,12 +82,12 @@ direction: `both`
 | field | type      | description                                                                              |
 | ----- | --------- | ---------------------------------------------------------------------------------------- |
 | c     | ?string\* | channel id                                                                               |
-| u     | ?bool\**   | whether this is a unicast message (only sent to this connection, not the entire session) |
+| u     | ?bool\*\* | whether this is a unicast message (only sent to this connection, not the entire session) |
 | e     | string    | dispatch event code                                                                      |
 | d     | object    | event data                                                                               |
 
 \* the `INIT` payload will contain a `null` channel ID  
-\** Exists on received payloads only (not required for tx)
+\*\* Exists on received payloads only (not required for tx)
 
 ---
 
@@ -124,9 +124,9 @@ direction: `receive`
 
 A channel has become available to this Leap session.
 
-| field      | type    | description                                       |
-| ---------- | ------- | ------------------------------------------------- |
-| channel   | channel | the channel object |
+| field   | type    | description        |
+| ------- | ------- | ------------------ |
+| channel | channel | the channel object |
 
 ### `PIPE_ROOM_AVAILABLE`: Pipe Room Became Available
 
@@ -135,26 +135,27 @@ direction: `receive`
 
 A Pipe room has become available to this Leap session.
 
-| field      | type    | description                                       |
-| ---------- | ------- | ------------------------------------------------- |
-| pipe_room   | [pipe_room](/pipe/api_reference/room) | the pipe room object, with sensitive fields stripped |
-| connection | ?ConnectionMap* | map connection objects, documented below |
+| field      | type                                  | description                                          |
+| ---------- | ------------------------------------- | ---------------------------------------------------- |
+| pipe_room  | [pipe_room](/pipe/api_reference/room) | the pipe room object, with sensitive fields stripped |
+| connection | ?ConnectionMap\*                      | map connection objects, documented below             |
 
-*connection will be an empty map if stream is `offline` (pipe_room:state)
-
+\*connection will be an empty map if stream is `offline` (pipe_room:state)
 
 #### parent connection map type
+
 ```ts showLineNumbers
 interface ConnectionMap {
-	["webrtc" | "llhls"]: Connection | null;
+	['webrtc' | 'llhls']: Connection | null;
 }
 ```
 
 #### individual connection objects
+
 ```ts showLineNumbers
 interface Connection {
 	edge_endpoint: string;
-	type: "webrtc" | "llhls"
+	type: 'webrtc' | 'llhls';
 	serving_pop: string; // can safely be ignored in frontend implementations
 }
 ```
@@ -194,15 +195,14 @@ Developers can send transient messages to channels through the API or server-sid
 e: `MESSAGE`  
 direction: `receive`
 
-| field | type   | description          |
-| ----- | ------ | -------------------- |
-| e | string | user-provided event name |
-| d | object | user-provided event data |
+| field | type   | description              |
+| ----- | ------ | ------------------------ |
+| e     | string | user-provided event name |
+| d     | object | user-provided event data |
 
 ### `DIRECT_MESSAGE`: Direct Message Received
 
 Exactly the same as `MESSAGE`, however received when sending direct messages to tokens rather than channels.
-
 
 ## Channel Availability Errors
 

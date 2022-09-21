@@ -3,7 +3,6 @@ title: Ignite Overview
 description: Hop Ignite overview
 ---
 
-
 # Ignite
 
 Ignite is the pragmatic app deployment platform: deploy and scale any application worldwide.
@@ -22,10 +21,11 @@ Ignite provides you with a gradual approach to deploying your apps: it's easy to
       │               │
       ▼               ▼
  Containers       Gateways
- ```
+```
 
 ### Deployments
-Deployments are Ignite's primary logical concept. Similar to Kubernetes deployments; at their core, they're a definition for how a particular application and it's containers should run. Hop projects can have multiple deployments inside of them. 
+
+Deployments are Ignite's primary logical concept. Similar to Kubernetes deployments; at their core, they're a definition for how a particular application and it's containers should run. Hop projects can have multiple deployments inside of them.
 
 You should create a new deployment per application or image you want to run. For example: one deployment for your API, and a separate deployment for your database.
 
@@ -34,6 +34,7 @@ You should create a new deployment per application or image you want to run. For
 When creating a deployment, you can choose how you want your containers to scale. This can either be `manual` (you will be able to manually create and destroy each container) or `autoscaled` (Hop will automatically create and destroy containers based on their CPU load).
 
 ### Containers
+
 There can be multiple containers running inside one deployment. They run the image specified in the deployment config, and have individual logs.
 
 Containers also get their own internal IP address which you can connect to from any other containers or resources in your project.

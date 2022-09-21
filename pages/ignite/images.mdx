@@ -15,6 +15,7 @@ When creating a deployment, you can specify an image from a remote registry (suc
 Registry domain: `registry.hop.io`
 
 ## Pushing a Docker Image to the Hop Registry
+
 You can push any OCI-compliant image (such as a Docker image) to the Hop Registry. It's super easy, and will be available to use within your Hop project.
 
 ### Logging into the Registry
@@ -22,6 +23,7 @@ You can push any OCI-compliant image (such as a Docker image) to the Hop Registr
 You'll need Docker installed on your machine to do this.
 
 #### Obtain a Personal Access Token
+
 To log in to the registry, you'll have to use a Hop PAT. They can be created from [this page](https://console.hop.io/settings/pats) on the console (User Settings -> Personal Tokens).
 
 Click on the "Create Token" button in the top right, optionally give it a name such as "Hop Registry" and finally click **Create Token** within the modal.
@@ -29,7 +31,7 @@ Click on the "Create Token" button in the top right, optionally give it a name s
 It'll be created and will be shown in the PAT list:
 
 <Bleed>
-    <Image src={hopPat2}/>
+	<Image src={hopPat2} />
 </Bleed>
 
 > You can use the <span><img className="no-styles" style={{display: "inline", height: "1em", margin: "0px 3px"}} src="/icons/clipboard.png"/></span> button to copy the token to your clipboard
@@ -55,23 +57,25 @@ Login Succeeded
 ### Build & Push the Image
 
 When you build your Docker image, make sure you prefix the tag with `registry.hop.io/<PROJECT_NAMESPACE>`. For example, my project's namespace is `test`, so I'll run the following command to build my container:
+
 ```
 docker build -t registry.hop.io/test/my-cool-project:latest
 ```
 
 > If you don't know your project's namespace, you can find it [on this page](https://console.hop.io/project/settings)
 
-
 Once the image is built, I'll push my image to the Hop Registry with the following command:
+
 ```
 docker push registry.hop.io/test/my-cool-project
 ```
 
 ### View the Image
+
 Once your image is pushed, you can view it on the [Images tab](https://console.hop.io/ignite/images) of Ignite:
 
 <Bleed>
-    <Image src={hopImages1}/>
+	<Image src={hopImages1} />
 </Bleed>
 
 That's it! Your image is now ready to use on Hop. You can use the 3 dots in the top right of the image card to create a deployment directly from the image.

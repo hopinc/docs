@@ -1,17 +1,20 @@
 ---
-title: Creating Channels 
+title: Creating Channels
 description: How to create Channels on Hop
 ---
 
-import {Callout} from 'nextra-theme-docs'
+import {Callout} from 'nextra-theme-docs';
 import {Code} from '../../../components/code';
 
 # Creating Channels
 
 You can create channels manually (through the Hop Console/CLI) or through our SDKs and API.
 
-<Callout>Channels cannot be created by frontend clients. You must use our server-side SDKs or API to create them. This reference assumes you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
-
+<Callout>
+	Channels cannot be created by frontend clients. You must use our server-side
+	SDKs or API to create them. This reference assumes you have already set up the
+	[Hop server-side SDK](/sdks/server/js).
+</Callout>
 
 ## Creating a Channel
 
@@ -25,12 +28,13 @@ import { ChannelType } from '@onehop/js';
 
 // Create a channel with the ID "group_chat_1"
 const channel = await hop.channels.create(
-	// Channel Type; either: "unprotected", "public", or "private"
-	ChannelType.UNPROTECTED,
-	// Channel ID; leave this field as null if you want an auto-generated ID
-	"group_chat_1"
+// Channel Type; either: "unprotected", "public", or "private"
+ChannelType.UNPROTECTED,
+// Channel ID; leave this field as null if you want an auto-generated ID
+"group_chat_1"
 );
-```
+
+````
 </Code>
 
 ### Creating a Channel with some Initial State
@@ -52,7 +56,8 @@ const channel = await hop.channels.create(
 		}
 	}
 )
-```
+````
+
 </Code>
 
 ## Channel Types
@@ -62,4 +67,3 @@ const channel = await hop.channels.create(
 **Public** channels allow any leap token to join them, given they're authenticated under your project and know the channel ID.
 
 **Unprotected** channels allow anyone to join them, even if they're not authenticated with a token, given they know the channel ID
-

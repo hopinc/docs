@@ -4,13 +4,16 @@ description: How to update Hop Channel state
 ---
 
 import {Code} from '../../../components/code';
-import {Callout} from 'nextra-theme-docs'
+import {Callout} from 'nextra-theme-docs';
 
 # Updating Channel State
 
 [Channel State](/channels/state) acts as a realtime data store attached to every Channel. You can update this state on your backend and frontend clients can subscribe to Channel state objects in realtime.
 
-<Callout type="info">This reference assumes you have already set up the [Hop server-side SDK](/sdks/server/js).</Callout>
+<Callout type="info">
+	This reference assumes you have already set up the [Hop server-side
+	SDK](/sdks/server/js).
+</Callout>
 
 ## Updating State
 
@@ -23,21 +26,25 @@ import { hop } from ".";
 
 const channelId = "channel_xxx"; // the channel we want to update
 
-/**
- * Option 1: Rewrite the state.
- * The existing state is passed as the first arument to Channel#setState
- */
+/\*\*
+
+- Option 1: Rewrite the state.
+- The existing state is passed as the first arument to Channel#setState
+  \*/
 
 hop.channels.setState(channelId, s => ({ ...s, name: "My Channel" }));
 
-/**
- * Option 2: Update or add variables
- * This operation will only effect the variables you specify.
- * The rest of the state will remain unchanged
- */
+/\*\*
+
+- Option 2: Update or add variables
+- This operation will only effect the variables you specify.
+- The rest of the state will remain unchanged
+  \*/
 
 channel.patchState(channelId, { name: "My Channel" });
+
 ```
 </Code>
 
 Either of these operations will update the connected clients in realtime.
+```
