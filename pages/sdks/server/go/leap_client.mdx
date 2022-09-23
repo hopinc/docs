@@ -1,0 +1,202 @@
+---
+title: Go Leap Client
+description: Guide to using Hop's server side Go Leap client
+---
+
+import {Code} from '../../../../components/code';
+import {Callout} from 'nextra-theme-docs';
+
+# Server Side Go Leap Client
+
+The Hop server side Go Leap client allows you to interact with Leap from a server. This can be useful for things such as microservices where you wish to dispatch events to many nodes.
+
+## Reference
+
+Reference the Hop Go Leap client in your imports. This is a package inside of `hop-go`, our Go SDK:
+
+<Code>
+```go {2}
+import (
+	"github.com/hopinc/hop-go/leap"
+)
+```
+</Code>
+
+Once you run any Go command, the Go toolchain will fetch and install the SDK which this is a part of automatically.
+
+## Creating a Leap Instance
+
+To use the client, you need to create a token in your project. This is different to a regular project token and is Leap specific. This can be done either programatically or on the Leap dashboard. When you have this, you can make the Leap client:
+<Code>
+```go
+client := leap.NewClient(projectId, token, leap.NewFmtLogger())
+```
+</Code>
+
+The logger parameter is described in the [logging section](#logging). In production, you likely want to hook into the logger you are using on the remainder of your application.
+
+Note at this point we are not connected yet and we will want to hook our callbacks first.
+
+### Listening for Message Events
+
+To make a channel for message events we will want to use the `MessageEventChannel` method and then loop around the channel. It is very important with these channels that you listen for the ok signal since the channel might be closed if the client is not reconnecting after an error or if it was closed.
+
+When we use the channels, we will want to create it once and then use it. By nature of how it is implemented, if you need the events in 2 different places, you can call this function in multiple goroutines and get seperate channels that return the same content:
+
+<Code>
+```go {1}
+ch := client.MessageEventChannel()
+for {
+	ev, ok := <-ch
+	if !ok {
+		break
+	}
+	...
+}
+```
+</Code>
+
+<Callout emoji="⚠️">
+Note that these channels will leak if you make them for every usage of them since like all Go channels, they are designed to be closed on the sender side. If you need to send a channels contents to many disposable items, it is suggested that you go ahead and have one goroutine that does this dispatching.
+</Callout>
+
+For each channel, the API is designed so that the contents are returned in the order they are sent down the WebSocket. The `Data` field on the event contains a map with the JSON data in, the `EventName` field contains the event name, and `ChannelID` contains the channel ID or is blank if this is a direct message.
+
+### Listening for Channel Events
+
+To make a channel for events relating to channels we will want to use the `ChannelEventChannel` method and then loop around the channel. It is very important with these channels that you listen for the ok signal since the channel might be closed if the client is not reconnecting after an error or if it was closed.
+
+When we use the channels, we will want to create it once and then use it. By nature of how it is implemented, if you need the events in 2 different places, you can call this function in multiple goroutines and get seperate channels that return the same content:
+
+<Code>
+```go {1}
+ch := client.MessageEventChannel()
+for {
+	anyEvent, ok := <-ch
+	if !ok {
+		break
+	}
+	...
+}
+```
+</Code>
+
+<Callout emoji="⚠️">
+Note that these channels will leak if you make them for every usage of them since like all Go channels, they are designed to be closed on the sender side. If you need to send a channels contents to many disposable items, it is suggested that you go ahead and have one goroutine that does this dispatching.
+</Callout>
+
+Channel events are a bit special because they return a type that is based off `any`. The reason for this is that channel events can be a variety of different things. We will want to switch on the type:
+<Code>
+```go
+...
+switch event := anyEvent.(type) {
+case types.LeapUnavailableEvent:
+	// Defines when a channel is unavailable. Not dispatched if the result for the Subscribe function.
+case types.LeapAvailableEvent:
+	// Defines when a channel is available. Not dispatched if the result for the Subscribe function.
+case types.LeapChannelStateUpdateEvent:
+	// Dispatched when a channel is updated.
+case types.LeapPipeRoomAvailableEvent:
+	// Dispatched when a Pipe room is available.
+case types.LeapPipeRoomUpdateEvent:
+	// Dispatched when a Pipe room is updated.
+}
+...
+```
+</Code>
+
+It is suggested you do not panic for unknown events since this might make upgrading difficult if more events are added in the future.
+
+### Listening for State Updates
+
+Due to the asynchronous nature of this library and the fact the internet is a spooky place, we might need to asynchronously make some decisions to try and regain the connection. Whilst this happens in the background for the most part, it is likely desirable for you to track this within your application. This is especially useful for errors where the client will not backoff since you will want to kill instances of the connection.
+
+To do this, we will want to use the `AddStateUpdateListener` function. This takes a function which we can use to watch the state:
+
+<Code>
+```go
+client.AddStateUpdateListener(func(stateInfo types.LeapStateInfo) {
+	switch stateInfo.ConnectionState {
+	case types.LeapConnectionStateConnecting:
+		// This is dispatched after the backoff timeout is over or a initial connection.
+	case types.LeapConnectionStateAuthenticating:
+		// We have made the initial connection to the Leap websocket. Just sending authentication information now.
+	case types.LeapConnectionStateConnected:
+		// Success!
+	case types.LeapConnectionStateErrored:
+		// There was a error.
+		err := stateInfo.Err
+		if !stateInfo.WillReconnect {
+			// TODO: Handle that the client will not reconnect
+		}
+	}
+})
+```
+</Code>
+
+
+### Connecting
+To make the connection to Leap, we will want to call the `Connect` method:
+<Code>
+```go
+err := client.Connect()
+```
+</Code>
+If it is unable to connect immediately, no connection retry will be made and an error will be returned. This behaves this way because a backoff on initial boot might break any health checks that depend on this.
+
+<Callout emoji="⚠️">
+It is important to note that a fair amount of the authentication within the Leap SDK is done asynchronously. Therefore, whilst this will give you a good idea if anything with the initial upgrade/packet sending has failed, it will not give you more information than that. Therefore, it is important you [listen for state updates](#listening-for-state-updates).
+</Callout>
+
+## Logging
+
+Whilst the Leap client has a fmt logger built in that you can use, it is likely desired in production that you implement the logging interface yourself. The SDK tries to be very unopinionated here since different logging implementations will want to manage this differently.
+
+To implement our own logging client, we will go ahead and make a struct:
+
+<Code>
+```go
+type logger struct{}
+```
+</Code>
+
+From here, we will make all the functions attached to it for the logging levels:
+<Code>
+```go
+func (logger) Debug(message string, metadata map[string]any) {
+	// TODO
+}
+
+func (logger) Info(message string, metadata map[string]any) {
+	// TODO
+}
+
+func (logger) Warn(message string, metadata map[string]any) {
+	// TODO
+}
+```
+</Code>
+
+Error is a special function since it contains an additional `err` param. This param can be nil, so this is a consideration you should keep in mind when you are logging:
+<Code>
+```go
+func (logger) Error(message string, err error, metadata map[string]any) {
+	// TODO
+}
+```
+</Code>
+
+It is important to keep in mind that any error handling from your logger should be handled youself. This logger can then be passed through as the logger parameter when you make the log client.
+
+The fmt logger is not suggested for production, but is potentially useful in development. A instance of it can be made with `leap.NewFmtLogger()`. The logging level is controlled by the `HOP_LOGGING_LEVEL` environment variable. The default is `info`. The levels are `debug`, `info`, `warn`, and `error`. To prevent unexpected behaviour, if the logger is nil, a NopLogger will be made and nothing will be logged.
+
+## Subscribing to Channels
+
+If you wish to subscribe to a channel, you can use the `Subscribe` function. A waiter will be added to the dispatcher, and the result will be sent back to you as either a channel partial or an error:
+<Code>
+```go
+ch, err := client.Subscribe("channel_id_here")
+```
+</Code>
+
+This event will not be dispatched to the channel update handler as documented above.
