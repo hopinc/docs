@@ -39,10 +39,12 @@ You can generate Tokens manually (using our Console) or via our SDKs & API.
 Here's an example of generating tokens using the server-side SDK:
 
 <Code>
-	```js {4} title="create-token.js" showLineNumbers // Import your Hop SDK
-	instance import {hop} from "."; const {id} = await
-	hop.channels.tokens.create(); // id = leap_token_xxx - you can now store and
-	pass this token to clients ```
+```js {4} title="create-token.js" showLineNumbers
+// Import your Hop SDK instance
+import {hop} from ".";
+const { id } = await hop.channels.tokens.create(); // id = leap_token_xxx - you can now store and pass this token to clients
+```
+
 </Code>
 
 ### Subscribing Tokens to Channels
