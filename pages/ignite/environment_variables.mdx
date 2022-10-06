@@ -6,6 +6,7 @@ description: Manage your Hop Project's Environment Variables
 import Image from 'next/future/image';
 import hopEnv1 from '../../assets/images/hop-deploy-env-1.png';
 import {Bleed} from '../../components/bleed';
+import {Code} from '../../components/code';
 
 # Environment Variables
 
@@ -44,27 +45,32 @@ When creating a deployment, or when using the **Environment** tab in your deploy
 You can set environment variables on an API request: `${env.NAME}`
 
 Using [Hop's JS SDK](https://docs.hop.io/sdks/client/js):
-```tsx
-import {API} from '@onehop/js';
 
-await hop.ignite.deployments.create({
-			version: '2022-05-17',
-			name: 'redis',
-			image: {
-				name: 'redis',
-				auth: null,
-				gh_repo: null,
-			},
-			container_strategy: 'manual',
-			type: API.Ignite.RuntimeType.PERSISTENT,
-			env: {
-				TOKEN: 'VALUE',
-			},
-			resources: {
-				vcpu: 0.5,
-				ram: '128MB',
-				vgpu: [],
-			},
-			restart_policy: API.Ignite.RestartPolicy.ALWAYS,
-		});
+<Code>
+
+```tsx
+import {RestartPolicy, RuntimeType} from '@onehop/js';
+
+const deployment = await hop.ignite.deployments.create({
+	version: '2022-05-17',
+	name: 'redis',
+	image: {
+		name: 'redis',
+		auth: null,
+		gh_repo: null,
+	},
+	container_strategy: 'manual',
+	type: RuntimeType.PERSISTENT,
+	env: {
+		TOKEN: 'VALUE',
+	},
+	resources: {
+        vcpu: 0.5,
+        ram: '128MB',
+        vgpu: [],
+    },
+	restart_policy: RestartPolicy.ALWAYS,
+});
 ```
+
+</Code>
