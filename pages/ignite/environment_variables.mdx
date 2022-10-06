@@ -42,3 +42,29 @@ When creating a deployment, or when using the **Environment** tab in your deploy
 #### Usage with API
 
 You can set environment variables on an API request: `${env.NAME}`
+
+Using [Hop's JS SDK](https://docs.hop.io/sdks/client/js):
+```tsx
+import {API} from '@onehop/js';
+
+await hop.ignite.deployments.create({
+			version: '2022-05-17',
+			name: 'redis',
+			image: {
+				name: 'redis',
+				auth: null,
+				gh_repo: null,
+			},
+			container_strategy: 'manual',
+			type: API.Ignite.RuntimeType.PERSISTENT,
+			env: {
+				TOKEN: 'VALUE',
+			},
+			resources: {
+				vcpu: 0.5,
+				ram: '128MB',
+				vgpu: [],
+			},
+			restart_policy: API.Ignite.RestartPolicy.ALWAYS,
+		});
+```
