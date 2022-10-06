@@ -9,9 +9,11 @@ import {Bleed} from '../../components/bleed';
 
 # Environment Variables
 
-Environment variables act as a variable set outside your Ignite deployment on Hop. Environment variables can be referenced in Ignite deployment configs and will automatically be populated when a container starts.
+Environment variables act as a variable set outside your Ignite deployment on Hop. Environment variables can be referenced in Ignite deployment configs and will automatically be populated when a container starts. 
 
 Environment variables can be **created** on deployment, **deleted** with the console, and **viewed** with the CLI, console, and API.
+
+Environment variables can be any string, in addition to a secret. For example, a Secret can be used as an environment variable.
 
 ## Environment Variable Names
 
@@ -30,18 +32,12 @@ When creating a deployment or individual container, you can set environment vari
 When using `hop deploy`, you can specify environment variables with `-e` or `--env`, so: for example, if I wanted to reference an environment variable named `TOKEN` in my deployment, I'd execute the following command:
 
 ```bash
-hop deploy --env TOKEN="${env.TOKEN}"
+hop deploy --env TOKEN=VALUE
 ```
 
 #### Usage with Console
 
-When creating a deployment, or when using the **Environment** tab in your deployment, you can set environment variable values:
-
-<br />
-
-<!-- <Bleed>
-	<Image src={hopEnv1} />
-</Bleed> -->
+When creating a deployment, or when using the **Environment** tab in your deployment, you can set environment variable values.
 
 #### Usage with API
 
