@@ -1,6 +1,7 @@
 {
 	"overview": "Overview",
 	"deploying": "Deploying",
+	"builds": "Builds",
 	"gateways": "Gateways",
 	"health_checks": "Health Checks",
 	"project_secrets": "Project Secrets"

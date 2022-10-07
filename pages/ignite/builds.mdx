@@ -1,0 +1,35 @@
+---
+title: Builds
+description: Build your container images with Hop Ignite
+---
+
+import {Callout} from 'nextra-theme-docs';
+
+# Builds
+
+<Callout type="info">
+	If you're looking on how to push your own pre-built images to Hop, see
+	[Images](./images). This page covers Hop's built-in build system.
+</Callout>
+
+Image builds are automatically triggered when using `hop deploy` or when pushing to the main branch of a git-synced Ignite deployment.
+
+You can view current & previous builds & their logs in the **Build Logs** tab in an Ignite deployment. If triggered by a `git push`, it'll contain information about the commit & author.
+
+## Rollouts
+
+Once builds are complete, Ignite will automatically _roll out_ your deployment. Rollouts duplicate your current running containers & their configurations, but apply the new build image to them instead, then delete the old containers once traffic has migrated over to the new ones.
+
+**Rollouts are smart:** they make sure that the new containers are running without error before cutting traffic over.
+
+Rollouts can also be triggered by updating the environment variables on an Ignite deployment.
+
+### The Rollout Flow
+
+Once a rollout is triggered, the following happens:
+
+1. **One new container is started** using the newly built image.
+2. Ignite waits for the container to start into the `RUNNING` state without error. If an error occurs during startup, the rollout is considered failed and old containers won't be deleted.
+3. If a [Health Check](./health_check) is configured on the deployment, Ignite will wait for it to succeed before continuing. If it fails after the **Max Attempts**, the rollout fails.
+4. If the above checks pass without issue, Ignite will start the remaining containers (to mirror the same amount of containers that are running the old build).
+5. Once traffic migrates off of the old containers, they will be deleted. The rollout has succeeded.
