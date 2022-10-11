@@ -22,6 +22,7 @@ You can update channel state from the server side SDK libraries or the API.
 If using React, you can use the `useReadChannelState` hook:
 
 <Code>
+
 ```jsx {7} title="Price.jsx" showLineNumbers
 const Price = () => {
 	/**
@@ -29,18 +30,14 @@ const Price = () => {
 	 * this will attempt to subscribe the client to the specified channel
 	 * if they are not already subscribed (you can disable this)
 	 */
-	const { state } = useReadChannelState("usd_prices");
+	const {state} = useReadChannelState('usd_prices');
 
-    if (!state) {
-    	return <h1>Loading</h1>;
-    }
+	if (!state) {
+		return <h1>Loading</h1>;
+	}
 
-    return <h1>BTC Price: {state.btc}</h1>;
-
-}
-
+	return <h1>BTC Price: {state.btc}</h1>;
+};
 ```
+
 </Code>
-
-Read more on (TODO: Insert link to client docs)
-```
