@@ -40,8 +40,5 @@ export default withNextra({
 
 	experimental: {
 		newNextLinkBehavior: true,
-		images: {
-			allowFutureImage: true,
-		},
 	},
 });
