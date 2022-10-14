@@ -25,6 +25,11 @@ export default withNextra({
 			destination: '/',
 			statusCode: 301,
 		},
+		{
+			source: '/cli',
+			destination: '/cli/overview',
+			statusCode: 301,
+		},
 	],
 
 	webpack(config) {
