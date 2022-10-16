@@ -1,7 +1,6 @@
 // @ts-check
 
 import urlcat from 'urlcat';
-import React from 'react';
 import {HopLogo} from './assets/BrandVectors';
 import {DocsThemeConfig, useConfig} from 'nextra-theme-docs';
 
@@ -21,6 +20,22 @@ const config: DocsThemeConfig = {
 
 	nextThemes: {
 		defaultTheme: 'dark',
+	},
+
+	components: {
+		h1: (props: JSX.IntrinsicElements['h1']) => (
+			<h1
+				className="tracking-tight mt-2 text-4xl font-serif font-black"
+				{...props}
+			/>
+		),
+
+		h2: (props: JSX.IntrinsicElements['h1']) => (
+			<h2
+				className="font-semibold font-serif tracking-tight mt-10 text-3xl border-b pb-1 dark:border-primary-100/10 contrast-more:border-neutral-400 contrast-more:dark:border-neutral-400"
+				{...props}
+			/>
+		),
 	},
 
 	toc: {
