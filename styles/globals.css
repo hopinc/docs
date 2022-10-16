@@ -69,3 +69,11 @@ iframe {
 img:not(.no-styles) {
 	@apply dark:border dark:border-neutral-700 my-4 shadow-lg shadow-black/20;
 }
+
+h2, h3, h4, h5, h6 {
+	@apply text-gray-100;
+}
+
+p {
+	@apply text-gray-200;
+}

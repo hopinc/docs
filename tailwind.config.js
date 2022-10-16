@@ -68,6 +68,9 @@ module.exports = {
 			colors: {
 				dark: '#111111',
 			},
+			fontFamily: {
+				serif: 'Quincy',
+			},
 		},
 	},
 	darkMode: 'class',
