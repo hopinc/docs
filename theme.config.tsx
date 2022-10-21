@@ -113,6 +113,7 @@ const config: DocsThemeConfig = {
 				<meta name="description" content="Hop: the realtime engine" />
 				<meta name="og:title" content="Hop: the realtime engine" />{' '}
 				<meta name="og:image" content={ogImage} />
+				<title>{title} — Hop</title>
 				<style
 					dangerouslySetInnerHTML={{
 						__html: `
