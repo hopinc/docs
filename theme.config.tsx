@@ -53,7 +53,6 @@ const config: DocsThemeConfig = {
 	},
 
 	docsRepositoryBase: 'https://github.com/hopinc/docs/tree/master',
-	titleSuffix: ' — Hop Documentation',
 
 	logo: function Logo() {
 		return <HopLogo width={50} />;

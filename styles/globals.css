@@ -70,10 +70,14 @@ img:not(.no-styles) {
 	@apply dark:border dark:border-neutral-700 my-4 shadow-lg shadow-black/20;
 }
 
-h2, h3, h4, h5, h6 {
-	@apply text-gray-100;
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply text-neutral-900 dark:text-neutral-100;
 }
 
 p {
-	@apply text-gray-200;
+	@apply text-neutral-800 dark:text-neutral-200;
 }
