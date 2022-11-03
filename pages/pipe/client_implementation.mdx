@@ -43,8 +43,8 @@ import { hop } from "@onehop/client";
 import App from './App';
 
 hop.init({
-projectId: "project_xxx" // TODO: replace with your project ID
-})
+	projectId: "project_xxx" // TODO: replace with your project ID
+});
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
@@ -60,7 +60,9 @@ The `@onehop/react` package exposes a collection of React hooks which allow you 
 `usePipeRoom` takes in an object as it's first and only argument, consisting of `joinToken` and `ref`, where `ref` is a [React reference](https://reactjs.org/refs-and-the-dom.html) to a video element.
 
 Let's jump into an example bare-minimum component:
+
 <Code>
+
 ```jsx showLineNumbers
 import { useRef } from "react";
 import { usePipeRoom } from "@onehop/react";
@@ -72,7 +74,7 @@ export function Livestream() {
 
 	const room = usePipeRoom({
 		joinToken,
-		ref: videoRef
+		ref: videoRef,
 	});
 
 	return (
@@ -85,7 +87,7 @@ export function Livestream() {
 		</>
 	)
 }
-````
+```
 
 </Code>
 
@@ -102,6 +104,7 @@ As you can see, Pipe allows you to provide your own video element - Pipe just ho
 ## Integrating Pipe with Vanilla JS
 
 <Code>
+
 ```ts showLineNumbers
 import { hop, pipe } from '@onehop/client';
 
@@ -118,7 +121,7 @@ const joinToken = 'join_token_xxx';
 client.subscribeToPipeRoom(joinToken);
 
 client.getRoomStateMap().addListener(map => {
-const room = map.get(joinToken);
+    const room = map.get(joinToken);
 
     if (
         !room ||
@@ -130,9 +133,8 @@ const room = map.get(joinToken);
     }
 
     pipe.mount(node, room.connection.llhls.edge_endpoint);
-
 });
 
 ```
+
 </Code>
-```
