@@ -1,0 +1,54 @@
+---
+title: "Creating a Pipe Room"
+sidebarTitle: "Room"
+description:
+  "Creating a Pipe Room through the Hop API. Rooms are Pipe's abstraction of
+  streams."
+---
+
+You should create a new Room for each new live broadcast. If marked with
+`ephemeral`, Rooms will automatically delete after 10 minutes of no input
+stream. You can also delete them programatically through our API or SDK.
+
+## Room Object
+
+The full Room object returned by our API
+
+| field              | type                                                              | description                                              |
+| ------------------ | ----------------------------------------------------------------- | -------------------------------------------------------- |
+| id                 | string                                                            | hop-generated room ID                                    |
+| name               | ?string                                                           | optional room name                                       |
+| ephemeral          | boolean                                                           | is this room temporary?                                  |
+| ingest_protocol    | string                                                            | one of: rtp, rtmp, srtp                                  |
+| delivery_protocols | string[]                                                          | an array of supported delivery protocols (llhls, webrtc) |
+| join_token         | string                                                            | room join token                                          |
+| state              | string                                                            | "live" or "offline"                                      |
+| ingest_endpoint    | string                                                            | room ingest endpoint (stream to this!)                   |
+| ingest_region      | [region](/reference/regions) (string)                             | the region where the primary ingest is hosted            |
+| llhls_config       | ?[llhls_config](/pipe/protocols/llhls#llhls-configuration-object) | custom LLHLS configuration options                       |
+| webrtc_config      | // TODO: @alii ping me once finished with rtc config in sdk       | custom WebRTC configuration options                      |
+
+## Creating a Room
+
+You can create a Pipe Room through our server-side
+[SDK](https://www.npmjs.com/package/@onehop/client) or our REST API.
+
+```ts
+const room = await hop.pipe.rooms.create({
+  name: "My Stream", // optional room name
+  ingestProtocol: "rtmp", // rtmp or rtp
+  deliveryProtocols: ["llhls"], // llhls and webrtc are permitted,
+  ephemeral: true, // set your rooms to ephemeral if they're single-use
+});
+```
+
+## Deleting a Room
+
+Please note that this will cause the ingest server to terminate your connection.
+This will also trigger the "CLOSED_REMOTELY" connection state on the frontend
+clients.
+
+```ts
+// delete by ID const id = "pipe_room_xxx"; const room =
+await hop.pipe.rooms.delete(id);
+```

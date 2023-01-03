@@ -1,0 +1,50 @@
+---
+title: "Sending Messages to Hop Channels"
+sidebarTitle: "Sending Messages"
+description:
+  "Along with Channel State, the other primary function of Channels is the
+  ability to send messages to Channel subscribers in realtime."
+---
+
+Messages can be sent to channels from your backend (e.g. an API, a serverless
+function, etc) and be received by Channel subscribers (on your frontend app, for
+example).
+
+## Message Structure
+
+When sending a message to a channel, you must specify 2 fields:
+
+- an **event name**, and
+- message data
+
+The event name can be an arbritrary string of your choosing - for example, if we
+were making a group chat application and wanted to send a channel message when
+someone sends a chat message, we might call that event `MESSAGE_CREATE`.
+
+The data field can be any object. In the case of our group chat example, we
+might include the message content and author in the data object.
+
+<Info>
+  This reference assumes you have already set up the [Hop server-side
+  SDK](/sdks/server/js).
+</Info>
+
+## Publish a Message to a Channel
+
+```js sending-messages.js
+// Import your Hop SDK instance
+import { hop } from ".";
+
+const channelId = "channel_xxx"; // the channel we want to send a message to
+
+await hop.channels.publishMessage(
+  channelId,
+  // event name of your choosing
+  "MESSAGE_CREATE",
+  // event data, this can be any object you want it to be
+  {
+    content: "Hello Hop Channels!",
+    author_name: "Vanilla",
+  }
+);
+```

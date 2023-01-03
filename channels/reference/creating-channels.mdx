@@ -1,0 +1,65 @@
+---
+title: "Creating Channels"
+sidebarTtle: "Creating"
+description:
+  "You can create channels manually (through the Hop Console/CLI) or through our
+  SDKs and API."
+---
+
+<Note>
+  Channels cannot be created by frontend clients. You must use our server-side
+  SDKs or API to create them. This reference assumes you have already set up the
+  [Hop server-side SDK](/sdks/server/js).
+</Note>
+
+## Creating a Channel
+
+```js create-channel.js
+// Import your Hop SDK instance
+import { hop } from ".";
+
+// Import the ChannelType enum from Hop sdk
+import { ChannelType } from "@onehop/js";
+
+// Create a channel with the ID "group_chat_1"
+const channel = await hop.channels.create(
+  // Channel Type; either: "unprotected", "public", or "private"
+  ChannelType.UNPROTECTED,
+  // Channel ID; leave this field as null if you want an auto-generated ID
+  "group_chat_1"
+);
+```
+
+### Creating a Channel with some Initial State
+
+```js create-channel-with-state.js
+import { hop } from ".";
+import { ChannelType } from "@onehop/js";
+
+// Create a channel with the ID "group_chat_2" and some initial state
+const channel = await hop.channels.create(
+  ChannelType.UNPROTECTED,
+  "group_chat_2",
+  // Creation Options
+  {
+    // Initial Channel state object
+    state: {
+      name: "Group Chat",
+      my_custom_value: 123,
+    },
+  }
+);
+```
+
+## Channel Types
+
+**Private** channels allow you to individually grant tokens access to channels,
+either by calling a method from the server-side SDK or by responding to a
+webhook call when tokens try to subscribe, which you can set up on the Channels
+console page
+
+**Public** channels allow any leap token to join them, given they're
+authenticated under your project and know the channel ID.
+
+**Unprotected** channels allow anyone to join them, even if they're not
+authenticated with a token, given they know the channel ID

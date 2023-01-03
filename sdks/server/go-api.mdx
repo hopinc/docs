@@ -1,0 +1,71 @@
+---
+title: "Server Side Go API Client"
+description:
+  "The Hop server side Go API client allows you to interact with all Hop
+  products on the server side."
+---
+
+## Usage
+
+Reference the Hop Go API client in your imports:
+
+```go GO
+import (
+	hop "go.hop.io/sdk"
+)
+```
+
+Once you run any Go command, the Go toolchain will fetch and install the SDK
+automatically.
+
+## Creating a Client Instance
+
+To use the SDK, you must first create a
+[project token](/reference/project-tokens). You can also use a PAT (personal
+access token), however this is not recommended as it has access to all of your
+projects.
+
+```go GO
+import (
+	"context"
+	"fmt"
+
+ hop "go.hop.io/sdk"
+)
+
+const HopToken = "ptk_xxx"
+
+func main() {
+	c, err := hop.NewClient(HopToken)
+	if err != nil {
+		// Handle your error here!
+		panic(err)
+	}
+
+ // Example: getting a channel by ID
+ ch, err := c.Channels.Get(context.Background(), "test")
+ if err != nil {
+ 	// Handle your error here!
+ 	panic(err)
+ }
+}
+```
+
+## Specifying the Project ID
+
+If you do not use a project token, you must also specify the project ID. You can
+do this in 1 of 2 ways:
+
+1. You can set this at a client level:
+
+```go GO
+c.AddClientOptions(hop.WithProjectID("project_id"))
+```
+
+2. You can set this at a request level:
+
+```go GO
+ch, err := c.Channels.Get(context.Background(), "test", hop.WithProjectID("project_id"))
+```
+
+hop-go will prefer options which are set at a functional level.

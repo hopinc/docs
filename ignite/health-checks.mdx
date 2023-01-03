@@ -1,0 +1,49 @@
+---
+title: "Health Checks"
+---
+
+Health Checks can be set up per Ignite deployment to make sure that:
+
+- Traffic is only directed to containers that pass the check, and
+- New builds smoothly roll out without downtime
+
+This is done by querying the containers periodically to make sure they're alive
+and healthy. You can choose how to respond to a health check. For example, you
+may only want to respond successfully to a health check once your program has
+connected to its database.
+
+## Options
+
+### Protocol-Specific Options
+
+| Option | Example         | Description                                                              |
+| ------ | --------------- | ------------------------------------------------------------------------ |
+| Path   | `/health_check` | the HTTP path that should be queried to check if your service is healthy |
+| Port   | `8080`          | the port that your service is running on                                 |
+
+### Advanced Options
+
+| Option        | Default    | Description                                                                                                                                                          |
+| ------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Initial Delay | 5          | How long Ignite should wait before sending the first health check                                                                                                    |
+| Interval      | 60         | How long Ignite should wait (in seconds) between sending health checks                                                                                               |
+| Timeout       | 10000      | The maximum time, in milliseconds, that should be tolerated for receiving a response to the health check. If exceeded, the container will be determined as unhealthy |
+| Maximum       | Failures 3 | How many times the health check needs to fail for a container to be determined unhealthy                                                                             |
+
+## Creating Health Checks
+
+Currently, Ignite only supports HTTP(s)-based health checks. When setting up a
+health check, you can choose the HTTP path to be queried to make sure the
+container is alive.
+
+To respond successfully to a health check, you must respond on the path
+specified when creating the health check with a `HTTP 2xx` response code, such
+as `200` or `204`.
+
+### Creating via Console
+
+1. Navigate to an Ignite deployment
+2. Select **Health Check** from the sidebar
+3. Click **Create Check** in the top right
+
+![](/images/health-check.png)
