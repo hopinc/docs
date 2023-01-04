@@ -1,0 +1,128 @@
+{
+  "name": "Hop.io",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#8F64F2",
+    "light": "#BFA6F9",
+    "dark": "#6036BF",
+    "ultraLight": "#EEE7FF",
+    "ultraDark": "#431B9F"
+  },
+  "topbarCtaButton": {
+    "name": "Console",
+    "url": "https://console.hop.io/auth"
+  },
+  "anchors": [
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/hopinc"
+    },
+    {
+      "name": "Community",
+      "icon": "discord",
+      "url": "https://discord.com/invite/hop"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Welcome",
+      "pages": ["introduction"]
+    },
+    {
+      "group": "CLI",
+      "pages": ["cli/overview", "cli/completions", "cli/ci"]
+    },
+    {
+      "group": "SDKs",
+      "pages": [
+        "sdks/overview",
+        {
+          "group": "Client Side",
+          "pages": ["sdks/client/js", "sdks/client/react"]
+        },
+        {
+          "group": "Server Side",
+          "pages": [
+            "sdks/server/js",
+            {
+              "group": "Go",
+              "pages": ["sdks/server/go-api", "sdks/server/go-leap"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Ignite",
+      "pages": [
+        "ignite/overview",
+        "ignite/deploying",
+        "ignite/gateways",
+        "ignite/health-checks",
+        "ignite/project-secrets",
+        "ignite/images"
+      ]
+    },
+    {
+      "group": "Channels",
+      "pages": [
+        "channels/overview",
+        "channels/channel-state",
+        "channels/tokens",
+        {
+          "group": "Reference",
+          "pages": [
+            "channels/reference/react",
+            "channels/reference/creating-channels",
+            "channels/reference/updating-channel-state",
+            "channels/reference/sending-messages",
+            "channels/reference/channel-stats"
+          ]
+        },
+        {
+          "group": "Internals",
+          "pages": [
+            "channels/internals/leap",
+            "channels/internals/payloads",
+            "channels/internals/atlas-protocol"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Pipe",
+      "pages": [
+        "pipe/overview",
+        "pipe/getting-started",
+        "pipe/client-implementation",
+        "pipe/streaming-to-pipe",
+        {
+          "group": "Protocols",
+          "pages": ["pipe/llhls"]
+        },
+        {
+          "group": "API Reference",
+          "pages": ["pipe/room"]
+        }
+      ]
+    },
+    {
+      "group": "Reference",
+      "pages": [
+        "reference/project-tokens",
+        "reference/regions",
+        "reference/rest-api"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/joinhop",
+    "github": "https://github.com/hopinc",
+    "discord": "https://discord.com/invite/hop"
+  }
+}

@@ -1,0 +1,71 @@
+---
+title: "Streaming to Pipe"
+description:
+  "Pipe supports multiple ingest protocols for sending streams to Pipe: RTMP and
+  RTP (MPEG-TS). You can set the ingest protocol to use when creating a Pipe
+  room."
+---
+
+For stability, we recommend sticking with RTMP.
+
+## RTMP
+
+When creating a Pipe room using the RTMP protocol, you'll get a response back
+from our API with something similar to the following:
+
+```json
+{
+  "id": "pipe_room_MzI1MjkzODg0MjgzNTM1NDg",
+  "name": "My pipe room",
+  "ingest_protocol": "rtmp",
+  "delivery_protocols": ["llhls"],
+  "join_token": "prjt_c19hN2MyNTExMWM4NWU4NjlhOGY0NWY0NjJlYTUzYjNlNV8zMjMyNTcwOTgxODk1Mzc3NA",
+  "ingest_region": "us-east-1",
+  "created_at": "2022-07-15T04:50:49.803Z",
+  "ingest_endpoint": "rtmp://cinnamon-iad1-prd.origin.hopvideo.net/v.vanilla/psk_c18yZTU3NDk2ODAxOTMwMTVhZDA2YzE5OGVkMDBmYTQ3Nl8zMjMyNTcwOTgzMTUzNjY4OA",
+  "state": "offline"
+}
+```
+
+The `ingest_endpoint` is what we'll focus on here.
+
+```
+rtmp://cinnamon-iad1-prd.origin.hopvideo.net/v.vanilla/psk_c18yZTU3NDk2ODAxOTMwMTVhZDA2YzE5OGVkMDBmYTQ3Nl8zMjMyNTcwOTgzMTUzNjY4OA
+```
+
+The RTMP ingest endpoint can be split up into logical partitions:
+
+```
+<protocol>://<origin_hostname>/<module>/<stream_key>
+```
+
+### Streaming with FFmpeg
+
+#### Streaming an X Window
+
+A common use case for Pipe is streaming an X window from an Ignite container.
+For this, we recommend the following FFmpeg command:
+
+```bash
+ffmpeg -f x11grab -i :0.0 -b:a 96k -c:v libx264 -profile:v baseline -pix_fmt yuv420p -tune zerolatency -profile:v baseline -preset veryfast -acodec aac -b:a 192k -ar 44100 -pes_payload_size 0 -f flv <INGEST_ENDPOINT>
+```
+
+(where `<INGEST_ENDPOINT>` is the endpoint you received from the room creation
+request)
+
+This will start streaming the X window to Pipe at it's local resolution.
+
+#### Streaming a Video file
+
+```bash
+ffmpeg -re -stream_loop -1 -i <FILE_NAME> -b:a 96k -c:v libx264 -profile:v baseline -pix_fmt yuv420p -tune zerolatency -profile:v baseline -preset veryfast -acodec aac -b:a 192k -ar 44100 -pes_payload_size 0 -f flv <INGEST_ENDPOINT>
+```
+
+(where `<FILE_NAME>` is the file name and `<INGEST_ENDPOINT>` is the endpoint
+you received from the room creation request)
+
+#### Verifying Stream Status
+
+You can verify that you're streaming from the Pipe page on the Hop Console:
+
+![](/images/pipe-console-live-1.webp)

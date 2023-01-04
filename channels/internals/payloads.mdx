@@ -1,0 +1,249 @@
+---
+title: "Payloads"
+description: "Payloads sent to & from Leap Edge"
+---
+
+We split payloads up into 2 categories: **Control** and **Service**. All
+payloads (from and to Leap Edge) must follow the Leap Edge encapsulating payload
+type:
+
+### Encapsulating Payload Type
+
+| field | type    | description  |
+| ----- | ------- | ------------ |
+| op    | integer | opcode       |
+| d     | object  | message data |
+
+**The payloads documented below are defining what goes inside the `d` (data)
+field.**
+
+## Control
+
+Payloads related to setting up & maintaining a connection with Leap Edge.
+
+### Opcode 1: Hello
+
+opcode: `1`  
+direction: `rx`
+
+Payload received from Leap Edge when connecting. This payload contains
+information needed for the client to set up and maintain a connection to Leap
+Edge.
+
+| field              | type    | description                                                                    |
+| ------------------ | ------- | ------------------------------------------------------------------------------ |
+| heartbeat_interval | integer | the interval in milliseconds which the client should send heartbeat packets at |
+
+### Opcode 2: Identify
+
+opcode: `2`  
+direction: `tx`
+
+Client should send this after receiving Opcode 1: Hello. This should contain
+identifying information about the client, including the LE token.
+
+| field      | type   | description                |
+| ---------- | ------ | -------------------------- |
+| project_id | string | the project id             |
+| token      | string | the `leap_token_xxx` token |
+
+### Opcode 3: Heartbeat
+
+opcode: `3`  
+direction: `both`
+
+Client should send this every x milliseconds, a repeating interval defined in
+Opcode 1: Hello (heartbeat_interval). The repeating payload does not need a data
+field, however, the socket may send this opcode with a `tag` field to the
+client - if this is received, the client needs to immediately send this opcode
+back with the `tag` field in the data object.
+
+| field | type    | description       |
+| ----- | ------- | ----------------- |
+| tag   | ?string | the heartbeat tag |
+
+### Opcode 4: Heartbeat Ack
+
+opcode: `4`  
+direction: `rx`
+
+Client will receive this opcode when any heartbeat is sent. If client was
+responding to a tagged heartbeat, then the `tag` field and an extra `latency`
+field will be included in the heartbeat acknowledgement.
+
+| field   | type     | description           |
+| ------- | -------- | --------------------- |
+| tag     | ?string  | the heartbeat tag     |
+| latency | ?integer | total round trip time |
+
+## Service
+
+Payloads for interacting with Hop realtime services through Leap Edge, through
+channels. All channel payloads are sent and received over Opcode 0: Dispatch.
+Other than Op 0, the events documented in this section are describing the
+contents of the Dispatch message.
+
+**Important:** All Hop services expose a default set of interface events which
+relate to the subscription and control of the service. The service will also
+implement its own events to transmit actual service data, and these events do
+not conflict with the default interface events documented below. You will need
+to check the documentation of the service for a full list of events dispatched
+from that specific service.
+
+### Opcode 0: Dispatch
+
+All interaction, to and from Hop Channels are transmitted through this Opcode.
+
+opcode: `0`  
+direction: `both`
+
+| field | type      | description                                                                              |
+| ----- | --------- | ---------------------------------------------------------------------------------------- |
+| c     | ?string\* | channel id                                                                               |
+| u     | ?bool\*\* | whether this is a unicast message (only sent to this connection, not the entire session) |
+| e     | string    | dispatch event code                                                                      |
+| d     | object    | event data                                                                               |
+
+\* the `INIT` payload will contain a `null` channel ID  
+\*\* Exists on received payloads only (not required for tx)
+
+---
+
+All payloads documented below specify the contents of Opcode 0: Dispatch. For
+outgoing messages, this documentation assumes you have already populated the `s`
+(service identifier) field with the relevant service ID.
+
+### `INIT`: Initialization
+
+e: `INIT`  
+direction: `receive`
+
+When successfully authenticating with the socket, you will receive this payload
+which details your authorization scope, token metadata, as well as channels the
+token is already subcribed to.
+
+| field            | type      | description                                                         |
+| ---------------- | --------- | ------------------------------------------------------------------- |
+| cid              | string    | connection id                                                       |
+| connection_count | integer   | how many times this leap token is connected to the Channels service |
+| metadata         | ?object   | token metadata, if applicable                                       |
+| scope            | string    | one of `project` or `token`                                         |
+| channels         | channel[] | list of subscribed channels                                         |
+
+### `SUBSCRIBE`: Create Channel subscription
+
+e: `SUBSCRIBE`  
+direction: `send`
+
+Subscribe to the specified channel. If you do not have permission to subscribe
+to the specified channel, then you will receive an `UNAVAILABLE` event with a
+`NOT_GRANTED` error code.
+
+> `d` (event data) can be null
+
+### `AVAILABLE`: Channel Became Available
+
+e: `AVAILABLE`  
+direction: `receive`
+
+A channel has become available to this Leap session.
+
+| field   | type    | description        |
+| ------- | ------- | ------------------ |
+| channel | channel | the channel object |
+
+### `PIPE_ROOM_AVAILABLE`: Pipe Room Became Available
+
+e: `PIPE_ROOM_AVAILABLE`  
+direction: `receive`
+
+A Pipe room has become available to this Leap session.
+
+| field      | type                                  | description                                          |
+| ---------- | ------------------------------------- | ---------------------------------------------------- |
+| pipe_room  | [pipe_room](/pipe/api_reference/room) | the pipe room object, with sensitive fields stripped |
+| connection | ?ConnectionMap\*                      | map connection objects, documented below             |
+
+\*connection will be an empty map if stream is `offline` (pipe_room:state)
+
+#### parent connection map type
+
+```ts
+interface ConnectionMap {
+  ["webrtc" | "llhls"]: Connection | null;
+}
+```
+
+#### individual connection objects
+
+```ts
+interface Connection {
+  edge_endpoint: string;
+  type: "webrtc" | "llhls";
+  serving_pop: string; // can safely be ignored in frontend implementations
+}
+```
+
+### `PIPE_ROOM_UPDATE`: Pipe Room Updated
+
+e: `PIPE_ROOM_UPDATE`  
+direction: `receive`
+
+A Pipe room has updated. The data field will contain the same data type as
+`PIPE_ROOM_AVAILABLE`
+
+### `UNAVAILABLE`: Service (Channel or Pipe Room) Became Unavailable
+
+You have been unsubscribed or were rejected from subscribing to a channel or
+pipe room, potentially with an error attached.
+
+e: `UNAVAILABLE`  
+direction: `receive`
+
+| field      | type    | description                                       |
+| ---------- | ------- | ------------------------------------------------- |
+| graceful   | boolean | if the service was expected to become unavailable |
+| error_code | ?string | the error identifier                              |
+
+### `STATE_UPDATE`: Channel State was Updated
+
+e: `STATE_UPDATE`  
+direction: `receive`
+
+| field | type   | description          |
+| ----- | ------ | -------------------- |
+| state | object | the new state object |
+
+### `MESSAGE`: Channel Message Received
+
+Developers can send transient messages to channels through the API or
+server-side SDKs.
+
+e: `MESSAGE`  
+direction: `receive`
+
+| field | type   | description              |
+| ----- | ------ | ------------------------ |
+| e     | string | user-provided event name |
+| d     | object | user-provided event data |
+
+### `DIRECT_MESSAGE`: Direct Message Received
+
+Exactly the same as `MESSAGE`, however received when sending direct messages to
+tokens rather than channels.
+
+## Channel Availability Errors
+
+You can be disconnected from services for a variety of reasons. When you get
+disconnected, an `UNAVAILABLE` event will be sent down. If the service became
+unavailable erroneously, an `error_code` string will be part of the event data.
+This section documents what those error codes mean.
+
+### `NOT_GRANTED`
+
+The Leap Token used to authenticate the socket connection does not have the
+permission grant required to authenticate with the attempted channel.
+
+### `UNKNOWN`
+
+The channel you attempted to message does not exist or you are not subscribed

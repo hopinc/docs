@@ -1,0 +1,52 @@
+---
+title: "Server-side JS SDK"
+sidebarTitle: "JavaScript"
+description:
+  "The Hop server-side JS SDK allows you to interact with all Hop products on
+  the server side."
+---
+
+Currently, the SDK is compatible with [Bun](https://bun.sh/),
+[Node.js](https://nodejs.org/en/) and [Deno](https://deno.land/).
+
+## Installing
+
+```bash
+# NPM
+npm i @onehop/js
+
+# Or with Yarn
+yarn add @onehop/js
+
+# Or with Bun
+bun add @onehop/js
+```
+
+Or in Deno, we recommend serving from jspm.dev. This will ensure dependencies
+are bundled and cached for you.
+
+```bash
+import {Hop} from 'https://jspm.dev/@onehop/js@<version>';
+```
+
+## Creating an SDK Instance
+
+To use the SDK, you must first create a
+[project token](/reference/project-tokens). You can also use a PAT (personal
+access token), however this is not recommended as it has access to all of your
+projects.
+
+```js JS
+import { Hop } from '@onehop/js';
+
+const myToken = 'ptk_xxx';
+
+// Export the Hop SDK instance so you can use it throughout your codebase
+export const hop = new Hop(myToken);
+
+// Example: Creating a project secret
+await hop.projects.secrets.create(
+ 'RANDOM_NUMBER',
+ Math.floor(Math.random() \* 100).toString(),
+);
+```

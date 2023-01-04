@@ -1,0 +1,32 @@
+---
+title: "Working in CI"
+sidebarTitle: "CI"
+description:
+  "Since the CLI has a *nix download script it can be easily used in headless /
+  continuous integration environments."
+---
+
+## Downloading the CLI
+
+The CLI will use the same script to download the CLI as the
+[download page](/cli/overview) does. This means that you can use the same
+environment variables to configure the download. One of the environment
+variables is `HOP_VERSION` which is used to specify the version of Hop to
+download. If you don't specify a version it will download the latest version.
+The versions can be found on the
+[releases page](https://github.com/hopinc/cli/tags).
+
+#### Example:
+
+```bash
+$ export HOP_VERSION=v0.1.46
+$ curl -fsSL https://download.hop.sh/install | sh
+```
+
+or in a one-liner:
+
+```bash
+$ curl -fsSL https://download.hop.sh/install | HOP_VERSION=v0.1.46 sh
+```
+
+<Note>You **must** specify the `v` prefix when specifying a version.</Note>
