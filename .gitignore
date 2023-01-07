@@ -1,7 +1,1 @@
-*.log
-.yarn/*
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-node_modules
 .next
