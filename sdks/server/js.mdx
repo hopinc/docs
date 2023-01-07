@@ -1,9 +1,9 @@
 ---
-title: "Server-side JS SDK"
-sidebarTitle: "JavaScript"
+title: 'Server-side JS SDK'
+sidebarTitle: 'JavaScript'
 description:
-  "The Hop server-side JS SDK allows you to interact with all Hop products on
-  the server side."
+  'The Hop server-side JS SDK allows you to interact with all Hop products on
+  the server side.'
 ---
 
 Currently, the SDK is compatible with [Bun](https://bun.sh/),
@@ -37,16 +37,34 @@ access token), however this is not recommended as it has access to all of your
 projects.
 
 ```js JS
-import { Hop } from '@onehop/js';
+import {Hop} from '@onehop/js';
 
-const myToken = 'ptk_xxx';
+const token = 'ptk_xxx';
 
 // Export the Hop SDK instance so you can use it throughout your codebase
-export const hop = new Hop(myToken);
+export const hop = new Hop(token);
 
-// Example: Creating a project secret
-await hop.projects.secrets.create(
- 'RANDOM_NUMBER',
- Math.floor(Math.random() \* 100).toString(),
-);
+// Example: Creating a deployment
+await hop.ignite.deployments.create({
+	name: 'postgres',
+	container_strategy: 'manual',
+	type: RuntimeType.EPHEMERAL,
+	version: '12-12-2022',
+	image: {
+		name: 'postgres',
+		auth: null,
+		gh_repo: null,
+	},
+	env: {
+		POSTGRES_PASSWORD: 'password',
+		POSTGRES_USER: 'postgres',
+		POSTGRES_DB: 'postgres',
+	},
+	resources: {
+		vcpu: 0.5,
+		ram: '128MB',
+		vgpu: [],
+	},
+	restart_policy: RestartPolicy.NEVER,
+});
 ```
