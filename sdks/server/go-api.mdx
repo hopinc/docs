@@ -1,8 +1,8 @@
 ---
-title: "Server Side Go API Client"
+title: 'Server Side Go API Client'
 description:
-  "The Hop server side Go API client allows you to interact with all Hop
-  products on the server side."
+  'The Hop server side Go API client allows you to interact with all Hop
+  products on the server side.'
 ---
 
 ## Usage
@@ -30,7 +30,11 @@ import (
 	"context"
 	"fmt"
 
- hop "go.hop.io/sdk"
+	hop "go.hop.io/sdk"
+
+	// types is a package that contains all of the types used by the Hop API
+	// and other utility helper functions
+ 	t   "go.hop.io/sdk/types"
 )
 
 const HopToken = "ptk_xxx"
@@ -42,12 +46,36 @@ func main() {
 		panic(err)
 	}
 
- // Example: getting a channel by ID
- ch, err := c.Channels.Get(context.Background(), "test")
- if err != nil {
- 	// Handle your error here!
- 	panic(err)
- }
+ 	// Example: Creating a deployment
+	deployment, err := client.Ignite.Deployments.Create(context.Background(), &t.DeploymentConfig{
+		Name: "postgres",
+		DeploymentConfigPartial: t.DeploymentConfigPartial{
+			Type:              t.RuntimeTypePersistent,
+			RestartPolicy:     t.RestartPolicyAlways,
+			ContainerStrategy: t.ContainerStrategyManual,
+			Image: t.Image{
+				Name: "postgres",
+			},
+			Resources: t.Resources{
+				VCPU: 0.5,
+
+				// Use the t.Megabytes helper function to convert
+				// megabytes to a string
+				RAM:  t.Megabytes(128),
+			},
+			Env: map[string]string{
+				"POSTGRES_PASSWORD": "mysecretpassword",
+				"POSTGRES_USER":     "postgres",
+				"POSTGRES_DB":       "postgres",
+			},
+		},
+	})
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(deployment)
 }
 ```
 
