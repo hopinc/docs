@@ -47,7 +47,7 @@ func main() {
 	}
 
  	// Example: Creating a deployment
-	deployment, err := client.Ignite.Deployments.Create(context.Background(), &t.DeploymentConfig{
+	deployment, err := c.Ignite.Deployments.Create(context.Background(), &t.DeploymentConfig{
 		Name: "postgres",
 		DeploymentConfigPartial: t.DeploymentConfigPartial{
 			Type:              t.RuntimeTypePersistent,
