@@ -24,12 +24,12 @@ connected to its database.
 
 ### Advanced Options
 
-| Option        | Default    | Description                                                                                                                                                          |
-| ------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Initial Delay | 5          | How long Ignite should wait before sending the first health check                                                                                                    |
-| Interval      | 60         | How long Ignite should wait (in seconds) between sending health checks                                                                                               |
-| Timeout       | 10000      | The maximum time, in milliseconds, that should be tolerated for receiving a response to the health check. If exceeded, the container will be determined as unhealthy |
-| Maximum       | Failures 3 | How many times the health check needs to fail for a container to be determined unhealthy                                                                             |
+| Option           | Default | Description                                                                                                                                                          |
+| ---------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Initial Delay    | 5       | How long Ignite should wait before sending the first health check                                                                                                    |
+| Interval         | 60      | How long Ignite should wait (in seconds) between sending health checks                                                                                               |
+| Timeout          | 10000   | The maximum time, in milliseconds, that should be tolerated for receiving a response to the health check. If exceeded, the container will be determined as unhealthy |
+| Maximum Failures | 3       | How many times the health check needs to fail for a container to be determined unhealthy                                                                             |
 
 ## Creating Health Checks
 
