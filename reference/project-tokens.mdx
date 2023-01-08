@@ -36,12 +36,39 @@ You can use project tokens with our REST API and our server-side SDKs.
 
 ### SDKs
 
-```ts
-import { Hop } from "@onehop/js";
+<CodeGroup>
+```ts TS
+import {Hop} from '@onehop/js';
 
-const projectToken = "ptk_xxx";
+const projectToken = 'ptk_xxx';
 const hop = new Hop(projectToken);
-```
+
+````
+
+```go Golang
+import (
+	"context"
+	"fmt"
+
+	hop "go.hop.io/sdk"
+
+	// types is a package that contains all of the types used by the Hop API
+	// and other utility helper functions
+ 	t   "go.hop.io/sdk/types"
+)
+
+const HopToken = "ptk_xxx"
+
+func main() {
+	c, err := hop.NewClient(HopToken)
+	if err != nil {
+		// Handle your error here!
+		panic(err)
+	}
+}
+````
+
+</CodeGroup>
 
 ### API
 
