@@ -41,10 +41,32 @@ To respond successfully to a health check, you must respond on the path
 specified when creating the health check with a `HTTP 2xx` response code, such
 as `200` or `204`.
 
-### Creating via Console
+<AccordionGroup>
 
+<Accordion title="Using the Console">
 1. Navigate to an Ignite deployment
 2. Select **Health Check** from the sidebar
 3. Click **Create Check** in the top right
 
-![](/images/health-check.png)
+<Frame>![](/images/health-check.webp)</Frame>
+</Accordion>
+
+<Accordion title="Using the CLI">
+
+```bash
+# Interactively
+hop ignite health new
+
+# Non-interactively
+
+hop ignite health new <deployment_id> \
+ --path [path] \
+ --port [port] \
+ --initial-delay [seconds] \
+ --interval [seconds] \
+ --timeout [milliseconds] \
+ --max-failures [number]
+```
+
+</Accordion>
+</AccordionGroup>
