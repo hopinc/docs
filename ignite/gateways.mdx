@@ -1,8 +1,8 @@
 ---
-title: "Gateways"
+title: 'Gateways'
 description:
-  "Gateways allow you to expose your Hop deployments to your project or the
-  internet."
+  'Gateways allow you to expose your Hop deployments to your project or the
+  internet.'
 ---
 
 There are 2 types of gateways: Internal or External. External gateways expose
@@ -17,20 +17,22 @@ controls for load balancing requests.
 
 ## Creating a Gateway
 
-It's easiest to create a gateway through our console, however keep in mind that
-all of Hop is built around a REST API, so you can automate this if you need to.
+You can create a gateway using the Hop Console or the Hop CLI.
 
-Navigate to the Gateways tab in an Ignite deployment:
+<AccordionGroup>
 
-![](/images/hop-gw-demo-1.webp)
+<Accordion title="Console">
+1. Navigate to the Gateways tab in an Ignite deployment:
 
-Click on the "Create Gateway" button in the top right:
+<Frame>![](/images/hop-gw-demo-1.webp)</Frame>
 
-![](/images/hop-gw-demo-2.webp)
+2. Click on the "Create Gateway" button in the top right:
 
-You will be presented with a modal:
+<Frame>![](/images/hop-gw-demo-2.webp)</Frame>
 
-![](/images/hop-gw-demo-3.webp)
+3. You will be presented with a modal:
+
+<Frame>![](/images/hop-gw-demo-3.webp)</Frame>
 
 Here, you can select the gateway type and target port.
 
@@ -47,7 +49,31 @@ balance requests between containers on the target port. HTTP gateways will
 automatically handle external HTTP and HTTPS termination on the correct ports
 (80 & 443), so you don't need to run your application on these ports.
 
-Click **Create Gateway**.
+4. Click **Create Gateway**.
+
+</Accordion>
+
+<Accordion title="CLI">
+To create a gateway interactively, run the following command:
+
+```bash
+hop gateways create [--project <project-namespace>]
+```
+
+This will take you through the steps to set up a gateway on a deployment.
+
+You can also create a gateway non-interactively by passing the following flags:
+
+```sh
+hop gateways create \
+  --type <type> \
+  --target-port <port> \
+  --project [namespace]
+```
+
+</Accordion>
+
+</AccordionGroup>
 
 ## Adding Custom Domains
 
@@ -56,23 +82,43 @@ generated using the deployment name. You have the choice to update this
 subdomain to something not taken already, or you can add your own custom
 domains.
 
-Head over to the "Domains" page inside your gateway.
+<AccordionGroup>
 
-![](/images/hop-gw-demo-4.webp)
+<Accordion title="Console">
+1. Head over to the "Domains" page inside your gateway.
 
-Here, you can manage the `.hop.sh` domain as well as add your own custom ones.
-To add a custom domain, click on the Attach Domain button in the top right of
-the page.
+<Frame>![](/images/hop-gw-demo-4.webp)</Frame>
 
-You will be presented with this modal, where you should enter your desired
-domain.
+2. Here, you can manage the `.hop.sh` domain as well as add your own custom ones.
+   To add a custom domain, click on the Attach Domain button in the top right of
+   the page.
 
-![](/images/hop-gw-demo-5.webp)
+3. You will be presented with this modal, where you should enter your desired
+   domain.
 
-Click **Next**.
+<Frame>![](/images/hop-gw-demo-5.webp)</Frame>
+
+4. Click **Next**.
 
 After this, you will be required to create a CNAME record for your previously
 entered domain pointing to Hop.
 
-Details about this record will be shown on screen in a modal after entering the
-domain.
+5. Details about this record will be shown on screen in a modal after entering the domain. You should add this record to your DNS provider.
+
+</Accordion>
+
+<Accordion title="CLI">
+Interactively:
+```sh
+hop domains attach
+```
+
+Non-interactively:
+
+```sh
+hop domains attach <gateway-id> <domain>
+```
+
+</Accordion>
+
+</AccordionGroup>
