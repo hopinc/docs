@@ -1,9 +1,9 @@
 ---
-title: "Overview"
+title: 'Overview'
 description:
-  "The Hop CLI allows you to manage and control every aspect of your Hop
+  'The Hop CLI allows you to manage and control every aspect of your Hop
   projects. It acts as a command-line replacement for the Hop Console with some
-  extra features to support Hop deployments."
+  extra features to support Hop deployments.'
 ---
 
 ## Install
@@ -39,9 +39,9 @@ hop auth login
 ```
 
 <Tip>
-  If you want to login to the Hop CLI in a headless environment (e.g. without a
-  browser), then you can provide a Project Token or a PAT using the --token
-  flag.
+	If you want to login to the Hop CLI in a headless environment (e.g. without a
+	browser), then you can provide a Project Token or a PAT using the --token
+	flag.
 </Tip>
 
 ## Projects
@@ -60,7 +60,14 @@ hop projects switch
 This will bring up an interface that allows you to use arrow keys to select a
 project:
 
-![](/images/cli-switch.png)
+```
+$ hop projects switch
+Select a project:
+> Bunny's Project           /bunny         project_MjcxMDk5Nzg1MTM1MDYzMTA  2022-06-30T19:25:22.573Z  personal
+  Lanyard                   /lanyard       project_MjcxMjgyNDEyMDc2MjM3NDE  2022-06-30T20:37:56.722Z  regular
+  ganyu                     /ganyu         project_MzAzNjU3MDkyNDI4MDYyODY  2022-07-09T19:02:29.251Z  regular
+  hopvideo.net              /hopvideo      project_MzA4ODY2MzcxNjEyNzEzMjY  2022-07-11T05:32:28.145Z  regular
+```
 
 You can also use `hop projects switch <namespace>` to perform the switch
 directly.
