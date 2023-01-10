@@ -1,0 +1,47 @@
+---
+title: 'Persistent Volumes'
+description: "Volumes allow you to persist data across containers - perserving your deployment's state after restarts"
+---
+
+<Warning>
+	Currently, deployments with persistent volumes may only run one container at
+	once
+</Warning>
+
+You can attach a volume to a deployment under a specified mount path, such as `/data`. This will persist within your deployment, even when containers are deleted.
+
+You can choose between `ext4` and `xfs` for your filesystem format.
+
+## Attach a volume
+
+### When creating a new deployment
+
+<AccordionGroup>
+	<Accordion title="Using the Hop Console">
+		<ol>
+			<li>
+				When selecting the resources for your deployment, check the{' '}
+				<strong>Add volume to deployment</strong> checkbox
+			</li>
+			<li>
+				<strong>Volume settings</strong> will appear. Here, you can choose the
+				file system, mount path and volume size.
+			</li>
+		</ol>
+	</Accordion>
+	<Accordion title="Using the Hop CLI">
+		When using `hop deploy`, you can interactively configure a volume or you can pass the following options to add a volume in a headless way:
+
+    	```
+    -v, --volume-mount <VOLUME_MOUNT>
+            Volume mount to use
+
+        --volume-fs <VOLUME_FS>
+            Type of the volume file system, defaults to `ext4`
+
+        --volume-size <VOLUME_SIZE>
+            Size of the volume to use, defaults to 3GB
+    	```
+    </Accordion>
+
+</AccordionGroup>

@@ -63,6 +63,7 @@
 				"ignite/overview",
 				"ignite/deploying",
 				"ignite/gateways",
+				"ignite/volumes",
 				"ignite/health-checks",
 				"ignite/project-secrets",
 				"ignite/images"
