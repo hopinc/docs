@@ -14,3 +14,7 @@ Docker layers are cached to speed up the build process on a per-deployment basis
 
 Your deployment's environment is injected into each build - any environment variables imported during runtime will
 also exist during build time.
+
+## Building locally with the CLI
+
+By default, `hop deploy` spins up a server-side builder instance, to use your machine's cache and compute to build & push your image, append `--local`.
