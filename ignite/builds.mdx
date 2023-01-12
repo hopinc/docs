@@ -1,0 +1,16 @@
+---
+title: 'Builds'
+description: 'When deploying with Github - Hop will automatically infer your build environment and initiate a build for each push to git'
+---
+
+Using Railway's [Nixpacks](https://github.com/railwayapp/nixpacks) (a better alternative to Buildpacks), Hop can automatically detect
+the language of your app, removing the need to write a Dockerfile for most cases. If a Dockerfile is detected, it will just be built using regular [Buildkit](https://docs.docker.com/build/buildkit/).
+
+## Caching
+
+Docker layers are cached to speed up the build process on a per-deployment basis. As of today, we don't bill for build cache although this may change in the future. Each deployment is assigned a quota of 50gb in build cache - usage can be tracked under the `Resources` tab within the deployment.
+
+## Environment
+
+Your deployment's environment is injected into each build - any environment variables imported during runtime will
+also exist during build time.
