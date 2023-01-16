@@ -67,7 +67,8 @@
 				"ignite/health-checks",
 				"ignite/project-secrets",
 				"ignite/images",
-				"ignite/builds"
+				"ignite/builds",
+				"ignite/port-forwarding"
 			]
 		},
 		{
