@@ -67,7 +67,11 @@
 				"ignite/health-checks",
 				"ignite/project-secrets",
 				"ignite/images",
-				"ignite/builds"
+				"ignite/builds",
+				{
+					"group": "Language Support",
+					"pages": ["ignite/languages/node"]
+				}
 			]
 		},
 		{

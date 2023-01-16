@@ -43,10 +43,10 @@ All responses from the API will be sent to you in the following JSON format.
 If `success` is false, the following error object type will be returned under the `error` field.
 
 <ParamField path="code" type="string">
-	Indicates whether the response is successful
+	The Hop error code, e.g. `invalid_token`
 </ParamField>
 <ParamField path="message" type="string">
-	The response data object
+	The human-readable error message
 </ParamField>
 
 ## Authentication
