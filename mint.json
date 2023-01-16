@@ -68,6 +68,7 @@
 				"ignite/project-secrets",
 				"ignite/images",
 				"ignite/builds",
+				"ignite/port-forwarding",
 				{
 					"group": "Language Support",
 					"pages": [
