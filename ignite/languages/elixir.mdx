@@ -1,0 +1,35 @@
+---
+title: 'Elixir'
+description: 'Deploy Elixir applications with Hop'
+---
+
+<Note>
+	Hop uses [Nixpacks](https://nixpacks.com) for automatic Elixir deployments.
+	You can write a custom `Dockerfile` if you don't want to use Nixpacks.
+</Note>
+
+Elixir applications are detected when you have a `mix.exs` file in your project root. Dependencies are installed with `mix deps.get` and the application is built with `mix compile`.
+
+## Clustering
+
+Thanks to a community member, you can use [libcluster](https://github.com/bitwalker/libcluster) directly with Hop to automatically cluster your Elixir applications. You can find the `libcluster_hop` strategy [here](https://github.com/hiett/libcluster_hop).
+
+## Versions
+
+By default, the Elixir version for your project is inferred from the `elixir` version in your `mix.exs` file.
+
+The following Elixir versions are available:
+
+- latest (**default**)
+- 1.12
+- 1.11
+- 1.10
+- 1.9
+
+If you need to support a version that isn't listed above, you should write a custom `Dockerfile`.
+
+### Overriding the version
+
+The version can be overridden by:
+
+- Setting the `ELIXIR_VERSION` environment variable

@@ -5,11 +5,7 @@ description:
   Deployments are Ignite's primary abstraction - containers run inside them."
 ---
 
-However you create a new deployment on Hop, we'll internally create a
-"deployment config" which contains values such as the image, default resource
-allocations and environment variables for the deployment. When containers start,
-they read off of this deployment config. You can also provide custom overrides
-per container if needed, though this is rarely needed.
+When deploying to Hop, we use a tool called Nixpacks to automatically infer your environment and build a container image for your application. However, you can also use your own `Dockerfile` to build your image. If we detect a `Dockerfile` in your project directory, we'll use that instead of Nixpacks.
 
 ## Deployment Methods
 

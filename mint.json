@@ -68,7 +68,15 @@
 				"ignite/project-secrets",
 				"ignite/images",
 				"ignite/builds",
-				"ignite/port-forwarding"
+				"ignite/port-forwarding",
+				{
+					"group": "Language Support",
+					"pages": [
+						"ignite/languages/node",
+						"ignite/languages/elixir",
+						"ignite/languages/rust"
+					]
+				}
 			]
 		},
 		{

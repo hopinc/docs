@@ -1,0 +1,40 @@
+---
+title: 'Node'
+description: 'Deploy Node.js applications with Hop'
+---
+
+<Note>
+	Hop uses [Nixpacks](https://nixpacks.com) for automatic Node deployments. You
+	can write a custom `Dockerfile` if you don't want to use Nixpacks.
+</Note>
+
+Node.js is detected when you have a `package.json` file in your project. All dependencies found in `packages.json` are installed with either NPM, Yarn, PNPM, or Bun (depending on the lockfile detected).
+
+## Start Command
+
+You can specify a custom start command in your `package.json` file, for example:
+
+```json package.json
+{
+	"scripts": {
+		"start": "node index.js"
+	}
+}
+```
+
+If not specified, then the start command will be inferred based on the environment. Read more on the [Nixpacks documentation](https://nixpacks.com/docs/providers/node).
+
+## Versions
+
+Hop supports the following Node.js versions out of the box:
+
+    * 14
+    * 16 (**default**)
+    * 18
+
+### Specifying a version
+
+The version can be overridden by:
+
+- Setting the `NIXPACKS_NODE_VERSION` environment variable, or
+- Specifying the `engines.node` field in `package.json`
