@@ -3,6 +3,11 @@ title: 'Node'
 description: 'Deploy Node.js applications with Hop'
 ---
 
+<Note>
+	Hop uses [Nixpacks](https://nixpacks.com) for automatic Node deployments. You
+	can write a custom `Dockerfile` if you don't want to use Nixpacks.
+</Note>
+
 Node.js is detected when you have a `package.json` file in your project. All dependencies found in `packages.json` are installed with either NPM, Yarn, PNPM, or Bun (depending on the lockfile detected).
 
 ## Start Command

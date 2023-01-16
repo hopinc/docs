@@ -70,7 +70,11 @@
 				"ignite/builds",
 				{
 					"group": "Language Support",
-					"pages": ["ignite/languages/node", "ignite/languages/elixir"]
+					"pages": [
+						"ignite/languages/node",
+						"ignite/languages/elixir",
+						"ignite/languages/rust"
+					]
 				}
 			]
 		},

@@ -1,0 +1,27 @@
+---
+title: 'Rust'
+description: 'Deploy Rust applications with Hop'
+---
+
+<Note>
+	Hop uses [Nixpacks](https://nixpacks.com) for automatic Rust deployments. You
+	can write a custom `Dockerfile` if you don't want to use Nixpacks.
+</Note>
+
+Rust is detected if a `Cargo.toml` file is found in your project root. Hop builds your project using `cargo build --release` and then deploys and executes the resulting binary.
+
+## Versions
+
+Hop supports all Rust versions. By default, the latest version is used, however it can be overriden by either:
+
+- The `rust-version` property in `Cargo.toml`,
+- Setting the `NIXPACKS_RUST_VERSION` environment variable, or
+- A `rust-toolchain.toml` file
+
+## Workspaces
+
+Hop will automatically detect if you are using [Cargo Workspaces](https://doc.rust-lang.org/book/ch14-03-cargo-workspaces.html).
+
+This checks `workspace.default_members` first and then `workspace.members`. It also respects the `workspace.exclude` field.
+
+To set which workspace Hop will build, just set the `NIXPACKS_CARGO_WORKSPACE` environment variable and Hop will use it as the `--package` argument.

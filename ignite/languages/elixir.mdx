@@ -3,6 +3,11 @@ title: 'Elixir'
 description: 'Deploy Elixir applications with Hop'
 ---
 
+<Note>
+	Hop uses [Nixpacks](https://nixpacks.com) for automatic Elixir deployments.
+	You can write a custom `Dockerfile` if you don't want to use Nixpacks.
+</Note>
+
 Elixir applications are detected when you have a `mix.exs` file in your project root. Dependencies are installed with `mix deps.get` and the application is built with `mix compile`.
 
 ## Clustering
