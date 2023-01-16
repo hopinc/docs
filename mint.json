@@ -73,7 +73,8 @@
 					"pages": [
 						"ignite/languages/node",
 						"ignite/languages/elixir",
-						"ignite/languages/rust"
+						"ignite/languages/rust",
+						"ignite/languages/go"
 					]
 				}
 			]

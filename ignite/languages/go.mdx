@@ -1,0 +1,20 @@
+---
+title: 'Go'
+description: 'Deploy Golang applications with Hop'
+---
+
+<Note>
+	Hop uses [Nixpacks](https://nixpacks.com) for automatic Go deployments. You
+	can write a custom `Dockerfile` if you don't want to use Nixpacks.
+</Note>
+
+Golang is detected when you have a `main.go` file in your project root. If a `go.mod` file is found, packages are installed with `go get`. Hop uses `go build` to compile your application, then executes the resulting binary.
+
+## Versions
+
+The version is parsed from the `go.mod` file.
+
+The following Go versions are available:
+
+- 1.17 (**default**)
+- 1.18
