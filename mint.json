@@ -38,26 +38,6 @@
 			"pages": ["cli/overview", "cli/completions", "cli/ci"]
 		},
 		{
-			"group": "SDKs",
-			"pages": [
-				"sdks/overview",
-				{
-					"group": "Client Side",
-					"pages": ["sdks/client/js", "sdks/client/react"]
-				},
-				{
-					"group": "Server Side",
-					"pages": [
-						"sdks/server/js",
-						{
-							"group": "Go",
-							"pages": ["sdks/server/go-api", "sdks/server/go-leap"]
-						}
-					]
-				}
-			]
-		},
-		{
 			"group": "Ignite",
 			"pages": [
 				"ignite/overview",
@@ -86,6 +66,26 @@
 				"reference/project-tokens",
 				"reference/regions",
 				"reference/rest-api"
+			]
+		},
+		{
+			"group": "SDKs",
+			"pages": [
+				"sdks/overview",
+				{
+					"group": "Client Side",
+					"pages": ["sdks/client/js", "sdks/client/react"]
+				},
+				{
+					"group": "Server Side",
+					"pages": [
+						"sdks/server/js",
+						{
+							"group": "Go",
+							"pages": ["sdks/server/go-api", "sdks/server/go-leap"]
+						}
+					]
+				}
 			]
 		},
 		{
@@ -140,6 +140,6 @@
 	"footerSocials": {
 		"twitter": "https://twitter.com/joinhop",
 		"github": "https://github.com/hopinc",
-		"discord": "https://discord.com/invite/hop"
+		"discord": "https://discord.gg/hop"
 	}
 }
