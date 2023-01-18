@@ -1,7 +1,7 @@
 ---
 title: 'Hop Regions'
 sidebarTitle: 'Regions'
-description: 'Physical Hop points of presence'
+description: 'Physical Hop points of presence & peering policy'
 ---
 
 Regions are physical points of presence where you can host and use Hop services.
@@ -13,6 +13,25 @@ to provide edge TLS termination and live video distribution: `185.167.182.0/24`
 
 ## Hop Regions
 
-| Region ID | Location    | Hostname Base    |
-| --------- | ----------- | ---------------- |
-| us-east-1 | Ashburn, VA | us-east-1.hop.io |
+| Region ID | Location           | Hostname Base    | Upstream ISPs       | Peering            |
+| --------- | ------------------ | ---------------- | ------------------- | ------------------ |
+| us-east-1 | Ashburn, VA (DC10) | us-east-1.hop.io | Cogent, GSL, HE.net | IX & PNI available |
+
+## Peering Policy
+
+We operate an **open** peering policy with our customers and partners. You can find our PeeringDB [here](https://www.peeringdb.com/net/26508).
+
+### IX Peering
+
+If you are present within a shared internet exchange, we're happy to peer with you - free of charge.
+
+Please reach out to `noc@hop.io` and provide:
+
+    * Your company name & a short description
+    * Your ASN
+    * The IX location
+    * Your IP address on the IX
+
+### PNI
+
+If you need a dedicated connection to Hop at one of our points of presence, you can purchase a private network interconnect (PNI). This is currently handled at a case-by-case basis, so please reach out to `noc@hop.io` to discuss your requirements. Make sure to provide your preferred port size. We support `1Gbps`, `10Gbps` and `40Gbps` ports at most regions.
