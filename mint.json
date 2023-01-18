@@ -31,7 +31,14 @@
 	"navigation": [
 		{
 			"group": "Getting Started",
-			"pages": ["getting-started/introduction", "ignite/deploying"]
+			"pages": [
+				"getting-started/introduction",
+				"ignite/deploying",
+				{
+					"group": "Quickstarts",
+					"pages": ["getting-started/quickstarts/elixir-cluster"]
+				}
+			]
 		},
 		{
 			"group": "CLI",

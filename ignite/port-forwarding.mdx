@@ -14,7 +14,7 @@ You can open a tunnel between your deployments and local machine via `hop fwd` -
 <Accordion title="Without hostames">
     To tunnel your deployment without host entries 
     ```bash
-        hop fwd <deployment-name>
+        hop fwd [deployment_name]
     ```
 
 </Accordion>
@@ -22,7 +22,7 @@ You can open a tunnel between your deployments and local machine via `hop fwd` -
 <Accordion title="With hostames">
     To add `<name>.hop` to your hosts file, sudo the tunnel in addition to providing the `--hosts` flag.
     ```bash
-        sudo hop fwd <deployment-name> --hosts
+        sudo hop fwd [deployment_name] --hosts
     ```
 </Accordion>
 
