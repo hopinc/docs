@@ -5,7 +5,16 @@ description: 'How to deploy & cluster Elixir on Hop'
 
 Using [libcluster](https://github.com/bitwalker/libcluster) with the [libcluster_hop](https://github.com/hiett/libcluster_hop) strategy, you can easily create a clustered Elixir application on Hop. All nodes (containers) will be connected to each other.
 
-## Deploy the Demo
+## Demo
+
+<Note>
+	You can a live version of this demo already deployed
+	[here](https://libcluster-hop.hop.sh)
+</Note>
+
+We have created a demo application that you can deploy to Hop to see how it works. It's a simple Elixir application that uses the `libcluster_hop` strategy and exposes a simple HTTP API which lets you see the nodes connected to each other.
+
+### Deploying the demo
 
 1. Fork [elixir_cluster](https://github.com/hop-examples/elixir_cluster) on GitHub.
 2. Obtain a [project token](/reference/project-tokens) for your Hop project. libcluster uses this to fetch the list of nodes in the cluster using the Hop API. Make sure to select the `Manage Deployments` permission when creating it.
