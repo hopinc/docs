@@ -1,0 +1,43 @@
+---
+title: 'Server-side Rust SDK'
+sidebarTitle: 'Rust'
+description:
+  'The Hop server-side Rust SDK allows you to interact with all Hop products on
+  the server side.'
+---
+
+## Installing
+
+You can add `hop-rs` to your `cargo.toml` file:
+
+```toml
+[dependencies]
+hop-rs = "0.1.0"
+```
+
+## Creating an SDK Instance
+
+To use the SDK, you must first create a
+[project token](/reference/project-tokens). You can also use a PAT (personal
+access token), however this is not recommended as it has access to all of your
+projects.
+
+```rust
+extern crate hop;
+extern crate rand;
+
+use hop::Hop;
+use rand::Rng;
+
+#[tokio::main]
+async fn main() {
+    let my_token = "ptk_xxx";
+    let hop = Hop::new(my_token);
+
+    // Example: Creating a project secret
+    hop.projects.create_secret(
+        "RANDOM_NUMBER",
+        rand::thread_rng().gen_range(0..100).to_string(),
+    ).await.unwrap();
+}
+```
