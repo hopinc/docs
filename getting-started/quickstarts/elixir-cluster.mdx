@@ -1,0 +1,27 @@
+---
+title: 'Elixir Cluster'
+description: 'How to deploy & cluster Elixir on Hop'
+---
+
+Using [libcluster](https://github.com/bitwalker/libcluster) with the [libcluster_hop](https://github.com/hiett/libcluster_hop) strategy, you can easily create a clustered Elixir application on Hop. All nodes (containers) will be connected to each other.
+
+## Deploy the Demo
+
+1. Fork [elixir_cluster](https://github.com/hop-examples/elixir_cluster) on GitHub.
+2. Obtain a [project token](/reference/project-tokens) for your Hop project. libcluster uses this to fetch the list of nodes in the cluster using the Hop API. Make sure to select the `Manage Deployments` permission when creating it.
+3. Create a new Hop deployment on the Console and select the GitHub repository you just forked.
+4. Set the following environment variables before deploying:
+
+<div style={{"paddingLeft": "35px"}}>
+
+| Name                   | Value                                    |
+| ---------------------- | ---------------------------------------- |
+| `HOP_TOKEN`            | The project token you obtained in step 2 |
+| `RELEASE_DISTRIBUTION` | `none`                                   |
+
+</div>
+
+5. Hit `Deploy` and wait for the build to finish.
+6. To expose your application to the web, create a [Gateway](/ignite/gateways) and point it to port `8080`.
+
+That's it! You're now able to scale your Elixir cluster and containers will automatically discover and connect to each other.
