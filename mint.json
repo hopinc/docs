@@ -70,9 +70,9 @@
 		{
 			"group": "Reference",
 			"pages": [
-				"reference/project-tokens",
 				"reference/regions",
 				"reference/rest-api",
+				"reference/project-tokens",
 				"reference/billing"
 			]
 		},
