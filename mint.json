@@ -72,7 +72,8 @@
 			"pages": [
 				"reference/project-tokens",
 				"reference/regions",
-				"reference/rest-api"
+				"reference/rest-api",
+				"reference/billing"
 			]
 		},
 		{
