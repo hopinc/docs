@@ -50,6 +50,7 @@
 				"ignite/overview",
 				"ignite/deploying",
 				"ignite/gateways",
+				"ignite/private-networking",
 				"ignite/volumes",
 				"ignite/health-checks",
 				"ignite/project-secrets",
