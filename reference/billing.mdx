@@ -21,6 +21,21 @@ Hop offers a free tier for personal projects (the project that gets created for 
 
 Regular projects that you create on Hop are not eligible for the free tier and incur costs for all resources you create.
 
+## Compute Resource Billing
+
+Like most cloud platforms, Hop bills you for the resources you are **allocated** while they're active (e.g. in the **Running** state), per minute.
+
+### Example
+
+For example, let's say you have a deployment with a single container running on 1 vCPU and 512MB of memory:
+
+| Resource   | Pricing            | Allocated | Cost  |
+| ---------- | ------------------ | --------- | ----- |
+| **vCPU**   | $4.32 / month      | 1 vCPU    | $4.32 |
+| **Memory** | $2.10 / GB / month | 512MB     | $1.05 |
+
+Our total cost for a month of running this deployment would be **$5.37 USD**.
+
 ## Balances
 
 Each Hop project gets it's own balance.
