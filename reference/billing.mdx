@@ -1,0 +1,51 @@
+---
+title: 'Billing Overview'
+sidebarTitle: 'Billing & Free Tier'
+description: 'Learn about how Hop handles billing for your projects'
+---
+
+<Note>
+	You can find detailed service pricing on [this page](https://hop.io/pricing).
+</Note>
+
+Resources and services you run on Hop are billed based on the number of minutes they are active. You can find the billing details for your project on the [Billing](https://console.hop.io/billing) page on the Hop console.
+
+## Free Tier
+
+Hop offers a free tier for personal projects (the project that gets created for you when you sign up for Hop). This tier is technically a free balance credit of $5.00 USD every month, which can be used to deploy the following resources:
+
+| Resource   | Free Tier Limit |
+| ---------- | --------------- |
+| **CPU**    | 1 vCPU          |
+| **Memory** | 512MB           |
+
+Regular projects that you create on Hop are not eligible for the free tier and incur costs for all resources you create.
+
+## Compute Resource Billing
+
+Like most cloud platforms, Hop bills you for the resources you are **allocated** while they're active (e.g. in the **Running** state), per minute.
+
+### Example
+
+For example, let's say you have a deployment with a single container running on 1 vCPU and 512MB of memory:
+
+| Resource   | Pricing            | Allocated | Cost  |
+| ---------- | ------------------ | --------- | ----- |
+| **vCPU**   | $4.32 / month      | 1 vCPU    | $4.32 |
+| **Memory** | $2.10 / GB / month | 512MB     | $1.05 |
+
+Our total cost for a month of running this deployment would be **$5.37 USD**.
+
+## Balances
+
+Each Hop project gets it's own balance.
+
+A **positive** balance (above $0) indicates how much you _owe_ to Hop. This automatically gets charged at the end of each payment cycle (monthly, dependant on project creation date). You can also manually top up your balance at any time.
+
+A **negative** balance (below $0) indicates that you have _credit_ with Hop. This can be used to pay for any future charges your project may incur.
+
+## Payment Methods
+
+Payment methods are attached to users rather than projects. You can have multiple payment methods attached to your Hop account, and you can attach them to projects as you wish. You must have **Editor** permission on a project to attach a payment method to it.
+
+You can manage your payment methods and the projects they're attached to on the [Payment Methods](https://console.hop.io/settings/cards) page.

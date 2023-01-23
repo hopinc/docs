@@ -1,9 +1,9 @@
 ---
 title: 'Port Forwarding'
-description: 'Using the CLI, you can port-forward deployments to access them securely without having to expose them to the public internet.'
+description: 'Using the CLI, you can port-forward deployments to access them securely without having to expose them to the public internet'
 ---
 
-If you haven't already, install the CLI as documented [here](http://localhost:3001/cli/overview).
+If you haven't already, install the CLI as documented [here](/cli/overview).
 
 ## Initiate the tunnel
 
@@ -12,18 +12,18 @@ You can open a tunnel between your deployments and local machine via `hop fwd` -
 <AccordionGroup>
 
 <Accordion title="Without hostames">
-    To tunnel your deployment without host entries 
-    ```bash
-        hop fwd [deployment_name]
-    ```
+ To tunnel your deployment without host entries 
+ ```bash
+ hop fwd [deployment_name]
+ ```
 
 </Accordion>
 
 <Accordion title="With hostames">
-    To add `<name>.hop` to your hosts file, sudo the tunnel in addition to providing the `--hosts` flag.
-    ```bash
-        sudo hop fwd [deployment_name] --hosts
-    ```
+To add `<name>.hop` to your hosts file, sudo the tunnel in addition to providing the `--hosts` flag.
+ ```bash
+sudo hop fwd [deployment_name] --hosts
+ ```
 </Accordion>
 
 </AccordionGroup>

@@ -50,6 +50,7 @@
 				"ignite/overview",
 				"ignite/deploying",
 				"ignite/gateways",
+				"ignite/private-networking",
 				"ignite/volumes",
 				"ignite/health-checks",
 				"ignite/project-secrets",
@@ -70,9 +71,10 @@
 		{
 			"group": "Reference",
 			"pages": [
-				"reference/project-tokens",
 				"reference/regions",
-				"reference/rest-api"
+				"reference/rest-api",
+				"reference/project-tokens",
+				"reference/billing"
 			]
 		},
 		{
