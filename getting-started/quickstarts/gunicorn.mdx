@@ -1,0 +1,64 @@
+---
+title: 'Gunicorn'
+description: 'How to deploy a python application with Gunicorn'
+---
+
+Using [Gunicorn]("https://gunicorn.org/") is a great way to deploy a python application. Using it on Hop is very easy and can be done in a few steps.
+
+## Demo
+
+<Note>
+	We have already made a repository for you to use. You can find it{' '}
+	[here]("https://github.com/hop-examples/python_gunicorn")
+</Note>
+
+### Preparing your application for Hop
+
+1. Gunicorn needs a config file to run. We will create a file called `gunicorn.conf.py` and add the following code to it. If you already have a config file, make sure to have this appended to it.
+
+<div style={{"paddingLeft": "35px"}}>
+
+```python
+bind = "0.0.0.0"
+```
+
+If you are going to expose this service through a gateway, the application needs to be bound to `0.0.0.0` instead of `localhost` or `127.0.0.1`.
+
+</div>
+
+2. If you are using a dockerfile (if not skip to #3), make sure to add the following line to it.
+
+<div style={{"paddingLeft": "35px"}}>
+
+```dockerfile
+CMD ["gunicorn", "[WSGI_APP]"]
+```
+
+Where `WSGI_APP` is of the pattern `$(MODULE_NAME):$(VARIABLE_NAME)`.
+For example for:
+
+```python
+# main.py
+def app(environ, start_response):
+    # your code here
+```
+
+The command is `CMD ["gunicorn", "main:app"]`
+
+</div>
+
+3. If you are not using a dockerfile, upon deploying your project to Hop, make sure to add the following under "Advanced Options" -> "CMD"
+
+<div style={{"paddingLeft": "35px"}}>
+
+```bash
+gunicorn [WSGI_APP]
+```
+
+Like so,
+
+<Frame>![](/images/hop-cmd-option.webp)</Frame>
+</div>
+
+
+4. All set! Enjoy your python application on Hop!
