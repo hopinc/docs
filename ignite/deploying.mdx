@@ -9,8 +9,7 @@ When deploying to Hop, we use a tool called Nixpacks to automatically infer your
 
 ## Deployment Methods
 
-There are various ways to create and deploy new versions to existing
-deployments.
+There are various ways to deploy applications to Hop.
 
 <AccordionGroup>
 
@@ -21,17 +20,23 @@ Deploying to Hop from GitHub allows you to easily connect a GitHub repository to
 Ignite and have your project be automatically deployed when you push to your
 main branch.
 
+<Frame>
+	<div className="relative pb-[56.25%] h-0 w-full overflow-hidden max-w-full">
+		<iframe
+			className="absolute top-0 left-0 w-full h-full"
+			src="https://www.youtube.com/embed/bkezeH6zhEM?modestbranding=1&rel=0&loop=1"
+			frameBorder="0"
+			allowFullScreen
+		></iframe>
+	</div>
+</Frame>
+
 To deploy from GitHub, we will use the
 [Hop Console](https://console.hop.io/auth)
 
 #### Creating the Deployment
 
-Select "Create Deployment" under the **Ignite** page.
-
-![](/images/creating-deployment.gif)
-
-If you're not sure what container type to pick, we recommend using
-**Persistent**.
+Select "Create Deployment" under the **Ignite** page, or, alternatively use the Cmd+K menu and search **GitHub**.
 
 #### Linking GitHub Account
 
@@ -109,3 +114,47 @@ deployments to select from.
 </Accordion>
 
 </AccordionGroup>
+
+## Deployment Options
+
+When creating a deployment, you are able to configure various options to customize how your application runs. All of these options can be updated after the deployment is created, too.
+
+### Resources
+
+The resources section allows you to configure the compute resources your that each container which runs within your deployment will be allocated (vCPU, memory and disk space). Hop has 4 presets which you can choose from to quickly set your resources. You can also configure the resources manually by selecting **Custom Resources** and setting the values yourself.
+
+### Volume Settings
+
+If you select the **Add volume to deployment** checkbox, you're able to configure the size and mount path of the volume that will be attached to your deployment. Please note that by selecting this option, your deployment will become **Stateful**. Stateful deployments may currently only run one container at a time.
+
+#### File system
+
+You can choose between two file systems for your volume: `ext4` and `xfs`. In general, XFS is better at handling large files, while Ext4 is more is more performant when handling a lot of small files. XFS is usually recommended for running databases. Please see [this article by Red Hat](https://access.redhat.com/articles/3129891) for more information.
+
+### Environment Variables
+
+You can add environment variables through our GUI, plain text editor and JSON editor. Once set, your environment variables will be made available to your application during build time and runtime.
+
+You can also point environment variables to [project secrets](/ignite/project-secrets). If using the GUI, you can select a secret from the dropdown. If using a text editor, API or CLI, you can use the following syntax:
+
+```
+${SECRETS.MY_SECRET}
+```
+
+### Advanced Options
+
+You should only modify these options if you understand how the Dockerfile is built for the image you're trying to deploy.
+
+#### Ephemeral containers
+
+<Note>
+	You cannot use Ephemeral containers with Stateful deployments (volumes).
+</Note>
+
+Enable **Use ephemeral containers** to run your deployment with ephemeral containers. Ephemeral containers are deleted immediately once they exit. This is useful for running one-off tasks such as database migrations. Your deployment can run an unlimited number of ephemeral containers at a time - you can use our API to create them dynamically.
+
+#### Entrypoint & CMD Override
+
+You can override the entrypoint or CMD of your containers within the scope of a deployment.
+
+The **entrypoint** is the base command that is run when the container starts. The **CMD** is the default arguments to pass to the entrypoint. An entrypoint is always needed, and if not provided, is inherited from the base image.
