@@ -17,36 +17,36 @@ Some nicities provided by Channels include:
   worry about handing out tokens to users on your frontend. This is useful if
   you want to display realtime data on a frontend application that doesn't
   require user sign-in, for example.
-- You can send events directly to [Tokens](/channels/tokens), instead of sending
+- You can send events directly to [Tokens](./tokens), instead of sending
   them to channels
 - You can keep realtime, persisted "state" within a channel, which all clients
   are kept in sync with when connecting & when it's updated.
-  [Read more ➜](/channels/channel-state)
+  [Read more ➜](./channel-state)
 - All capabilities can be mixed and matched with each other, allowing you to
   reap powerful benefits from individual channels without having to create hacky
   workarounds
 
 For most use cases, you'll need a protected server-side application (e.g. an
 API) which can use the [Hop SDK](/sdks/server/js) to
-[generate Tokens](/channels/tokens) and
-[create Channels](/channels/creating-channels). You can then use the
+[generate Tokens](./tokens) and
+[create Channels](./creating-channels). You can then use the
 [client-side SDKs](/sdks/client/js) to subscribe to channels.
 
 ## Jump To
 
-- [Learn about Channel State](/channels/channel-state)
-- [Learn about Channel Tokens (authenticate users to Channels)](/channels/tokens)
-- [Using Channels with React](/channels/reference/react)
-- [Creating Channels with the Hop SDK](/channels/reference/creating-channels)
-- [Updating Channel State using the Hop SDK](/channels/reference/updating-channel-state)
-- [Sending Messages to Channels using the Hop SDK](/channels/reference/sending-messages)
+- [Learn about Channel State](./channel-state)
+- [Learn about Channel Tokens (authenticate users to Channels)](./tokens)
+- [Using Channels with React](./reference/react)
+- [Creating Channels with the Hop SDK](./reference/creating-channels)
+- [Updating Channel State using the Hop SDK](./reference/updating-channel-state)
+- [Sending Messages to Channels using the Hop SDK](./reference/sending-messages)
 
 ## Concepts
 
 ### Clients
 
 The client (or "user") is the entity that subscribes to Channels, using either
-the Hop SDK or via a custom [Leap](/channels/internals/leap) implementation. The
+the Hop SDK or via a custom [Leap](./internals/leap) implementation. The
 client can be anything: a React app, a server-side application or an IoT device,
 for example.
 
@@ -79,7 +79,7 @@ need to worry about this resource - just know that it's used to keep a
 consistent and uninterrupted socket connection during unstable network
 conditions. Sessions automatically die once there have been no connected clients
 for a 30 second period. You can read more about them in the
-[Leap](/channels/internals/leap) documentation.
+[Leap](./internals/leap) documentation.
 
 #### Connections
 
@@ -156,11 +156,11 @@ authenticated with a token, given they know the channel ID
 #### State
 
 State acts as a realtime data store attached to each channel. See
-[Channel State](/channels/channel-state)
+[Channel State](./channel-state)
 
 ### Messages
 
 You can use the Hop API or SDK to easily send messages of any size to channels,
 which can then be handled by channel subscribers.
 
-[How to send Messages to Channels](/channels/reference/sending-messages)
+[How to send Messages to Channels](./reference/sending-messages)

@@ -1,9 +1,9 @@
 ---
-title: "Channel State"
+title: 'Channel State'
 description:
-  "As well as transient messages, channels can be used as a store for realtime,
+  'As well as transient messages, channels can be used as a store for realtime,
   stateful and persisted state. You can think of it like a realtime database
-  attached to every channel."
+  attached to every channel.'
 ---
 
 Channel state is stored under `state` in the Channel object. State is a
@@ -16,7 +16,7 @@ also listen to the individual state update events with the client SDK.
 
 You can update channel state from the server side SDK libraries or the API.
 
-- [Reference: Updating State](/channels/reference/updating-channel-state)
+- [Reference: Updating State](./reference/updating-channel-state)
 
 ### Usage with React
 
@@ -24,19 +24,19 @@ If using React, you can use the `useReadChannelState` hook:
 
 ```jsx Price.jsx
 const Price = () => {
-  /**
-   * `state` will be null until the client is connected
-   * this will attempt to subscribe the client to the specified channel
-   * if they are not already subscribed (you can disable this)
-   */
+	/**
+	 * `state` will be null until the client is connected
+	 * this will attempt to subscribe the client to the specified channel
+	 * if they are not already subscribed (you can disable this)
+	 */
 
-  const { state } = useReadChannelState("usd_prices");
+	const {state} = useReadChannelState('usd_prices');
 
-  if (!state) {
-    return;
-    <h1>Loading</h1>;
-  }
+	if (!state) {
+		return;
+		<h1>Loading</h1>;
+	}
 
-  return <h1>BTC Price: {state.btc}</h1>;
+	return <h1>BTC Price: {state.btc}</h1>;
 };
 ```

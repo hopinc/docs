@@ -1,16 +1,16 @@
 ---
-title: "Updating Channel State"
-sidebarTitle: "Channel State"
-description: "How to update Hop Channel state"
+title: 'Updating Channel State'
+sidebarTitle: 'Channel State'
+description: 'How to update Hop Channel state'
 ---
 
-[Channel State](/channels/channel-state) acts as a realtime data store attached
+[Channel State](./channel-state) acts as a realtime data store attached
 to every Channel. You can update this state on your backend and frontend clients
 can subscribe to Channel state objects in realtime.
 
 <Info>
-  This reference assumes you have already set up the [Hop server-side
-  SDK](/sdks/server/js).
+	This reference assumes you have already set up the [Hop server-side
+	SDK](/sdks/server/js).
 </Info>
 
 ## Updating State
@@ -20,16 +20,16 @@ Channel state can be updated (manually) through the Hop Console or
 
 ```js updating-state.js
 // Import your Hop SDK instance
-import { hop } from ".";
+import {hop} from '.';
 
-const channelId = "channel_xxx"; // the channel we want to update
+const channelId = 'channel_xxx'; // the channel we want to update
 
 /*
  * - Option 1: Rewrite the state.
  * - The existing state is passed as the first arument to Channel#setState
  */
 
-hop.channels.setState(channelId, (s) => ({ ...s, name: "My Channel" }));
+hop.channels.setState(channelId, s => ({...s, name: 'My Channel'}));
 
 /*
  * - Option 2: Update or add variables
@@ -37,7 +37,7 @@ hop.channels.setState(channelId, (s) => ({ ...s, name: "My Channel" }));
  * - The rest of the state will remain unchanged
  */
 
-channel.patchState(channelId, { name: "My Channel" });
+channel.patchState(channelId, {name: 'My Channel'});
 ```
 
 Either of these operations will update the connected clients in realtime.
