@@ -67,6 +67,18 @@ func main() {
 }
 ````
 
+```rs Rust
+extern crate hop;
+
+use hop::Hop;
+
+#[tokio::main]
+async fn main() {
+	let my_token = "ptk_xxx";
+	let hop = Hop::new(my_token);
+}
+````
+
 </CodeGroup>
 
 ### API
