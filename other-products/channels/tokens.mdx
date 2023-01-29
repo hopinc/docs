@@ -1,5 +1,5 @@
 ---
-title: "Tokens"
+title: 'Tokens'
 ---
 
 Tokens can be used to:
@@ -14,7 +14,7 @@ they can authenticate with Channels. A common implementation is to generate a
 Token per user on your backend, then store it with the user object in your
 database. You can then pass their token down to the user (via your API, for
 example) and it can be used with our
-[Client-side SDK](/channels/tokens#using-tokens-with-client-side-sdks) to
+[Client-side SDK](./tokens#using-tokens-with-client-side-sdks) to
 authenticate with Channels.
 
 ## Do I need to use Tokens?
@@ -35,8 +35,8 @@ as private group chat channels, to specific users.
 ## Server-side Examples
 
 <Note>
-  The examples below assume you have already set up the [Hop server-side
-  SDK](/sdks/server/js).
+	The examples below assume you have already set up the [Hop server-side
+	SDK](/sdks/server/js).
 </Note>
 
 ### Generating Tokens
@@ -47,8 +47,8 @@ Here's an example of generating tokens using the server-side SDK:
 
 ```js create-token.js
 // Import your Hop SDK instance
-import { hop } from ".";
-const { id } = await hop.channels.tokens.create(); // id = leap_token_xxx - you can now store and pass this token to clients
+import {hop} from '.';
+const {id} = await hop.channels.tokens.create(); // id = leap_token_xxx - you can now store and pass this token to clients
 ```
 
 ### Subscribing Tokens to Channels
@@ -61,10 +61,10 @@ In this example, let's assume that we have a private channel with the ID `game`.
 
 ```js subscribe-token.js
 // Import your Hop SDK instance
-import { hop } from ".";
+import {hop} from '.';
 
-const channelId = "game";
-const userToken = "leap_token_abc123";
+const channelId = 'game';
+const userToken = 'leap_token_abc123';
 
 await hop.channels.subscribeToken(channelId, userToken);
 ```
@@ -73,14 +73,14 @@ await hop.channels.subscribeToken(channelId, userToken);
 
 ```js send-message-to-token.js
 // Import your Hop SDK instance
-import { hop } from ".";
+import {hop} from '.';
 
-const userToken = "leap_token_abc123";
-const eventName = "NOTIFICATION"; // this can be anything you want
+const userToken = 'leap_token_abc123';
+const eventName = 'NOTIFICATION'; // this can be anything you want
 
 await hop.channels.publishDirectMessage(userToken, eventName, {
-  title: "Someone liked your post!",
-  description: "Tap to view more.",
+	title: 'Someone liked your post!',
+	description: 'Tap to view more.',
 });
 ```
 
@@ -91,8 +91,8 @@ to Channels.
 
 ```js is-token-online.js
 // Import your Hop SDK instance
-import { hop } from ".";
-const userToken = "leap_token_abc123";
+import {hop} from '.';
+const userToken = 'leap_token_abc123';
 
 const isOnline = await hop.channels.tokens.isOnline(userToken);
 // isOnline: boolean

@@ -1,9 +1,9 @@
 ---
 title: Low-latency HLS (LLHLS)
-sidebarTitle: "LLHLS"
+sidebarTitle: 'LLHLS'
 description:
-  "LLHLS (Low-Latency HLS) allows you to deliver live, low-latency streams to
-  global audiences over HTTP."
+  'LLHLS (Low-Latency HLS) allows you to deliver live, low-latency streams to
+  global audiences over HTTP.'
 ---
 
 Historically, HLS has favored stream reliability over latency, however back in
@@ -83,7 +83,7 @@ There's no doubt that LLHLS is the gold standard of today's livestreaming
 protocols; for Pipe, we implement the raw protocol and serve it across our edge
 network.
 
-However, thanks to our [Leap](/channels/internals/leap) protocol, which is a
+However, thanks to our [Leap](./internals/leap) protocol, which is a
 WebSocket that all frontend SDKs use to signal with Pipe (and Channels!), we're
 able to gain greater insight across all realtime viewers from a latency and
 network environment standpoint. Leap keeps a running heartbeat with clients,
