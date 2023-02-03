@@ -5,6 +5,11 @@
 		"dark": "/logo/dark.svg"
 	},
 	"favicon": "/favicon.svg",
+	"analytics": {
+		"gtm": {
+			"tagId": "GTM-PWWFBQW"
+		}
+	},
 	"colors": {
 		"primary": "#8F64F2",
 		"light": "#BFA6F9",
