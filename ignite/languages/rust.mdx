@@ -3,10 +3,7 @@ title: 'Rust'
 description: 'Deploy Rust applications with Hop'
 ---
 
-<Note>
-	Hop uses [Nixpacks](https://nixpacks.com) for automatic Rust deployments. You
-	can write a custom `Dockerfile` if you don't want to use Nixpacks.
-</Note>
+<Snippet file="nixpacks-notice.mdx" />
 
 Rust is detected if a `Cargo.toml` file is found in your project root. Hop builds your project using `cargo build --release` and then deploys and executes the resulting binary.
 
