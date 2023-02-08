@@ -3,18 +3,38 @@ title: 'Builds'
 description: 'When deploying with GitHub, Hop will automatically infer your build environment and initiate a build for each push to git'
 ---
 
-Using [Nixpacks](https://github.com/hopinc/nixpacks) (a better alternative to Buildpacks), Hop can automatically detect
+Using [Nixpacks](https://nixpacks.com) (a better alternative to Buildpacks), Hop can automatically detect
 the language of your app, removing the need to write a Dockerfile for most cases. If a Dockerfile is detected, it will just be built using regular [Buildkit](https://docs.docker.com/build/buildkit/).
 
 ## Caching
 
 Docker layers are cached to speed up the build process on a per-deployment basis. As of today, we don't bill for build cache although this may change in the future. Each deployment is assigned a quota of 50GB in build cache - usage can be tracked under the `Resources` tab within the deployment.
 
-## Environment
+## Environment Variables
 
-Your deployment's environment is injected into each build - any environment variables imported during runtime will
+Your deployment's environment variables are injected into each build - any environment variables imported during runtime will
 also exist during build time.
 
 ## Building locally with the CLI
 
 By default, `hop deploy` spins up a server-side builder instance. To use your local machine's cache and compute power to build & push your image instead, append the `--local` flag.
+
+## Customizing Configless Deployment Builds
+
+If you don't want to specify a `Dockerfile` then you can use the following environment variables to customize your build.
+
+<Info>
+	You can find more options on the [Nixpacks
+	documentation](https://nixpacks.com/docs/configuration/environment)
+</Info>
+
+| Variable               | Description                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------------- |
+| `NIXPACKS_INSTALL_CMD` | Override the install command                                                             |
+| `NIXPACKS_BUILD_CMD`   | Override the build command                                                               |
+| `NIXPACKS_START_CMD`   | Override the start command                                                               |
+| `NIXPACKS_PKGS`        | Additional [Nix packages](https://search.nixos.org/packages?channel=unstable) to install |
+| `NIXPACKS_APT_PKGS`    | Add additional Apt packages to install                                                   |
+| `NIXPACKS_LIBS`        | Add additional Nix libraries to make available                                           |
+| `NIXPACKS_DEBIAN`      | Enable Debian base image, used for supporting OpenSSL 1.1                                |
+|                        |
