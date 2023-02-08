@@ -1,0 +1,99 @@
+---
+title: 'Python'
+description: 'Deploy Python applications with Hop'
+---
+
+<Note>
+	Hop uses [Nixpacks](https://nixpacks.com) for automatic Python deployments.
+	You can write a custom `Dockerfile` if you don't want to use Nixpacks.
+</Note>
+
+Python is detected when you have one of the following files in your codebase:
+
+- `main.py`
+- `requirements.txt`
+- `pyproject.toml`
+
+## Build Command
+
+Depending on the dependency file detected in your project, a different command will be used to build your image.
+
+<AccordionGroup>
+
+<Accordion title="requirements.txt">
+
+```shell
+pip install -r requirements.txt
+```
+
+</Accordion>
+<Accordion title="pyproject.toml">
+
+```shell
+pip install --upgrade build setuptools && pip install .
+```
+
+If a poetry.lock file is also detected, this will be ran instead:
+
+```shell
+poetry install --no-dev --no-interactive --no-ansi
+```
+
+</Accordion>
+<Accordion title="Pipfile">
+
+```shell
+PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
+```
+
+</Accordion>
+
+</AccordionGroup>
+
+## Start Command
+
+<AccordionGroup>
+
+<Accordion title="Django">
+If Django is detected, the following command will be used:
+
+```shell
+python manage.py migrate && gunicorn {app_name}.wsgi
+```
+
+</Accordion>
+<Accordion title="pyproject.toml">
+
+```shell
+python -m {module}
+```
+
+</Accordion>
+<Accordion title="Otherwise">
+
+```shell
+python main.py
+```
+
+</Accordion>
+</AccordionGroup>
+
+Depending on files detected within your project, a different start command (entrypoint) will be used to run your application.
+
+## Versions
+
+The following Go versions are available:
+
+- 3.11
+- 3.10
+- 3.9
+- 3.8 (**default**)
+- 3.7
+- 2.7
+
+### Specifying a version
+
+The version can be overridden by:
+
+- Setting the `NIXPACKS_PYTHON_VERSION` environment variable, or
+- Specifying the version in a `.python-version` file

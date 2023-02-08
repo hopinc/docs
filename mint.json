@@ -66,6 +66,7 @@
 					"group": "Language Support",
 					"pages": [
 						"ignite/languages/node",
+						"ignite/languages/python",
 						"ignite/languages/elixir",
 						"ignite/languages/rust",
 						"ignite/languages/go"
