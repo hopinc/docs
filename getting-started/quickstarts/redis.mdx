@@ -1,0 +1,45 @@
+---
+title: 'Redis'
+description: 'Learn how to deploy Redis with persistence enabled to Hop in seconds'
+---
+
+Hop is a deployment platform that makes it easy to deploy any application. If something can run as a Docker image, it can run on Hop. That includes Redis!
+
+Redis is available on Docker Hub, and it's also available as a **Preset** on Hop which means that all the configuration is done for you.
+
+## Deploy Redis
+
+### In 5 seconds
+
+This will deploy Redis with our default configuration. This is a good place to start if you're not sure what you need.
+
+1. Hit Cmd+K (or Ctrl+K if using Windows) on your keyboard
+2. Type `redis` and hit enter twice
+3. It's deployed! Now head over to [using your new deployment](#using-your-new-deployment).
+
+### Custom configuration
+
+You can edit Hop's default Redis runtime settings by deploying Redis through the preset menu.
+
+1. Go to **Ignite** on the sidebar, then **New deployment**
+2. Select **Redis** from the list of presets
+3. Optionally configure the start command, environment variables and volume size
+4. Hit **Deploy**
+
+## Using your new deployment
+
+Now that Redis is deployed, let's put it to use.
+
+### Connecting to Redis from your local machine
+
+You can use the [hop fwd](/ignite/port-forwarding) CLI command to connect to your new Redis deployment from your local machine. Redis runs on port **6379** so make sure to select that when forwarding.
+
+Once the forwarding is set up, you can open another terminal and connect to Redis using the forwarded port using [redis-cli](https://redis.io/docs/getting-started/installation/).
+
+```bash
+redis-cli
+```
+
+### Connecting to Redis from another Hop deployment
+
+Let's say you want to allow your API deployment to access your new Redis instance. Luckily, Hop makes this easy. You can create an [Internal Gateway](/ignite/gateways) to give your Redis deployment an **internal domain**, such as **redis.hop**. You can then use that domain within any other deployment in your project, and it'll point to your Redis deployment.

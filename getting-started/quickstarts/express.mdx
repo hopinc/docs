@@ -17,3 +17,19 @@ We have created a demo application that you can deploy to Hop to see how it work
 4. To expose your application to the web, create a [Gateway](/ignite/gateways) and point it to port `3000`.
 
 That's it! You're now able to scale your Express application horizontally and take advantage of all the features Hop has to offer.
+
+### Adding a health check (optional)
+
+[Health checks](/ignite/health-checks) are a great way to ensure your application has zero downtime. Health checks insure that:
+
+- If your application is not responding to requests, Hop will automatically restart it, and
+- when containers start, the health check must succeed before the container gets added to your Gateway (load balancer)
+
+To add a health check, first visit the **Health Check** page in your new deployment. Then, add a new health check with the following settings:
+
+| Setting | Value  |
+| ------- | ------ |
+| Path    | `/`    |
+| Port    | `3000` |
+
+Once entered, click **Create Check**. Your health check is now active and will be queried to ensure zero downtime. You can see health check success status update in realtime on the Hop console.

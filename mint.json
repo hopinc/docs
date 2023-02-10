@@ -42,8 +42,9 @@
 				{
 					"group": "Quickstarts",
 					"pages": [
-						"getting-started/quickstarts/elixir-cluster",
-						"getting-started/quickstarts/express"
+						"getting-started/quickstarts/express",
+						"getting-started/quickstarts/redis",
+						"getting-started/quickstarts/elixir-cluster"
 					]
 				}
 			]
