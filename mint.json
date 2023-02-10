@@ -41,7 +41,10 @@
 				"ignite/deploying",
 				{
 					"group": "Quickstarts",
-					"pages": ["getting-started/quickstarts/elixir-cluster"]
+					"pages": [
+						"getting-started/quickstarts/elixir-cluster",
+						"getting-started/quickstarts/express"
+					]
 				}
 			]
 		},

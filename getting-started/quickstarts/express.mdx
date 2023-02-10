@@ -1,4 +1,19 @@
 ---
-title: 'Express'
-description: 'How to deploy a Node.js Express app to Hop in less than 2 minutes'
+title: 'Node.js Express App'
+description: 'How to deploy a Node.js app server on Hop in less than 2 minutes'
 ---
+
+Hop makes it easy to deploy any Node.js application. This guide focusses on the deployment of an Express application, however it applies to any Node.js web application.
+
+## Demo
+
+We have created a demo application that you can deploy to Hop to see how it works. It's a simple Express application that exposes a single endpoint that returns the hostname of the container it's running on.
+
+### Deploying the demo
+
+1. Fork [node-express-app](https://github.com/hop-examples/node-express-app) on GitHub.
+2. Create a new Hop deployment on the Console and select the GitHub repository you just forked.
+3. Hit `Deploy` and wait for the build to finish.
+4. To expose your application to the web, create a [Gateway](/ignite/gateways) and point it to port `3000`.
+
+That's it! You're now able to scale your Express application horizontally and take advantage of all the features Hop has to offer.
