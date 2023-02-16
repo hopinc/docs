@@ -1,0 +1,24 @@
+---
+title: 'Revoked Tokens'
+description: 'Received an email about a revoked token? This article explains why and what to do next'
+---
+
+Hop partners with GitHub through the [GitHub Secret Scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning) program. This allows GitHub to scan your repositories for Hop secrets and tokens that may have been accidentally committed.
+
+If GitHub finds a secret or token that has been committed, they automatically notify us which then causes our systems to revoke the token. This is done to prevent any malicious use of the token.
+
+## What to do next
+
+You cannot use the previous token. You can find the token that was revoked by clicking the GitHub link within the email you received. You can generate a new token using the Hop Console.
+
+You can identify the type of token that was revoked by looking at the token prefix (the lowercase characters before the last underscore).
+
+### Token Types
+
+These are the types of tokens that are scanned and can be revoked.
+
+| Token Prefix | Token Type                                           |
+| ------------ | ---------------------------------------------------- |
+| `pat_`       | Personal Access Token                                |
+| `ptk_`       | [Project Token](./project-tokens)                    |
+| `bearer_`    | Hop user token, you will need to sign into Hop again |
