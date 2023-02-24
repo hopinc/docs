@@ -116,3 +116,27 @@ hop domains attach [gateway] [domain]
 </Accordion>
 
 </AccordionGroup>
+
+## Headers
+
+When HTTP requests are sent to your services, they are proxied through our edge network where we append the following headers onto the final request.
+
+### Request Headers
+
+| Header                   | Description                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------- |
+| `x-forwarded-for `       | The IP of the client that made the request as it hits our network                                       |
+| `hop-edge-node`          | The node the gateway that proxied your request lives on                                                 |
+| `hop-region`             | The region the gateway service lives on                                                                 |
+| `hop-gateway-id`         | The ID of your deployment's gateway the request is going through. This will be prefixed with `gateway_` |
+| `hop-connecting-country` | The country code of the client that made the request                                                    |
+| `hop-connecting-ip`      | The IP of the connecting client                                                                         |
+| `x-real-ip`              | The IP of the originating client                                                                        |
+
+### Response Headers
+
+| Header          | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| `hop-edge-node` | The node the gateway that proxied your request lives on      |
+| `hop-region`    | The region the gateway service lives on                      |
+| `server`        | Indicating the response is from Hop, the value will be `hop` |
