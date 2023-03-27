@@ -35,3 +35,17 @@ hop.init({
 	projectId: 'project_xxx', // replace with your project ID
 });
 ```
+
+## Subscribe to a channel
+
+```jsx JSX
+import { hop } from '@onehop/client';
+
+const instance = await hop.init({ projectId: '' })
+const initialChannelState = instance.subscribeToChannel('HopIsReallyCool')
+
+// https://github.com/hopinc/client-js/blob/master/packages/client/src/leap/client.ts#L271
+instance.on('STATE_UPDATE', (data) => {
+  console.log(`Look at all those chickens: ${data}`)
+})
+```
