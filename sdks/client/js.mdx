@@ -50,3 +50,14 @@ instance.on('STATE_UPDATE', (data) => {
   console.log(`Look at all those chickens: ${data}`)
 })
 ```
+
+## Send a message to a channel
+
+```jsx JSX
+import { hop } from '@onehop/client';
+
+const instance = await hop.init({ projectId: '', token: '' })
+// instance.sendMessage(channel, event, payload)
+instance.sendMessage('votes', 'add', 1)
+instance.sendMessage('public-chat', 'kashcafe', { user: 'Kashall', message: 'This is a message!' })
+```
