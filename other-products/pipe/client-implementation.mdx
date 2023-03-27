@@ -1,9 +1,9 @@
 ---
-title: "Pipe Client Implementation"
-sidebarTitle: "Client Implementation"
+title: 'Pipe Client Implementation'
+sidebarTitle: 'Client Implementation'
 description:
-  "You can use our client (frontend) SDKs to easily implement Pipe into your
-  product."
+  'You can use our client (frontend) SDKs to easily implement Pipe into your
+  product.'
 ---
 
 ## Frontend Packages
@@ -62,28 +62,28 @@ in this section.
 Let's jump into an example bare-minimum component:
 
 ```jsx
-import { useRef } from "react";
-import { usePipeRoom } from "@onehop/react";
+import {useRef} from 'react';
+import {usePipeRoom} from '@onehop/react';
 
-const joinToken = "prjt_xxx"; // TODO: replace this with a real Pipe join token
+const joinToken = 'prjt_xxx'; // TODO: replace this with a real Pipe join token
 
 export function Livestream() {
-  const videoRef = useRef(null);
+	const videoRef = useRef(null);
 
-  const room = usePipeRoom({
-    joinToken,
-    ref: videoRef,
-  });
+	const room = usePipeRoom({
+		joinToken,
+		ref: videoRef,
+	});
 
-  return (
-    <>
-      <button disabled={!room.canPlay} onClick={() => videoRef.current?.play()}>
-        play
-      </button>
+	return (
+		<>
+			<button disabled={!room.canPlay} onClick={() => videoRef.current?.play()}>
+				play
+			</button>
 
-      <video ref={videoRef} />
-    </>
-  );
+			<video ref={videoRef} />
+		</>
+	);
 }
 ```
 
@@ -103,32 +103,32 @@ want.
 ## Integrating Pipe with Vanilla JS
 
 ```ts
-import { hop, pipe } from "@onehop/client";
+import {hop, pipe} from '@onehop/client';
 
 // TypeScript only — declaring that `node` is a variable
 // that exists, and is a DOM Video element
 declare const node: HTMLVideoElement;
 
 const client = hop.init({
-  projectId: "project_xxx",
+	projectId: 'project_xxx',
 });
 
-const joinToken = "join_token_xxx";
+const joinToken = 'join_token_xxx';
 
 client.subscribeToPipeRoom(joinToken);
 
-client.getRoomStateMap().addListener((map) => {
-  const room = map.get(joinToken);
+client.getRoomStateMap().addListener(map => {
+	const room = map.get(joinToken);
 
-  if (
-    !room ||
-    room.subscription !== "available" ||
-    !room.connection.llhls?.edge_endpoint
-  ) {
-    console.log("Not ready:", { room });
-    return;
-  }
+	if (
+		!room ||
+		room.subscription !== 'available' ||
+		!room.connection.llhls?.edge_endpoint
+	) {
+		console.log('Not ready:', {room});
+		return;
+	}
 
-  pipe.mount(node, room.connection.llhls.edge_endpoint);
+	pipe.mount(node, room.connection.llhls.edge_endpoint);
 });
 ```
