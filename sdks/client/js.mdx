@@ -36,7 +36,9 @@ hop.init({
 });
 ```
 
-## Subscribe to a channel
+## Subscribing to a unprotected channel
+
+Unprotected channels allow anyone to connect as long as they know the channel id. You can learn more about types of channels on [this page](https://react.dev/learn/manipulating-the-dom-with-refs).
 
 ```jsx JSX
 import { hop } from '@onehop/client';
@@ -44,7 +46,6 @@ import { hop } from '@onehop/client';
 const instance = await hop.init({ projectId: '' })
 const initialChannelState = instance.subscribeToChannel('HopIsReallyCool')
 
-// https://github.com/hopinc/client-js/blob/master/packages/client/src/leap/client.ts#L271
 instance.on('STATE_UPDATE', (data) => {
   console.log(`Look at all those chickens: ${data}`)
 })
