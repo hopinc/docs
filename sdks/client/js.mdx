@@ -40,24 +40,24 @@ hop.init({
 
 Unprotected channels allow anyone to connect as long as they know the channel id. You can learn more about types of channels on [this page](https://react.dev/learn/manipulating-the-dom-with-refs).
 
-```jsx JSX
+```jsx
 import { hop } from '@onehop/client';
 
-const instance = await hop.init({ projectId: '' })
-const initialChannelState = instance.subscribeToChannel('HopIsReallyCool')
+const instance = await hop.init({ projectId: '' });
+const initialChannelState = instance.subscribeToChannel('HopIsReallyCool');
 
 instance.on('STATE_UPDATE', (data) => {
-  console.log(`Look at all those chickens: ${data}`)
-})
+  console.log(`Look at all those chickens: ${data}`);
+});
 ```
 
 ## Send a message to a channel
 
-```jsx JSX
+```jsx
 import { hop } from '@onehop/client';
 
-const instance = await hop.init({ projectId: '', token: '' })
-// instance.sendMessage(channel, event, payload)
-instance.sendMessage('votes', 'add', 1)
-instance.sendMessage('public-chat', 'kashcafe', { user: 'Kashall', message: 'This is a message!' })
+const instance = await hop.init({ projectId: '', token: '' });
+
+instance.sendMessage('votes', 'add', 1);
+instance.sendMessage('public-chat', 'kashcafe', { user: 'Kashall', message: 'This is a message!' });
 ```
