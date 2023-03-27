@@ -15,6 +15,6 @@ Each Hop region that you use within a project gets its own `/16` subnet. Even th
 
 ## Container Addressing & Internal Gateways
 
-Every container that gets deployed to Hop automatically gets assigned it's own private IP address. All containers are able to talk to each other using these addresses, however, because containers are usually treated in an ephemeral manner, it's recommended to use an [Internal Gateway](http://localhost:3001/ignite/gateways#creating-a-gateway) to route between services instead of using the container IPs directly. Internal gateways give you an "internal domain" which you can use to dynamically resolve the IP addresses of containers under a specific deployment.
+Every container that gets deployed to Hop automatically gets assigned it's own private IP address. All containers are able to talk to each other using these addresses, however, because containers are usually treated in an ephemeral manner, it's recommended to use an [Internal Gateway](https://docs.hop.io/ignite/gateways#creating-a-gateway) to route between services instead of using the container IPs directly. Internal gateways give you an "internal domain" which you can use to dynamically resolve the IP addresses of containers under a specific deployment.
 
 For example, if you had an internal **redis** deployment which you wanted to connect to from an **api** deployment, you could create an internal gateway with the internal domain `redis.hop` and then use the `redis://redis.hop` hostname to connect to the redis deployment.

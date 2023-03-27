@@ -24,7 +24,7 @@ yarn add @onehop/client
 
 ## Initializing the SDK
 
-Find your project ID on [this page](https://console.hop.io/auth).
+Find your project ID on [this page](https://console.hop.io/project/settings).
 
 ```jsx JSX
 import {hop} from '@onehop/client';
@@ -34,4 +34,30 @@ import {hop} from '@onehop/client';
 hop.init({
 	projectId: 'project_xxx', // replace with your project ID
 });
+```
+
+## Subscribing to a unprotected channel
+
+Unprotected channels allow anyone to connect as long as they know the channel id. You can learn more about types of channels on [this page](https://react.dev/learn/manipulating-the-dom-with-refs).
+
+```jsx
+import { hop } from '@onehop/client';
+
+const instance = await hop.init({ projectId: '' });
+const initialChannelState = instance.subscribeToChannel('HopIsReallyCool');
+
+instance.on('STATE_UPDATE', (data) => {
+  console.log(`Look at all those chickens: ${data}`);
+});
+```
+
+## Send a message to a channel
+
+```jsx
+import { hop } from '@onehop/client';
+
+const instance = await hop.init({ projectId: '', token: '' });
+
+instance.sendMessage('votes', 'add', 1);
+instance.sendMessage('public-chat', 'kashcafe', { user: 'Kashall', message: 'This is a message!' });
 ```
