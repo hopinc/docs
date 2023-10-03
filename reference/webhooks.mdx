@@ -163,16 +163,6 @@ Body Example:
 
 To verify the webhook payload to ensure that it is coming from Hop, we provide a utility function in the @onehop/js SDK.
 
-```ts TS
-import {verifyHmac} from '@onehop/js';
-
-const validHmac = verifyHmac(
-	stringedJSONBody,
-	webhookSignatureHeader,
-	webhookSecret,
-);
-```
-
 Similar to the Stripe SDK, you can also construct an event to get type safe access to the webhook payload.
 
 ```ts TS
@@ -191,6 +181,6 @@ try {
 }
 ```
 
-```
+## Example
 
-```
+For a full example using express - see [here](https://github.com/hop-examples/webhooks-example)
