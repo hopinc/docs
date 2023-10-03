@@ -3,15 +3,62 @@ title: 'Webhooks'
 description: 'Learn about how you can utilize Hop webhooks in your applications.'
 ---
 
-Jump to:<br/>
-[Create a Webhook](#creating-webhooks)<br/>
-[Events](#events)<br/>
-[Webhook Payload](#payload)<br/>
-[Verifying Webhook Payload](#verify)<br/>
+## Webhook Basics
 
-## Creating a Webhook
+### Creating Webhooks
 
 You can create a webhook within our [console](https://console.hop.io/project/settings/webhooks) or through our [SDK]()
+
+<AccordionGroup>
+	<Accordion icon="terminal" title="Create a webhook through the Console">
+		meow
+	</Accordion>
+	<Accordion icon="terminal" title="Create a webhook through the SDK">
+		meow
+	</Accordion>
+</AccordionGroup>
+
+### Editing a Webhook
+
+After creating a webhook, you can edit the events and endpoint that the webhook is associated with. Please refer to the [Events](#events) section for more information on the events that you can listen to.
+
+<AccordionGroup>
+	<Accordion icon="terminal" title="Edit a webhook through the Console">
+		meow
+	</Accordion>
+	<Accordion icon="terminal" title="Edit a webhook through the SDK">
+		meow
+	</Accordion>
+</AccordionGroup>
+
+### Regenerating Webhook Secret
+
+You can regenerate the secret associated with a webhook. This will invalidate the previous secret, and you will need to update your application to use the new secret in order to correctly verify the webhook payload.
+
+<AccordionGroup>
+	<Accordion
+		icon="terminal"
+		title="Regenerate webhook secret through the Console"
+	>
+		meow
+	</Accordion>
+	<Accordion icon="terminal" title="Regenerate webhook secret through the SDK">
+		meow
+	</Accordion>
+</AccordionGroup>
+
+### Deleting a Webhook
+
+After creating a webhook, you can delete it at any time. This will instantly invalidate the webhook, and Hop will no longer send any requests to the endpoint associated with the webhook.
+
+<AccordionGroup>
+	<Accordion icon="terminal" title="Delete a webhook through the Console">
+		meow
+	</Accordion>
+	<Accordion icon="terminal" title="Delete a webhook through the SDK">
+		meow
+	</Accordion>
+</AccordionGroup>
 
 ## Events
 
@@ -19,7 +66,21 @@ You can create a webhook within our [console](https://console.hop.io/project/set
 
 ## Webhook Payload
 
-When receiving an event from Hop, here is an example of what an event can look like.
+### Request Headers
+
+With every webhook request sent to your endpoint, Hop will include a signature header. This will help you verify that the request is coming from Hop, and not a malicious/third-party source.
+
+Header Example:
+
+```http
+X-Hop-Hooks-Signature: 86EBE7F54A92C809CDF8F3DC6536C566A1C074F9B001E9118DF7EC433BE435E7
+```
+
+### Request Body
+
+When an event occurrs that the webhook is listening to, Hop will send a POST request to the endpoint you specified when creating the webhook. The request body will contain a JSON object.
+
+Body Example:
 
 ```json
 {
@@ -36,5 +97,37 @@ When receiving an event from Hop, here is an example of what an event can look l
 		},
 		"container_id": "container_MTkzMDc3MjExODczMDc5MzAx"
 	}
+}
+```
+
+### Verify Webhook Payload
+
+To verify the webhook payload to ensure that it is coming from Hop, we provide a utility function in the @onehop/js SDK.
+
+```ts TS
+import {verifyHmac} from '@onehop/js';
+
+const validHmac = verifyHmac(
+	stringedJSONBody,
+	webhookSignatureHeader,
+	webhookSecret,
+);
+```
+
+Similar to the Stripe SDK, you can also construct an event to get type safe access to the webhook payload.
+
+```ts TS
+import {constructEvent} from '@onehop/js';
+
+try {
+	const event = constructEvent(
+		stringedJSONBody,
+		webhookSignatureHeader,
+		webhookSecret,
+	);
+
+	console.log(event.id, event.data);
+} catch (err) {
+	// handle error ("Invalid signature")
 }
 ```
