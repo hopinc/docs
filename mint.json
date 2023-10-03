@@ -82,6 +82,7 @@
 			"group": "Reference",
 			"pages": [
 				"reference/regions",
+				"reference/webhooks",
 				"reference/rest-api",
 				"reference/project-tokens",
 				"reference/billing"
