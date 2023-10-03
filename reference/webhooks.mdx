@@ -11,19 +11,28 @@ You can create a webhook within our [console](https://console.hop.io/project/set
 
 <AccordionGroup>
 	<Accordion icon="terminal" title="Create a webhook through the Console">
-		meow
-	</Accordion>
-	<Accordion icon="terminal" title="Create a webhook through the SDK">
+	
+	Navigate to Project Settings > Webhooks and select the events as follows
+
+    <Frame>![](/images/webhooks-create.webp)</Frame>
+    </Accordion>
+    <Accordion icon="terminal" title="Create a webhook through the SDK">
+
 ```ts TS
 import {Hop} from '@onehop/js';
 
 const projectToken = 'ptk_xxx';
 const hop = new Hop(projectToken);
 
-const webhook = await hop.project.webhooks.create("https://example.com/webhook", ["ignite.deployment.container.metrics_update"]);
+const webhook = await hop.project.webhooks.create(
+	'https://example.com/webhook',
+	['ignite.deployment.container.metrics_update'],
+);
 console.log(webhook.id);
 ```
-	</Accordion>
+
+    </Accordion>
+
 </AccordionGroup>
 
 ### Editing a Webhook
@@ -32,23 +41,29 @@ After creating a webhook, you can edit the events and endpoint that the webhook 
 
 <AccordionGroup>
 	<Accordion icon="terminal" title="Edit a webhook through the Console">
-		meow
-	</Accordion>
-	<Accordion icon="terminal" title="Edit a webhook through the SDK">
+
+    	Navigate to project settings and select the webhook you wish to edit
+
+        <Frame>![](/images/webhooks-edit.webp)</Frame>
+    </Accordion>
+    <Accordion icon="terminal" title="Edit a webhook through the SDK">
+
 ```ts TS
 import {Hop} from '@onehop/js';
 
 const projectToken = 'ptk_xxx';
 const hop = new Hop(projectToken);
 
-const webhook = await hop.project.webhooks.edit("webhook_xxx", {
-  events: ["ignite.deployment.container.metrics_update"],
-  webhookUrl: "https://example.com/webhook",
+const webhook = await hop.project.webhooks.edit('webhook_xxx', {
+	events: ['ignite.deployment.container.metrics_update'],
+	webhookUrl: 'https://example.com/webhook',
 });
 
 console.log(webhook);
 ```
-	</Accordion>
+
+    </Accordion>
+
 </AccordionGroup>
 
 ### Regenerating Webhook Secret
@@ -60,20 +75,26 @@ You can regenerate the secret associated with a webhook. This will invalidate th
 		icon="terminal"
 		title="Regenerate webhook secret through the Console"
 	>
-		meow
-	</Accordion>
-	<Accordion icon="terminal" title="Regenerate webhook secret through the SDK">
+
+    	Navigate to Project Settings > Click the three dots of your chosen webhook > Regenerate Secret
+
+        <Frame>![](/images/regenerate.webp)</Frame>
+    </Accordion>
+    <Accordion icon="terminal" title="Regenerate webhook secret through the SDK">
+
 ```ts TS
 import {Hop} from '@onehop/js';
 
 const projectToken = 'ptk_xxx';
 const hop = new Hop(projectToken);
 
-const secret = await hop.project.webhooks.regenerateSecret("webhook_xxx");
+const secret = await hop.project.webhooks.regenerateSecret('webhook_xxx');
 
 console.log(secret);
 ```
-	</Accordion>
+
+    </Accordion>
+
 </AccordionGroup>
 
 ### Deleting a Webhook
@@ -82,23 +103,25 @@ After creating a webhook, you can delete it at any time. This will instantly inv
 
 <AccordionGroup>
 	<Accordion icon="terminal" title="Delete a webhook through the Console">
-		meow
-	</Accordion>
-	<Accordion icon="terminal" title="Delete a webhook through the SDK">
+
+    	Navigate to Project Settings > Click the three dots of your chosen webhook > Delete Webhook
+
+        <Frame>![](/images/webhooks-delete.webp)</Frame>
+    </Accordion>
+    <Accordion icon="terminal" title="Delete a webhook through the SDK">
+
 ```ts TS
 import {Hop} from '@onehop/js';
 
 const projectToken = 'ptk_xxx';
 const hop = new Hop(projectToken);
 
-await hop.project.webhooks.delete("webhook_xxx");
+await hop.project.webhooks.delete('webhook_xxx');
 ```
-	</Accordion>
+
+    </Accordion>
+
 </AccordionGroup>
-
-## Events
-
-...
 
 ## Webhook Payload
 
@@ -166,4 +189,8 @@ try {
 } catch (err) {
 	// handle error ("Invalid signature")
 }
+```
+
+```
+
 ```
