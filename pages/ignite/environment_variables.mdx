@@ -1,0 +1,76 @@
+---
+title: Environment Variables
+description: Manage your Hop Project's Environment Variables
+---
+
+import Image from 'next/future/image';
+import hopEnv1 from '../../assets/images/hop-deploy-env-1.png';
+import {Bleed} from '../../components/bleed';
+import {Code} from '../../components/code';
+
+# Environment Variables
+
+Environment variables act as a variable set outside your Ignite deployment on Hop. Environment variables can be referenced in Ignite deployment configs and will automatically be populated when a container starts. 
+
+Environment variables can be **created** on deployment, **deleted** with the console, and **viewed** with the CLI, console, and API.
+
+Environment variables can be any string, in addition to a secret. For example, a Secret can be used as an environment variable.
+
+## Environment Variable Names
+
+Environment variables are limited to 64 characters in length, must be alphanumeric (with underscores) and are automatically uppercased.
+
+📝 Environment variables regex, for your convenience: `^[a-zA-Z0-9_]{1,64}$`
+
+## Using Environment Variables
+
+### In Hop Deployments
+
+When creating a deployment or individual container, you can set environment variables - the values will then automatically be updated.
+
+#### Usage with `hop deploy`
+
+When using `hop deploy`, you can specify environment variables with `-e` or `--env`, so: for example, if I wanted to reference an environment variable named `TOKEN` in my deployment, I'd execute the following command:
+
+```bash
+hop deploy --env TOKEN=VALUE
+```
+
+#### Usage with Console
+
+When creating a deployment, or when using the **Environment** tab in your deployment, you can set environment variable values.
+
+#### Usage with API
+
+You can set environment variables on an API request: `${env.NAME}`
+
+Using [Hop's JS SDK](https://docs.hop.io/sdks/client/js):
+
+<Code>
+
+```tsx
+import {RestartPolicy, RuntimeType} from '@onehop/js';
+
+const deployment = await hop.ignite.deployments.create({
+	version: '2022-05-17',
+	name: 'redis',
+	image: {
+		name: 'redis',
+		auth: null,
+		gh_repo: null,
+	},
+	container_strategy: 'manual',
+	type: RuntimeType.PERSISTENT,
+	env: {
+		TOKEN: 'VALUE',
+	},
+	resources: {
+        vcpu: 0.5,
+        ram: '128MB',
+        vgpu: [],
+    },
+	restart_policy: RestartPolicy.ALWAYS,
+});
+```
+
+</Code>
